@@ -1,21 +1,19 @@
 {
-  "name": "turntableam",
-  "version": "0.1.0",
-  "sources": {
-    "dir" : "src",
-    "subdirs" : true
-  },
-  "package-specs": {
-    "module": "commonjs",
-    "in-source": true
-  },
-  "suffix": ".bs.js",
-  "bs-dependencies": [
-
-  ],
-  "warnings": {
-    "error" : "+101"
-  },
-  "namespace": true,
-  "refmt": 3
+	"name": "turntableam",
+	"version": "0.1.0",
+	"sources": {
+		"dir": "src",
+		"subdirs": true
+	},
+	"package-specs": {
+		"module": "es6",
+		"in-source": true
+	},
+	"suffix": ".bs.js",
+	"bs-dependencies": ["reason-react"],
+	"warnings": {
+		"error": "+101"
+	},
+	"namespace": true,
+	"refmt": 3
 }
