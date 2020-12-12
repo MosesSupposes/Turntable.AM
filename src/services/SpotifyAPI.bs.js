@@ -25,6 +25,9 @@ function signIn(param) {
 }
 
 var Authorization = {
+  authorizationURI: "https://accounts.spotify.com/authorize",
+  clientId: "96e25e1a56b5467fbbf82af545444904",
+  localhostEncoded: "https%3A%2F%2Flocalhost%3A1234",
   signIn: signIn
 };
 
