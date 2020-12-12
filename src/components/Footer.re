@@ -1,3 +1,5 @@
+[%bs.raw {|require("../styles/footer.css")|}];
+
 [@react.component]
 let make = () => {
   <footer>

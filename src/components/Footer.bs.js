@@ -2,6 +2,8 @@
 
 import * as React from "react";
 
+((require("../styles/footer.css")));
+
 function Footer(Props) {
   return React.createElement("footer", undefined, React.createElement("p", undefined, "Copyright 2020 by Moses A. Samuel"));
 }
@@ -12,4 +14,4 @@ export {
   make ,
   
 }
-/* react Not a pure module */
+/*  Not a pure module */
