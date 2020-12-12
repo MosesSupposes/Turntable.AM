@@ -4,7 +4,8 @@ let base = "https://api.spotify.com";
 [@bs.module "uuid"] external uuid: unit => string = "v4";
 
 module Authorization = {
-  let authorizationURI = "https://accounts.spotify.com/authorize";
+  let corsAnywhereUrl = "https://cors-anywhere.herokuapp.com/";
+  let authorizationBaseURI = "https://accounts.spotify.com/authorize";
   let clientId = "96e25e1a56b5467fbbf82af545444904";
   let localhostEncoded = "https%3A%2F%2Flocalhost%3A1234";
   let scopes = [|
@@ -31,5 +32,13 @@ module Authorization = {
   let generateCodeChallenge = () =>
     generateCodeVerifier() |> ReCrypt.Sha256.make |> encodeInBase64;
 
-  let signIn = () => {};
+  let scopesEncoded = urlEncode(scopes);
+  let state = uuid();
+  let codeChallenge = generateCodeChallenge();
+  let authorizationURI = {j|$authorizationBaseURI?response_type=code&client_id=$clientId&redirect_uri=$localhostEncoded&scope=$scopesEncoded&state=$state&code_challenge=$codeChallenge&code_challenge_method=S256|j};
+
+  let signIn = () => {
+    fetch(authorizationURI)
+    |> Js.Promise.then_(res => Js.Promise.resolve(Js.log(res)));
+  };
 };
