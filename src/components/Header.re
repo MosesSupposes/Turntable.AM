@@ -1,3 +1,4 @@
+[%bs.raw {|require("../styles/header.css")|}];
 open UsePage;
 
 [@react.component]

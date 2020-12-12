@@ -3,6 +3,8 @@
 import * as React from "react";
 import * as Link$Turntableam from "./Link.bs.js";
 
+((require("../styles/header.css")));
+
 function Header(Props) {
   var setPage = Props.setPage;
   return React.createElement("header", undefined, React.createElement("ul", undefined, React.createElement("li", undefined, React.createElement(Link$Turntableam.make, {
@@ -22,4 +24,4 @@ export {
   make ,
   
 }
-/* react Not a pure module */
+/*  Not a pure module */
