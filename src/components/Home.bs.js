@@ -3,7 +3,7 @@
 import * as React from "react";
 
 function Home(Props) {
-  return React.createElement("div", undefined, React.createElement("h1", undefined, "Welcome to Turntable.Am"));
+  return React.createElement("div", undefined, React.createElement("h1", undefined, "Welcome to Turntable.AM"));
 }
 
 var make = Home;
