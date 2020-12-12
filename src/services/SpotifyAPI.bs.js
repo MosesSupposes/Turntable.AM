@@ -7,7 +7,17 @@ import * as CamlinternalOO from "bs-platform/lib/es6/camlinternalOO.js";
 
 var scopes = [
   "playlist-modify-public",
-  "playlist-modify-private"
+  "playlist-modify-private",
+  "playlist-read-private",
+  "playlist-read-collaborative",
+  "user-read-recently-played",
+  "user-top-read",
+  "ugc-image-upload",
+  "user-follow-read",
+  "user-library-read",
+  "user-library-modify",
+  "user-read-email",
+  "user-read-private"
 ];
 
 function urlEncode(arr) {
