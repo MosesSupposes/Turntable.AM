@@ -1,7 +1,8 @@
 module Page = {
   type t =
     | Home
-    | UserProfile;
+    | UserProfile
+    | Login;
 };
 
 type export = {

@@ -2,19 +2,24 @@
 
 import * as React from "react";
 import * as Home$Turntableam from "./Home.bs.js";
+import * as Login$Turntableam from "./Login.bs.js";
 import * as UserProfile$Turntableam from "./UserProfile.bs.js";
 
 function ApplicationContainer(Props) {
   var page = Props.page;
   var setPage = Props.setPage;
-  if (page) {
-    return React.createElement(UserProfile$Turntableam.make, {
-                setPage: setPage
-              });
-  } else {
-    return React.createElement(Home$Turntableam.make, {
-                setPage: setPage
-              });
+  switch (page) {
+    case /* Home */0 :
+        return React.createElement(Home$Turntableam.make, {
+                    setPage: setPage
+                  });
+    case /* UserProfile */1 :
+        return React.createElement(UserProfile$Turntableam.make, {
+                    setPage: setPage
+                  });
+    case /* Login */2 :
+        return React.createElement(Login$Turntableam.make, {});
+    
   }
 }
 

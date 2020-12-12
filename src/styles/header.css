@@ -2,12 +2,19 @@ header {
 	background-color: black;
 	color: white;
 	font-size: 1.5rem;
+	display: flex;
+	justify-content: space-between;
 }
 
 ul {
+	width: 50%;
 	list-style-type: none;
 	display: flex;
 	justify-content: space-evenly;
 	height: 60px;
 	align-items: center;
+}
+
+ul.left {
+	justify-content: left;
 }

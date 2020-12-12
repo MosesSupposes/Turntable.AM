@@ -7,7 +7,15 @@ import * as Link$Turntableam from "./Link.bs.js";
 
 function Header(Props) {
   var setPage = Props.setPage;
-  return React.createElement("header", undefined, React.createElement("ul", undefined, React.createElement("li", undefined, React.createElement(Link$Turntableam.make, {
+  return React.createElement("header", undefined, React.createElement("ul", {
+                  className: "left"
+                }, React.createElement("li", undefined, React.createElement(Link$Turntableam.make, {
+                          to_: /* Login */2,
+                          setPage: setPage,
+                          children: "Sign In"
+                        }))), React.createElement("ul", {
+                  className: "right"
+                }, React.createElement("li", undefined, React.createElement(Link$Turntableam.make, {
                           to_: /* Home */0,
                           setPage: setPage,
                           children: "Home"
