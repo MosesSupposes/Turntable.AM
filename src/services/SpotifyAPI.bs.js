@@ -3,6 +3,8 @@
 import * as Uuid from "uuid";
 import * as ReCrypt from "@space-labs/re-crypt/src/ReCrypt.bs.js";
 
+var corsAnywhereUrl = "https://cors-anywhere.herokuapp.com/";
+
 var authorizationBaseURI = "https://accounts.spotify.com/authorize";
 
 var clientId = "96e25e1a56b5467fbbf82af545444904";
@@ -42,7 +44,7 @@ var state = Uuid.v4();
 
 var codeChallenge = generateCodeChallenge(undefined);
 
-var authorizationURI = "" + authorizationBaseURI + "?response_type=code&client_id=" + clientId + "&redirect_uri=" + localhostEncoded + "&scope=" + scopesEncoded + "&state=" + state + "&code_challenge=" + codeChallenge + "&code_challenge_method=S256";
+var authorizationURI = "" + corsAnywhereUrl + authorizationBaseURI + "?response_type=code&client_id=" + clientId + "&redirect_uri=" + localhostEncoded + "&scope=" + scopesEncoded + "&state=" + state + "&code_challenge=" + codeChallenge + "&code_challenge_method=S256";
 
 function signIn(param) {
   return fetch(authorizationURI).then(function (res) {
@@ -51,7 +53,7 @@ function signIn(param) {
 }
 
 var Authorization = {
-  corsAnywhereUrl: "https://cors-anywhere.herokuapp.com/",
+  corsAnywhereUrl: corsAnywhereUrl,
   authorizationBaseURI: authorizationBaseURI,
   clientId: clientId,
   localhostEncoded: localhostEncoded,

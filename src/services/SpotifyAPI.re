@@ -35,9 +35,10 @@ module Authorization = {
   let scopesEncoded = urlEncode(scopes);
   let state = uuid();
   let codeChallenge = generateCodeChallenge();
-  let authorizationURI = {j|$authorizationBaseURI?response_type=code&client_id=$clientId&redirect_uri=$localhostEncoded&scope=$scopesEncoded&state=$state&code_challenge=$codeChallenge&code_challenge_method=S256|j};
+  let authorizationURI = {j|$corsAnywhereUrl$authorizationBaseURI?response_type=code&client_id=$clientId&redirect_uri=$localhostEncoded&scope=$scopesEncoded&state=$state&code_challenge=$codeChallenge&code_challenge_method=S256|j};
 
   let signIn = () => {
+    // fetch(authorizationURI, {"mode": "no-cors"})
     fetch(authorizationURI)
     |> Js.Promise.then_(res => Js.Promise.resolve(Js.log(res)));
   };
