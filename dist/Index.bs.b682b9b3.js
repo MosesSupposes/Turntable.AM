@@ -30025,12 +30025,12 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"styles/footer.css":[function(require,module,exports) {
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"client/styles/footer.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Footer.bs.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"client/components/Footer.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30055,7 +30055,7 @@ var make = Footer;
 /*  Not a pure module */
 
 exports.make = make;
-},{"react":"../node_modules/react/index.js","../styles/footer.css":"styles/footer.css"}],"../node_modules/bs-platform/lib/es6/caml_array.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../styles/footer.css":"client/styles/footer.css"}],"../node_modules/bs-platform/lib/es6/caml_array.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30669,7 +30669,7 @@ function __8(o) {
   }
 }
 /* No side effect */
-},{"./caml_array.js":"../node_modules/bs-platform/lib/es6/caml_array.js"}],"components/Link.bs.js":[function(require,module,exports) {
+},{"./caml_array.js":"../node_modules/bs-platform/lib/es6/caml_array.js"}],"client/components/Link.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30703,12 +30703,12 @@ var make = Link;
 /* react Not a pure module */
 
 exports.make = make;
-},{"bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","react":"../node_modules/react/index.js"}],"styles/header.css":[function(require,module,exports) {
+},{"bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","react":"../node_modules/react/index.js"}],"client/styles/header.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Header.bs.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"client/components/Header.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30758,7 +30758,7 @@ var make = Header;
 /*  Not a pure module */
 
 exports.make = make;
-},{"react":"../node_modules/react/index.js","./Link.bs.js":"components/Link.bs.js","../styles/header.css":"styles/header.css"}],"hooks/UsePage.bs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Link.bs.js":"client/components/Link.bs.js","../styles/header.css":"client/styles/header.css"}],"client/hooks/UsePage.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30790,7 +30790,7 @@ function make(param) {
   };
 }
 /* react Not a pure module */
-},{"react":"../node_modules/react/index.js"}],"components/Home.bs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"client/components/Home.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36135,13 +36135,13 @@ var Sha512 = {
 /* No side effect */
 
 exports.Sha512 = Sha512;
-},{"./ReCrypt/ReCrypt_MD5.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt/ReCrypt_MD5.bs.js","./ReCrypt/ReCrypt_Sha1.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt/ReCrypt_Sha1.bs.js","./ReCrypt/ReCrypt_Sha224.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt/ReCrypt_Sha224.bs.js","./ReCrypt/ReCrypt_Sha256.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt/ReCrypt_Sha256.bs.js","./ReCrypt/ReCrypt_Sha384.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt/ReCrypt_Sha384.bs.js","./ReCrypt/ReCrypt_Sha512.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt/ReCrypt_Sha512.bs.js"}],"services/SpotifyAPI.bs.js":[function(require,module,exports) {
+},{"./ReCrypt/ReCrypt_MD5.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt/ReCrypt_MD5.bs.js","./ReCrypt/ReCrypt_Sha1.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt/ReCrypt_Sha1.bs.js","./ReCrypt/ReCrypt_Sha224.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt/ReCrypt_Sha224.bs.js","./ReCrypt/ReCrypt_Sha256.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt/ReCrypt_Sha256.bs.js","./ReCrypt/ReCrypt_Sha384.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt/ReCrypt_Sha384.bs.js","./ReCrypt/ReCrypt_Sha512.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt/ReCrypt_Sha512.bs.js"}],"server/services/SpotifyAPI.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Authorization = exports.base = void 0;
+exports.AuthorizationImplicitGrant = exports.AuthorizationPKCE = exports.base = void 0;
 
 var Uuid = _interopRequireWildcard(require("uuid"));
 
@@ -36152,10 +36152,9 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-var corsAnywhereUrl = "https://cors-anywhere.herokuapp.com/";
 var authorizationBaseURI = "https://accounts.spotify.com/authorize";
 var clientId = "96e25e1a56b5467fbbf82af545444904";
-var localhostEncoded = "https%3A%2F%2Flocalhost%3A1234";
+var localhostEncoded = "https://kind-fermat-94e8ea.netlify.app/";
 var scopes = ["playlist-modify-public", "playlist-modify-private", "playlist-read-private", "playlist-read-collaborative", "user-read-recently-played", "user-top-read", "ugc-image-upload", "user-follow-read", "user-library-read", "user-library-modify", "user-read-email", "user-read-private"];
 
 function urlEncode(arr) {
@@ -36173,7 +36172,7 @@ function generateCodeChallenge(param) {
 var scopesEncoded = scopes.join("%2C");
 var state = Uuid.v4();
 var codeChallenge = generateCodeChallenge(undefined);
-var authorizationURI = "" + corsAnywhereUrl + authorizationBaseURI + "?response_type=code&client_id=" + clientId + "&redirect_uri=" + localhostEncoded + "&scope=" + scopesEncoded + "&state=" + state + "&code_challenge=" + codeChallenge + "&code_challenge_method=S256";
+var authorizationURI = "" + authorizationBaseURI + "?response_type=code&client_id=" + clientId + "&redirect_uri=" + localhostEncoded + "&scope=" + scopesEncoded + "&state=" + state + "&code_challenge=" + codeChallenge + "&code_challenge_method=S256";
 
 function signIn(param) {
   return fetch(authorizationURI).then(function (res) {
@@ -36181,8 +36180,8 @@ function signIn(param) {
   });
 }
 
-var Authorization = {
-  corsAnywhereUrl: corsAnywhereUrl,
+var AuthorizationPKCE = {
+  corsAnywhereUrl: "https://cors-anywhere.herokuapp.com/",
   authorizationBaseURI: authorizationBaseURI,
   clientId: clientId,
   localhostEncoded: localhostEncoded,
@@ -36196,46 +36195,88 @@ var Authorization = {
   authorizationURI: authorizationURI,
   signIn: signIn
 };
-exports.Authorization = Authorization;
+exports.AuthorizationPKCE = AuthorizationPKCE;
+var authorizationBaseURI$1 = "https://accounts.spotify.com/authorize";
+var clientId$1 = "96e25e1a56b5467fbbf82af545444904";
+var corsAnywhereUrl = "https://cors-anywhere.herokuapp.com/";
+var localhostEncoded$1 = "http%3A%2F%2Flocalhost%3A1234";
+var scopes$1 = ["playlist-modify-public", "playlist-modify-private", "playlist-read-private", "playlist-read-collaborative", "user-read-recently-played", "user-top-read", "ugc-image-upload", "user-follow-read", "user-library-read", "user-library-modify", "user-read-email", "user-read-private"];
+
+function urlEncode$1(arr) {
+  return arr.join("%2C");
+}
+
+var state$1 = Uuid.v4();
+var scopesEncoded$1 = scopes$1.join("%2C");
+var finalEncodedUri = "" + corsAnywhereUrl + authorizationBaseURI$1 + "?client_id=" + clientId$1 + "&response_type=\"token\"&redirect_uri=" + localhostEncoded$1 + "&state=" + state$1 + "&scope=" + scopesEncoded$1;
+
+function signIn$1(param) {
+  return fetch(finalEncodedUri).then(function (response) {
+    return Promise.resolve((console.log(response), undefined));
+  });
+}
+
+var AuthorizationImplicitGrant = {
+  authorizationBaseURI: authorizationBaseURI$1,
+  clientId: clientId$1,
+  corsAnywhereUrl: corsAnywhereUrl,
+  localhostEncoded: localhostEncoded$1,
+  scopes: scopes$1,
+  urlEncode: urlEncode$1,
+  state: state$1,
+  scopesEncoded: scopesEncoded$1,
+  finalEncodedUri: finalEncodedUri,
+  signIn: signIn$1
+};
+exports.AuthorizationImplicitGrant = AuthorizationImplicitGrant;
 var base = "https://api.spotify.com";
 /* scopesEncoded Not a pure module */
 
 exports.base = base;
-},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js","@space-labs/re-crypt/src/ReCrypt.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt.bs.js"}],"components/Login.bs.js":[function(require,module,exports) {
+},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js","@space-labs/re-crypt/src/ReCrypt.bs.js":"../node_modules/@space-labs/re-crypt/src/ReCrypt.bs.js"}],"client/components/Login.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.handleSignIn = handleSignIn;
+exports.handleSignInPKCE = handleSignInPKCE;
+exports.handleSignInImplicitGrant = handleSignInImplicitGrant;
 exports.make = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
-var SpotifyAPI$Turntableam = _interopRequireWildcard(require("../services/SpotifyAPI.bs.js"));
+var SpotifyAPI$Turntableam = _interopRequireWildcard(require("../../server/services/SpotifyAPI.bs.js"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-function handleSignIn(param) {
-  SpotifyAPI$Turntableam.Authorization.signIn(undefined);
+function handleSignInPKCE(param) {
+  SpotifyAPI$Turntableam.AuthorizationPKCE.signIn(undefined);
+}
+
+function handleSignInImplicitGrant(param) {
+  SpotifyAPI$Turntableam.AuthorizationImplicitGrant.signIn(undefined);
 }
 
 function Login(Props) {
   return React.createElement("div", undefined, React.createElement("p", undefined, "Sign in to your Spotify Account"), React.createElement("button", {
     onClick: function onClick(param) {
-      return handleSignIn(undefined);
+      return handleSignInPKCE(undefined);
     }
-  }, "Sign In"));
+  }, "Sign In PKCE"), React.createElement("button", {
+    onClick: function onClick(param) {
+      return handleSignInImplicitGrant(undefined);
+    }
+  }, "Sign In Implicit Grant"));
 }
 
 var make = Login;
 /* react Not a pure module */
 
 exports.make = make;
-},{"react":"../node_modules/react/index.js","../services/SpotifyAPI.bs.js":"services/SpotifyAPI.bs.js"}],"components/UserProfile.bs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../server/services/SpotifyAPI.bs.js":"server/services/SpotifyAPI.bs.js"}],"client/components/UserProfile.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36258,7 +36299,7 @@ var make = UserProfile;
 /* react Not a pure module */
 
 exports.make = make;
-},{"react":"../node_modules/react/index.js"}],"components/ApplicationContainer.bs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"client/components/ApplicationContainer.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36309,7 +36350,7 @@ var make = ApplicationContainer;
 /* react Not a pure module */
 
 exports.make = make;
-},{"react":"../node_modules/react/index.js","./Home.bs.js":"components/Home.bs.js","./Login.bs.js":"components/Login.bs.js","./UserProfile.bs.js":"components/UserProfile.bs.js"}],"components/App.bs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Home.bs.js":"client/components/Home.bs.js","./Login.bs.js":"client/components/Login.bs.js","./UserProfile.bs.js":"client/components/UserProfile.bs.js"}],"client/components/App.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36347,7 +36388,7 @@ var make = App;
 /* react Not a pure module */
 
 exports.make = make;
-},{"react":"../node_modules/react/index.js","./Footer.bs.js":"components/Footer.bs.js","./Header.bs.js":"components/Header.bs.js","../hooks/UsePage.bs.js":"hooks/UsePage.bs.js","./ApplicationContainer.bs.js":"components/ApplicationContainer.bs.js"}],"styles/index.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Footer.bs.js":"client/components/Footer.bs.js","./Header.bs.js":"client/components/Header.bs.js","../hooks/UsePage.bs.js":"client/hooks/UsePage.bs.js","./ApplicationContainer.bs.js":"client/components/ApplicationContainer.bs.js"}],"styles/index.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -36363,7 +36404,7 @@ var React = _interopRequireWildcard(require("react"));
 
 var ReactDOMRe = _interopRequireWildcard(require("reason-react/src/legacy/ReactDOMRe.bs.js"));
 
-var App$Turntableam = _interopRequireWildcard(require("./components/App.bs.js"));
+var App$Turntableam = _interopRequireWildcard(require("./client/components/App.bs.js"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -36374,7 +36415,7 @@ require("./styles/index.css");
 
 ReactDOMRe.renderToElementWithId(React.createElement(App$Turntableam.make, {}), "root");
 /*  Not a pure module */
-},{"react":"../node_modules/react/index.js","reason-react/src/legacy/ReactDOMRe.bs.js":"../node_modules/reason-react/src/legacy/ReactDOMRe.bs.js","./components/App.bs.js":"components/App.bs.js","./styles/index.css":"styles/index.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","reason-react/src/legacy/ReactDOMRe.bs.js":"../node_modules/reason-react/src/legacy/ReactDOMRe.bs.js","./client/components/App.bs.js":"client/components/App.bs.js","./styles/index.css":"styles/index.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

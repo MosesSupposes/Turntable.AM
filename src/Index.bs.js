@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as ReactDOMRe from "reason-react/src/legacy/ReactDOMRe.bs.js";
-import * as App$Turntableam from "./components/App.bs.js";
+import * as App$Turntableam from "./client/components/App.bs.js";
 
 ((require("./styles/index.css")));
 
