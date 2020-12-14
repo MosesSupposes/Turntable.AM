@@ -2,8 +2,8 @@
 	"name": "turntableam",
 	"version": "0.1.0",
 	"scripts": {
-		"start": "parcel src/index.html",
-		"build": "parcel build src/index.html",
+		"start": "parcel src/client/index.html",
+		"build": "parcel build src/client/index.html",
 		"re:build": "bsb -make-world",
 		"re:watch": "bsb -make-world -w",
 		"re:clean": "bsb -clean-world"
