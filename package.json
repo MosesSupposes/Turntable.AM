@@ -20,6 +20,7 @@
 	},
 	"dependencies": {
 		"@space-labs/re-crypt": "^1.4.0",
+		"axios": "^0.21.0",
 		"cors": "^2.8.5",
 		"express": "^4.17.1",
 		"querystring": "^0.2.0",
