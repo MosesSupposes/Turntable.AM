@@ -23,10 +23,10 @@ function parseQueryParams(queryParams) {
     return ;
   }
   var accessToken = List.hd($$String.split_on_char(/* "&" */38, Caml_array.get($$Array.of_list($$String.split_on_char(/* "=" */61, queryParams)), 1)));
-  var state = List.hd($$String.split_on_char(/* "&" */38, Caml_array.get($$Array.of_list($$String.split_on_char(/* "=" */61, queryParams)), 4)));
+  var stateKey = List.hd($$String.split_on_char(/* "&" */38, Caml_array.get($$Array.of_list($$String.split_on_char(/* "=" */61, queryParams)), 4)));
   return {
           accessToken: accessToken,
-          state: state
+          stateKey: stateKey
         };
 }
 
@@ -92,7 +92,7 @@ function getState(url) {
     if (match$1 && !match$1.tl) {
       var match$2 = parseQueryParams(match$1.hd);
       if (match$2 !== undefined) {
-        return match$2.state;
+        return match$2.stateKey;
       } else {
         return ;
       }

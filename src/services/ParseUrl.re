@@ -1,6 +1,6 @@
 type parsedUrl = {
   accessToken: string,
-  state: string,
+  stateKey: string,
 };
 
 let parseQueryParams = (queryParams: string): option(parsedUrl) => {
@@ -17,13 +17,13 @@ let parseQueryParams = (queryParams: string): option(parsedUrl) => {
       |> Array.get(_, 1)
       |> String.split_on_char('&')
       |> List.hd;
-    let state =
+    let stateKey =
       String.split_on_char('=', queryParams)
       |> Array.of_list
       |> Array.get(_, 4)
       |> String.split_on_char('&')
       |> List.hd;
-    Some({accessToken, state});
+    Some({accessToken, stateKey});
   };
 };
 
@@ -38,7 +38,7 @@ let getAccessToken = (url: string): option(string) => {
     switch (String.split_on_char('#', url)) {
     | [_baseUrl, queryParams] =>
       switch (parseQueryParams(queryParams)) {
-      | Some({accessToken, state}) => Some(accessToken)
+      | Some({accessToken, stateKey}) => Some(accessToken)
       | None => None
       }
     };
@@ -56,7 +56,7 @@ let getState = (url: string): option(string) => {
     switch (String.split_on_char('#', url)) {
     | [_baseUrl, queryParams] =>
       switch (parseQueryParams(queryParams)) {
-      | Some({accessToken, state}) => Some(state)
+      | Some({accessToken, stateKey}) => Some(stateKey)
       | None => None
       }
     };
