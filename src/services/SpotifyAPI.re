@@ -1,4 +1,3 @@
-[@bs.val] external fetch: string => Js.Promise.t('a) = "fetch";
 [@bs.val] external encodeInBase64: string => string = "btoa";
 let base = "https://api.spotify.com";
 [@bs.module "uuid"] external uuid: unit => string = "v4";
