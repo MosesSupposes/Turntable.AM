@@ -31720,7 +31720,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 require("../styles/login.css");
 
 function Login(Props) {
-  return React.createElement("div", undefined, React.createElement("button", undefined, React.createElement("a", {
+  return React.createElement("div", {
+    className: "login-container"
+  }, React.createElement("button", undefined, React.createElement("a", {
     href: SpotifyAPI$Turntableam.Authorization.finalEncodedUri
   }, "Log in with Spotify")));
 }
@@ -31896,7 +31898,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53425" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53733" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
