@@ -3,7 +3,7 @@
 import * as React from "react";
 
 function Home(Props) {
-  return React.createElement("div", undefined, React.createElement("h1", undefined, "Welcome to Turntable.AM"));
+  return React.createElement("div", undefined, React.createElement("h1", undefined, "Welcome to Turntable.AM"), React.createElement("p", undefined, "Turntable.AM is a music sharing app that allows you to collaboratively create custom playlists with your friends. Click the Sign In link above to connect your Spotify account to the app."));
 }
 
 var make = Home;
