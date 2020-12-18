@@ -1,4 +1,5 @@
 [@bs.val] external fetch: (string, Js.t({..})) => Js.Promise.t('a) = "fetch";
+
 let request =
     (
       ~url: string,
