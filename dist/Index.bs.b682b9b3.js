@@ -36141,7 +36141,7 @@ exports.Sha512 = Sha512;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AuthorizationImplicitGrant = exports.AuthorizationPKCE = exports.base = void 0;
+exports.AuthorizationClientCredentials = exports.AuthorizationImplicitGrant = exports.AuthorizationPKCE = exports.base = void 0;
 
 var Uuid = _interopRequireWildcard(require("uuid"));
 
@@ -36175,8 +36175,8 @@ var codeChallenge = generateCodeChallenge(undefined);
 var authorizationURI = "" + authorizationBaseURI + "?response_type=code&client_id=" + clientId + "&redirect_uri=" + localhostEncoded + "&scope=" + scopesEncoded + "&state=" + state + "&code_challenge=" + codeChallenge + "&code_challenge_method=S256";
 
 function signIn(param) {
-  return fetch("http://localhost:9000").then(function (response) {
-    return Promise.resolve((console.log(response), undefined));
+  return fetch(authorizationURI).then(function (res) {
+    return Promise.resolve((console.log(res), undefined));
   });
 }
 
@@ -36198,7 +36198,6 @@ var AuthorizationPKCE = {
 exports.AuthorizationPKCE = AuthorizationPKCE;
 var authorizationBaseURI$1 = "https://accounts.spotify.com/authorize";
 var clientId$1 = "96e25e1a56b5467fbbf82af545444904";
-var corsAnywhereUrl = "https://cors-anywhere.herokuapp.com/";
 var localhostEncoded$1 = "http%3A%2F%2Flocalhost%3A1234";
 var scopes$1 = ["playlist-modify-public", "playlist-modify-private", "playlist-read-private", "playlist-read-collaborative", "user-read-recently-played", "user-top-read", "ugc-image-upload", "user-follow-read", "user-library-read", "user-library-modify", "user-read-email", "user-read-private"];
 
@@ -36208,7 +36207,7 @@ function urlEncode$1(arr) {
 
 var state$1 = Uuid.v4();
 var scopesEncoded$1 = scopes$1.join("%2C");
-var finalEncodedUri = "" + corsAnywhereUrl + authorizationBaseURI$1 + "?client_id=" + clientId$1 + "&response_type=\"token\"&redirect_uri=" + localhostEncoded$1 + "&state=" + state$1 + "&scope=" + scopesEncoded$1;
+var finalEncodedUri = "" + authorizationBaseURI$1 + "?client_id=" + clientId$1 + "&response_type=\"token\"&redirect_uri=" + localhostEncoded$1 + "&state=" + state$1 + "&scope=" + scopesEncoded$1;
 
 function signIn$1(param) {
   return fetch(finalEncodedUri).then(function (response) {
@@ -36219,7 +36218,7 @@ function signIn$1(param) {
 var AuthorizationImplicitGrant = {
   authorizationBaseURI: authorizationBaseURI$1,
   clientId: clientId$1,
-  corsAnywhereUrl: corsAnywhereUrl,
+  corsAnywhereUrl: "https://cors-anywhere.herokuapp.com/",
   localhostEncoded: localhostEncoded$1,
   scopes: scopes$1,
   urlEncode: urlEncode$1,
@@ -36229,6 +36228,17 @@ var AuthorizationImplicitGrant = {
   signIn: signIn$1
 };
 exports.AuthorizationImplicitGrant = AuthorizationImplicitGrant;
+
+function signIn$2(param) {
+  return fetch("http://localhost:9000/login").then(function (response) {
+    return Promise.resolve((console.log(response), undefined));
+  });
+}
+
+var AuthorizationClientCredentials = {
+  signIn: signIn$2
+};
+exports.AuthorizationClientCredentials = AuthorizationClientCredentials;
 var base = "https://api.spotify.com";
 /* scopesEncoded Not a pure module */
 
@@ -36241,6 +36251,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.handleSignInPKCE = handleSignInPKCE;
 exports.handleSignInImplicitGrant = handleSignInImplicitGrant;
+exports.handleSignInClientCredentials = handleSignInClientCredentials;
 exports.make = void 0;
 
 var React = _interopRequireWildcard(require("react"));
@@ -36260,16 +36271,24 @@ function handleSignInImplicitGrant(param) {
   SpotifyAPI$Turntableam.AuthorizationImplicitGrant.signIn(undefined);
 }
 
+function handleSignInClientCredentials(param) {
+  SpotifyAPI$Turntableam.AuthorizationClientCredentials.signIn(undefined);
+}
+
 function Login(Props) {
   return React.createElement("div", undefined, React.createElement("p", undefined, "Sign in to your Spotify Account"), React.createElement("button", {
     onClick: function onClick(param) {
       return handleSignInPKCE(undefined);
     }
-  }, "Sign In PKCE"), React.createElement("button", {
+  }, "Log in with Spotify PKCE"), React.createElement("button", {
     onClick: function onClick(param) {
       return handleSignInImplicitGrant(undefined);
     }
-  }, "Sign In Implicit Grant"));
+  }, "Sign in with Spotify Implicit Grant"), React.createElement("button", {
+    onClick: function onClick(param) {
+      return handleSignInClientCredentials(undefined);
+    }
+  }, "Log in with Spotify Client Credentials"));
 }
 
 var make = Login;
@@ -36443,7 +36462,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53991" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62628" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

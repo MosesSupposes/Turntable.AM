@@ -13,16 +13,25 @@ function handleSignInImplicitGrant(param) {
   
 }
 
+function handleSignInClientCredentials(param) {
+  SpotifyAPI$Turntableam.AuthorizationClientCredentials.signIn(undefined);
+  
+}
+
 function Login(Props) {
   return React.createElement("div", undefined, React.createElement("p", undefined, "Sign in to your Spotify Account"), React.createElement("button", {
                   onClick: (function (param) {
                       return handleSignInPKCE(undefined);
                     })
-                }, "Sign In PKCE"), React.createElement("button", {
+                }, "Log in with Spotify PKCE"), React.createElement("button", {
                   onClick: (function (param) {
                       return handleSignInImplicitGrant(undefined);
                     })
-                }, "Sign In Implicit Grant"));
+                }, "Sign in with Spotify Implicit Grant"), React.createElement("button", {
+                  onClick: (function (param) {
+                      return handleSignInClientCredentials(undefined);
+                    })
+                }, "Log in with Spotify Client Credentials"));
 }
 
 var make = Login;
@@ -30,6 +39,7 @@ var make = Login;
 export {
   handleSignInPKCE ,
   handleSignInImplicitGrant ,
+  handleSignInClientCredentials ,
   make ,
   
 }

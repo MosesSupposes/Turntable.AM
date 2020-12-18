@@ -70,9 +70,15 @@ module AuthorizationImplicitGrant = {
 
   let state = uuid();
   let scopesEncoded = urlEncode(scopes);
-  let finalEncodedUri = {j|$corsAnywhereUrl$authorizationBaseURI?client_id=$clientId&response_type="token"&redirect_uri=$localhostEncoded&state=$state&scope=$scopesEncoded|j};
+  let finalEncodedUri = {j|$authorizationBaseURI?client_id=$clientId&response_type="token"&redirect_uri=$localhostEncoded&state=$state&scope=$scopesEncoded|j};
 
   let signIn = () =>
     fetch(finalEncodedUri)
+    |> Js.Promise.(then_(response => resolve(Js.log(response))));
+};
+
+module AuthorizationClientCredentials = {
+  let signIn = () =>
+    fetch("http://localhost:9000/login")
     |> Js.Promise.(then_(response => resolve(Js.log(response))));
 };

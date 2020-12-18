@@ -70,8 +70,6 @@ var authorizationBaseURI$1 = "https://accounts.spotify.com/authorize";
 
 var clientId$1 = "96e25e1a56b5467fbbf82af545444904";
 
-var corsAnywhereUrl = "https://cors-anywhere.herokuapp.com/";
-
 var localhostEncoded$1 = "http%3A%2F%2Flocalhost%3A1234";
 
 var scopes$1 = [
@@ -97,7 +95,7 @@ var state$1 = Uuid.v4();
 
 var scopesEncoded$1 = scopes$1.join("%2C");
 
-var finalEncodedUri = "" + corsAnywhereUrl + authorizationBaseURI$1 + "?client_id=" + clientId$1 + "&response_type=\"token\"&redirect_uri=" + localhostEncoded$1 + "&state=" + state$1 + "&scope=" + scopesEncoded$1;
+var finalEncodedUri = "" + authorizationBaseURI$1 + "?client_id=" + clientId$1 + "&response_type=\"token\"&redirect_uri=" + localhostEncoded$1 + "&state=" + state$1 + "&scope=" + scopesEncoded$1;
 
 function signIn$1(param) {
   return fetch(finalEncodedUri).then(function (response) {
@@ -108,7 +106,7 @@ function signIn$1(param) {
 var AuthorizationImplicitGrant = {
   authorizationBaseURI: authorizationBaseURI$1,
   clientId: clientId$1,
-  corsAnywhereUrl: corsAnywhereUrl,
+  corsAnywhereUrl: "https://cors-anywhere.herokuapp.com/",
   localhostEncoded: localhostEncoded$1,
   scopes: scopes$1,
   urlEncode: urlEncode$1,
@@ -118,12 +116,23 @@ var AuthorizationImplicitGrant = {
   signIn: signIn$1
 };
 
+function signIn$2(param) {
+  return fetch("http://localhost:9000/login").then(function (response) {
+              return Promise.resolve((console.log(response), undefined));
+            });
+}
+
+var AuthorizationClientCredentials = {
+  signIn: signIn$2
+};
+
 var base = "https://api.spotify.com";
 
 export {
   base ,
   AuthorizationPKCE ,
   AuthorizationImplicitGrant ,
+  AuthorizationClientCredentials ,
   
 }
 /* scopesEncoded Not a pure module */
