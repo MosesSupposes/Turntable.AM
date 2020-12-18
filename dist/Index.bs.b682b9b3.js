@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../../node_modules/object-assign/index.js":[function(require,module,exports) {
+})({"../node_modules/object-assign/index.js":[function(require,module,exports) {
 /*
 object-assign
 (c) Sindre Sorhus
@@ -213,7 +213,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
   return to;
 };
-},{}],"../../node_modules/react/cjs/react.development.js":[function(require,module,exports) {
+},{}],"../node_modules/react/cjs/react.development.js":[function(require,module,exports) {
 /** @license React v17.0.1
  * react.development.js
  *
@@ -2497,7 +2497,7 @@ if ("development" !== "production") {
     exports.version = ReactVersion;
   })();
 }
-},{"object-assign":"../../node_modules/object-assign/index.js"}],"../../node_modules/react/index.js":[function(require,module,exports) {
+},{"object-assign":"../node_modules/object-assign/index.js"}],"../node_modules/react/index.js":[function(require,module,exports) {
 'use strict';
 
 if ("development" === 'production') {
@@ -2505,7 +2505,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react.development.js');
 }
-},{"./cjs/react.development.js":"../../node_modules/react/cjs/react.development.js"}],"../../node_modules/scheduler/cjs/scheduler.development.js":[function(require,module,exports) {
+},{"./cjs/react.development.js":"../node_modules/react/cjs/react.development.js"}],"../node_modules/scheduler/cjs/scheduler.development.js":[function(require,module,exports) {
 /** @license React v0.20.1
  * scheduler.development.js
  *
@@ -3348,7 +3348,7 @@ if ("development" !== "production") {
     exports.unstable_wrapCallback = unstable_wrapCallback;
   })();
 }
-},{}],"../../node_modules/scheduler/index.js":[function(require,module,exports) {
+},{}],"../node_modules/scheduler/index.js":[function(require,module,exports) {
 'use strict';
 
 if ("development" === 'production') {
@@ -3356,7 +3356,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/scheduler.development.js');
 }
-},{"./cjs/scheduler.development.js":"../../node_modules/scheduler/cjs/scheduler.development.js"}],"../../node_modules/scheduler/cjs/scheduler-tracing.development.js":[function(require,module,exports) {
+},{"./cjs/scheduler.development.js":"../node_modules/scheduler/cjs/scheduler.development.js"}],"../node_modules/scheduler/cjs/scheduler-tracing.development.js":[function(require,module,exports) {
 /** @license React v0.20.1
  * scheduler-tracing.development.js
  *
@@ -3704,7 +3704,7 @@ if ("development" !== "production") {
     exports.unstable_wrap = unstable_wrap;
   })();
 }
-},{}],"../../node_modules/scheduler/tracing.js":[function(require,module,exports) {
+},{}],"../node_modules/scheduler/tracing.js":[function(require,module,exports) {
 'use strict';
 
 if ("development" === 'production') {
@@ -3712,7 +3712,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/scheduler-tracing.development.js');
 }
-},{"./cjs/scheduler-tracing.development.js":"../../node_modules/scheduler/cjs/scheduler-tracing.development.js"}],"../../node_modules/react-dom/cjs/react-dom.development.js":[function(require,module,exports) {
+},{"./cjs/scheduler-tracing.development.js":"../node_modules/scheduler/cjs/scheduler-tracing.development.js"}],"../node_modules/react-dom/cjs/react-dom.development.js":[function(require,module,exports) {
 /** @license React v17.0.1
  * react-dom.development.js
  *
@@ -29734,7 +29734,7 @@ if ("development" !== "production") {
     exports.version = ReactVersion;
   })();
 }
-},{"react":"../../node_modules/react/index.js","object-assign":"../../node_modules/object-assign/index.js","scheduler":"../../node_modules/scheduler/index.js","scheduler/tracing":"../../node_modules/scheduler/tracing.js"}],"../../node_modules/react-dom/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","object-assign":"../node_modules/object-assign/index.js","scheduler":"../node_modules/scheduler/index.js","scheduler/tracing":"../node_modules/scheduler/tracing.js"}],"../node_modules/react-dom/index.js":[function(require,module,exports) {
 'use strict';
 
 function checkDCE() {
@@ -29772,7 +29772,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"../../node_modules/react-dom/cjs/react-dom.development.js"}],"../../node_modules/bs-platform/lib/es6/caml_option.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"../node_modules/bs-platform/lib/es6/caml_option.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29861,7 +29861,7 @@ function option_unwrap(x) {
   }
 }
 /* No side effect */
-},{}],"../../node_modules/reason-react/src/legacy/ReactDOMRe.bs.js":[function(require,module,exports) {
+},{}],"../node_modules/reason-react/src/legacy/ReactDOMRe.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29958,7 +29958,7 @@ var Style;
 /* react Not a pure module */
 
 exports.Style = Style;
-},{"react":"../../node_modules/react/index.js","react-dom":"../../node_modules/react-dom/index.js","bs-platform/lib/es6/caml_option.js":"../../node_modules/bs-platform/lib/es6/caml_option.js"}],"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","bs-platform/lib/es6/caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -29990,7 +29990,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"../../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -30025,12 +30025,12 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../styles/footer.css":[function(require,module,exports) {
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"styles/footer.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/Footer.bs.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Footer.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30055,7 +30055,7 @@ var make = Footer;
 /*  Not a pure module */
 
 exports.make = make;
-},{"react":"../../node_modules/react/index.js","../styles/footer.css":"../styles/footer.css"}],"../../node_modules/bs-platform/lib/es6/caml_array.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../styles/footer.css":"styles/footer.css"}],"../node_modules/bs-platform/lib/es6/caml_array.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30200,7 +30200,7 @@ function caml_array_dup(prim) {
   return prim.slice(0);
 }
 /* No side effect */
-},{}],"../../node_modules/bs-platform/lib/es6/curry.js":[function(require,module,exports) {
+},{}],"../node_modules/bs-platform/lib/es6/curry.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30669,7 +30669,7 @@ function __8(o) {
   }
 }
 /* No side effect */
-},{"./caml_array.js":"../../node_modules/bs-platform/lib/es6/caml_array.js"}],"../components/Link.bs.js":[function(require,module,exports) {
+},{"./caml_array.js":"../node_modules/bs-platform/lib/es6/caml_array.js"}],"components/Link.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30703,12 +30703,12 @@ var make = Link;
 /* react Not a pure module */
 
 exports.make = make;
-},{"bs-platform/lib/es6/curry.js":"../../node_modules/bs-platform/lib/es6/curry.js","react":"../../node_modules/react/index.js"}],"../styles/header.css":[function(require,module,exports) {
+},{"bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","react":"../node_modules/react/index.js"}],"styles/header.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../components/Header.bs.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Header.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30758,7 +30758,7 @@ var make = Header;
 /*  Not a pure module */
 
 exports.make = make;
-},{"react":"../../node_modules/react/index.js","./Link.bs.js":"../components/Link.bs.js","../styles/header.css":"../styles/header.css"}],"../hooks/UsePage.bs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Link.bs.js":"components/Link.bs.js","../styles/header.css":"styles/header.css"}],"hooks/UsePage.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30790,7 +30790,7 @@ function make(param) {
   };
 }
 /* react Not a pure module */
-},{"react":"../../node_modules/react/index.js"}],"../components/Home.bs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"components/Home.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30813,7 +30813,7 @@ var make = Home;
 /* react Not a pure module */
 
 exports.make = make;
-},{"react":"../../node_modules/react/index.js"}],"../../node_modules/uuid/dist/esm-browser/rng.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"../node_modules/uuid/dist/esm-browser/rng.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30840,7 +30840,7 @@ function rng() {
 
   return getRandomValues(rnds8);
 }
-},{}],"../../node_modules/uuid/dist/esm-browser/regex.js":[function(require,module,exports) {
+},{}],"../node_modules/uuid/dist/esm-browser/regex.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30849,7 +30849,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
 exports.default = _default;
-},{}],"../../node_modules/uuid/dist/esm-browser/validate.js":[function(require,module,exports) {
+},{}],"../node_modules/uuid/dist/esm-browser/validate.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30867,7 +30867,7 @@ function validate(uuid) {
 
 var _default = validate;
 exports.default = _default;
-},{"./regex.js":"../../node_modules/uuid/dist/esm-browser/regex.js"}],"../../node_modules/uuid/dist/esm-browser/stringify.js":[function(require,module,exports) {
+},{"./regex.js":"../node_modules/uuid/dist/esm-browser/regex.js"}],"../node_modules/uuid/dist/esm-browser/stringify.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30908,7 +30908,7 @@ function stringify(arr) {
 
 var _default = stringify;
 exports.default = _default;
-},{"./validate.js":"../../node_modules/uuid/dist/esm-browser/validate.js"}],"../../node_modules/uuid/dist/esm-browser/v1.js":[function(require,module,exports) {
+},{"./validate.js":"../node_modules/uuid/dist/esm-browser/validate.js"}],"../node_modules/uuid/dist/esm-browser/v1.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31016,7 +31016,7 @@ function v1(options, buf, offset) {
 
 var _default = v1;
 exports.default = _default;
-},{"./rng.js":"../../node_modules/uuid/dist/esm-browser/rng.js","./stringify.js":"../../node_modules/uuid/dist/esm-browser/stringify.js"}],"../../node_modules/uuid/dist/esm-browser/parse.js":[function(require,module,exports) {
+},{"./rng.js":"../node_modules/uuid/dist/esm-browser/rng.js","./stringify.js":"../node_modules/uuid/dist/esm-browser/stringify.js"}],"../node_modules/uuid/dist/esm-browser/parse.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31062,7 +31062,7 @@ function parse(uuid) {
 
 var _default = parse;
 exports.default = _default;
-},{"./validate.js":"../../node_modules/uuid/dist/esm-browser/validate.js"}],"../../node_modules/uuid/dist/esm-browser/v35.js":[function(require,module,exports) {
+},{"./validate.js":"../node_modules/uuid/dist/esm-browser/validate.js"}],"../node_modules/uuid/dist/esm-browser/v35.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31141,7 +31141,7 @@ function _default(name, version, hashfunc) {
   generateUUID.URL = URL;
   return generateUUID;
 }
-},{"./stringify.js":"../../node_modules/uuid/dist/esm-browser/stringify.js","./parse.js":"../../node_modules/uuid/dist/esm-browser/parse.js"}],"../../node_modules/uuid/dist/esm-browser/md5.js":[function(require,module,exports) {
+},{"./stringify.js":"../node_modules/uuid/dist/esm-browser/stringify.js","./parse.js":"../node_modules/uuid/dist/esm-browser/parse.js"}],"../node_modules/uuid/dist/esm-browser/md5.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31365,7 +31365,7 @@ function md5ii(a, b, c, d, x, s, t) {
 
 var _default = md5;
 exports.default = _default;
-},{}],"../../node_modules/uuid/dist/esm-browser/v3.js":[function(require,module,exports) {
+},{}],"../node_modules/uuid/dist/esm-browser/v3.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31382,7 +31382,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var v3 = (0, _v.default)('v3', 0x30, _md.default);
 var _default = v3;
 exports.default = _default;
-},{"./v35.js":"../../node_modules/uuid/dist/esm-browser/v35.js","./md5.js":"../../node_modules/uuid/dist/esm-browser/md5.js"}],"../../node_modules/uuid/dist/esm-browser/v4.js":[function(require,module,exports) {
+},{"./v35.js":"../node_modules/uuid/dist/esm-browser/v35.js","./md5.js":"../node_modules/uuid/dist/esm-browser/md5.js"}],"../node_modules/uuid/dist/esm-browser/v4.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31420,7 +31420,7 @@ function v4(options, buf, offset) {
 
 var _default = v4;
 exports.default = _default;
-},{"./rng.js":"../../node_modules/uuid/dist/esm-browser/rng.js","./stringify.js":"../../node_modules/uuid/dist/esm-browser/stringify.js"}],"../../node_modules/uuid/dist/esm-browser/sha1.js":[function(require,module,exports) {
+},{"./rng.js":"../node_modules/uuid/dist/esm-browser/rng.js","./stringify.js":"../node_modules/uuid/dist/esm-browser/stringify.js"}],"../node_modules/uuid/dist/esm-browser/sha1.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31525,7 +31525,7 @@ function sha1(bytes) {
 
 var _default = sha1;
 exports.default = _default;
-},{}],"../../node_modules/uuid/dist/esm-browser/v5.js":[function(require,module,exports) {
+},{}],"../node_modules/uuid/dist/esm-browser/v5.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31542,7 +31542,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var v5 = (0, _v.default)('v5', 0x50, _sha.default);
 var _default = v5;
 exports.default = _default;
-},{"./v35.js":"../../node_modules/uuid/dist/esm-browser/v35.js","./sha1.js":"../../node_modules/uuid/dist/esm-browser/sha1.js"}],"../../node_modules/uuid/dist/esm-browser/nil.js":[function(require,module,exports) {
+},{"./v35.js":"../node_modules/uuid/dist/esm-browser/v35.js","./sha1.js":"../node_modules/uuid/dist/esm-browser/sha1.js"}],"../node_modules/uuid/dist/esm-browser/nil.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31551,7 +31551,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = '00000000-0000-0000-0000-000000000000';
 exports.default = _default;
-},{}],"../../node_modules/uuid/dist/esm-browser/version.js":[function(require,module,exports) {
+},{}],"../node_modules/uuid/dist/esm-browser/version.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31573,7 +31573,7 @@ function version(uuid) {
 
 var _default = version;
 exports.default = _default;
-},{"./validate.js":"../../node_modules/uuid/dist/esm-browser/validate.js"}],"../../node_modules/uuid/dist/esm-browser/index.js":[function(require,module,exports) {
+},{"./validate.js":"../node_modules/uuid/dist/esm-browser/validate.js"}],"../node_modules/uuid/dist/esm-browser/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31653,7 +31653,7 @@ var _stringify = _interopRequireDefault(require("./stringify.js"));
 var _parse = _interopRequireDefault(require("./parse.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./v1.js":"../../node_modules/uuid/dist/esm-browser/v1.js","./v3.js":"../../node_modules/uuid/dist/esm-browser/v3.js","./v4.js":"../../node_modules/uuid/dist/esm-browser/v4.js","./v5.js":"../../node_modules/uuid/dist/esm-browser/v5.js","./nil.js":"../../node_modules/uuid/dist/esm-browser/nil.js","./version.js":"../../node_modules/uuid/dist/esm-browser/version.js","./validate.js":"../../node_modules/uuid/dist/esm-browser/validate.js","./stringify.js":"../../node_modules/uuid/dist/esm-browser/stringify.js","./parse.js":"../../node_modules/uuid/dist/esm-browser/parse.js"}],"../server/services/SpotifyAPI.bs.js":[function(require,module,exports) {
+},{"./v1.js":"../node_modules/uuid/dist/esm-browser/v1.js","./v3.js":"../node_modules/uuid/dist/esm-browser/v3.js","./v4.js":"../node_modules/uuid/dist/esm-browser/v4.js","./v5.js":"../node_modules/uuid/dist/esm-browser/v5.js","./nil.js":"../node_modules/uuid/dist/esm-browser/nil.js","./version.js":"../node_modules/uuid/dist/esm-browser/version.js","./validate.js":"../node_modules/uuid/dist/esm-browser/validate.js","./stringify.js":"../node_modules/uuid/dist/esm-browser/stringify.js","./parse.js":"../node_modules/uuid/dist/esm-browser/parse.js"}],"services/SpotifyAPI.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31695,7 +31695,12 @@ var base = "https://api.spotify.com";
 /* state Not a pure module */
 
 exports.base = base;
-},{"uuid":"../../node_modules/uuid/dist/esm-browser/index.js"}],"../components/Login.bs.js":[function(require,module,exports) {
+},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js"}],"styles/login.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Login.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31705,13 +31710,15 @@ exports.make = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
-var SpotifyAPI$Turntableam = _interopRequireWildcard(require("../server/services/SpotifyAPI.bs.js"));
+var SpotifyAPI$Turntableam = _interopRequireWildcard(require("../services/SpotifyAPI.bs.js"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
+require("../styles/login.css");
+
 function Login(Props) {
   return React.createElement("div", undefined, React.createElement("button", undefined, React.createElement("a", {
     href: SpotifyAPI$Turntableam.Authorization.finalEncodedUri
@@ -31719,10 +31726,10 @@ function Login(Props) {
 }
 
 var make = Login;
-/* react Not a pure module */
+/*  Not a pure module */
 
 exports.make = make;
-},{"react":"../../node_modules/react/index.js","../server/services/SpotifyAPI.bs.js":"../server/services/SpotifyAPI.bs.js"}],"../components/UserProfile.bs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../services/SpotifyAPI.bs.js":"services/SpotifyAPI.bs.js","../styles/login.css":"styles/login.css"}],"components/UserProfile.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31745,7 +31752,7 @@ var make = UserProfile;
 /* react Not a pure module */
 
 exports.make = make;
-},{"react":"../../node_modules/react/index.js"}],"../components/ApplicationContainer.bs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"components/ApplicationContainer.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31796,7 +31803,7 @@ var make = ApplicationContainer;
 /* react Not a pure module */
 
 exports.make = make;
-},{"react":"../../node_modules/react/index.js","./Home.bs.js":"../components/Home.bs.js","./Login.bs.js":"../components/Login.bs.js","./UserProfile.bs.js":"../components/UserProfile.bs.js"}],"../components/App.bs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Home.bs.js":"components/Home.bs.js","./Login.bs.js":"components/Login.bs.js","./UserProfile.bs.js":"components/UserProfile.bs.js"}],"components/App.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31834,12 +31841,12 @@ var make = App;
 /* react Not a pure module */
 
 exports.make = make;
-},{"react":"../../node_modules/react/index.js","./Footer.bs.js":"../components/Footer.bs.js","./Header.bs.js":"../components/Header.bs.js","../hooks/UsePage.bs.js":"../hooks/UsePage.bs.js","./ApplicationContainer.bs.js":"../components/ApplicationContainer.bs.js"}],"styles/index.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Footer.bs.js":"components/Footer.bs.js","./Header.bs.js":"components/Header.bs.js","../hooks/UsePage.bs.js":"hooks/UsePage.bs.js","./ApplicationContainer.bs.js":"components/ApplicationContainer.bs.js"}],"styles/index.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"Index.bs.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"Index.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31850,7 +31857,7 @@ var React = _interopRequireWildcard(require("react"));
 
 var ReactDOMRe = _interopRequireWildcard(require("reason-react/src/legacy/ReactDOMRe.bs.js"));
 
-var App$Turntableam = _interopRequireWildcard(require("../components/App.bs.js"));
+var App$Turntableam = _interopRequireWildcard(require("./components/App.bs.js"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -31861,7 +31868,7 @@ require("./styles/index.css");
 
 ReactDOMRe.renderToElementWithId(React.createElement(App$Turntableam.make, {}), "root");
 /*  Not a pure module */
-},{"react":"../../node_modules/react/index.js","reason-react/src/legacy/ReactDOMRe.bs.js":"../../node_modules/reason-react/src/legacy/ReactDOMRe.bs.js","../components/App.bs.js":"../components/App.bs.js","./styles/index.css":"styles/index.css"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","reason-react/src/legacy/ReactDOMRe.bs.js":"../node_modules/reason-react/src/legacy/ReactDOMRe.bs.js","./components/App.bs.js":"components/App.bs.js","./styles/index.css":"styles/index.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -31889,7 +31896,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52164" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53425" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -32065,5 +32072,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","Index.bs.js"], null)
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","Index.bs.js"], null)
 //# sourceMappingURL=/Index.bs.b682b9b3.js.map
