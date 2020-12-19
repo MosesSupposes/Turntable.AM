@@ -45,7 +45,7 @@ let getAccessToken = (url: string): option(string) => {
   };
 };
 
-let getState = (url: string): option(string) => {
+let getStateKey = (url: string): option(string) => {
   let queryParamsStartIndex =
     try(String.index(url, '#')) {
     | Not_found => (-1)

@@ -70,7 +70,7 @@ function getAccessToken(url) {
       };
 }
 
-function getState(url) {
+function getStateKey(url) {
   var queryParamsStartIndex;
   try {
     queryParamsStartIndex = $$String.index(url, /* "#" */35);
@@ -113,7 +113,7 @@ function getState(url) {
 export {
   parseQueryParams ,
   getAccessToken ,
-  getState ,
+  getStateKey ,
   
 }
 /* No side effect */
