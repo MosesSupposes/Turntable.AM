@@ -2,16 +2,29 @@
 
 import * as Curry from "bs-platform/lib/es6/curry.js";
 
-function request(url, accessToken, onSuccess, onFail) {
+function getRequest(url, accessToken, onSuccess, onFail) {
   return fetch(url, {
-                  headers: {
-                    Authorization: "Bearer " + accessToken
-                  }
+                    headers: {
+                      Authorization: "Bearer " + accessToken
+                    }
+                  }).then(function (response) {
+                  return response.json();
+                }).then(Curry.__1(onSuccess)).catch(Curry.__1(onFail));
+}
+
+function postRequest(url, body, accessToken, onSuccess, onFail) {
+  return fetch(url, {
+                    headers: {
+                      Authorization: "Bearer " + accessToken
+                    }
+                  }).then(function (response) {
+                  return response.json();
                 }).then(Curry.__1(onSuccess)).catch(Curry.__1(onFail));
 }
 
 export {
-  request ,
+  getRequest ,
+  postRequest ,
   
 }
 /* No side effect */
