@@ -2,6 +2,7 @@
 let base = "https://api.spotify.com";
 [@bs.module "uuid"] external uuid: unit => string = "v4";
 
+// TODO: Set the redirectUri to the deployed site's url
 module Authorization = {
   let authorizationBaseURI = "https://accounts.spotify.com/authorize";
   let clientId = "96e25e1a56b5467fbbf82af545444904";
