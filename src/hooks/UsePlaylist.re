@@ -48,7 +48,7 @@ let reducer = (state, action) => {
         List.map(
           (pl: Playlist.t): Playlist.t =>
             if (pl.dj === playlist.dj) {
-              {...pl, songs: pl.songs @ [song]};
+              {...pl, songs: Array.append(pl.songs, [|song|])};
             } else {
               pl;
             },

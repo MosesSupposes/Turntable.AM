@@ -10,7 +10,7 @@ function make(dj, songs, param) {
   } else {
     return {
             dj: dj,
-            songs: /* [] */0
+            songs: []
           };
   }
 }
