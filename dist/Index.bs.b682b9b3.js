@@ -38964,7 +38964,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.parseQueryParams = parseQueryParams;
 exports.getAccessToken = getAccessToken;
-exports.getState = getState;
+exports.getStateKey = getStateKey;
 
 var List = _interopRequireWildcard(require("bs-platform/lib/es6/list.js"));
 
@@ -39064,7 +39064,7 @@ function getAccessToken(url) {
   };
 }
 
-function getState(url) {
+function getStateKey(url) {
   var queryParamsStartIndex;
 
   try {
@@ -40157,18 +40157,11 @@ function App(Props) {
   var setPage = match.setPage;
   var match$1 = React.useState(function () {});
   var setAccessToken = match$1[1];
-  var match$2 = React.useState(function () {});
-  var setStateKey = match$2[1];
   React.useEffect(function () {
     var accessToken = ParseUrl$Turntableam.getAccessToken(document.location.href);
-    var stateKey = ParseUrl$Turntableam.getState(document.location.href);
 
     Curry._1(setAccessToken, function (param) {
       return accessToken;
-    });
-
-    Curry._1(setStateKey, function (param) {
-      return stateKey;
     });
   }, []);
   return React.createElement("main", undefined, React.createElement(Header$Turntableam.make, {

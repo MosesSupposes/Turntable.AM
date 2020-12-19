@@ -15,18 +15,10 @@ function App(Props) {
         
       });
   var setAccessToken = match$1[1];
-  var match$2 = React.useState(function () {
-        
-      });
-  var setStateKey = match$2[1];
   React.useEffect((function () {
           var accessToken = ParseUrl$Turntableam.getAccessToken(document.location.href);
-          var stateKey = ParseUrl$Turntableam.getState(document.location.href);
           Curry._1(setAccessToken, (function (param) {
                   return accessToken;
-                }));
-          Curry._1(setStateKey, (function (param) {
-                  return stateKey;
                 }));
           
         }), []);
