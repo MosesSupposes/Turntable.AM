@@ -16,10 +16,11 @@ function getRequest(url, accessToken, onSuccess, onFail) {
 function postRequest(url, body, accessToken, onSuccess, onFail) {
   return fetch(url, {
                     method: "POST",
-                    body: $$JSON.stringify(body),
                     headers: {
+                      "Content-Type": "application/json",
                       Authorization: "Bearer " + accessToken
-                    }
+                    },
+                    body: $$JSON.stringify(body)
                   }).then(function (response) {
                   return response.json();
                 }).then(Curry.__1(onSuccess)).catch(Curry.__1(onFail));

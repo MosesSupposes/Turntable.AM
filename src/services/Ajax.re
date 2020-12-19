@@ -31,10 +31,11 @@ let postRequest =
     url,
     {
       "method": "POST",
-      "body": jsonStringify(body),
       "headers": {
+        "Content-Type": "application/json",
         "Authorization": {j|Bearer $accessToken|j},
       },
+      "body": jsonStringify(body),
     },
   )
   |> Js.Promise.then_(response => response##json())
