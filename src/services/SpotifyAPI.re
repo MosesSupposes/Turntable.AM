@@ -29,3 +29,15 @@ module Authorization = {
   let scopesEncoded = urlEncode(scopes);
   let finalEncodedUri = {j|$authorizationBaseURI?client_id=$clientId&response_type=token&redirect_uri=$localhostUnencoded&state=$state&scope=$scopesEncoded|j};
 };
+
+module Search = {
+  let searchArtist =
+      (~accessToken: string, ~artist: string): Js.Promise.t('a) => {
+    Ajax.getRequest(
+      ~url="https://api.spotify.com/v1/search?q=lil%uzi&type=artist",
+      ~accessToken,
+      ~onSuccess=response => Js.Promise.resolve(Js.log(response)),
+      ~onFail=error => Js.Promise.resolve(Js.log(error)),
+    );
+  };
+};
