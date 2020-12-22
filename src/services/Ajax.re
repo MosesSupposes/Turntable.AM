@@ -6,8 +6,8 @@ let getRequest =
     (
       ~url: string,
       ~accessToken: string,
-      ~onSuccess: 'a => 'b,
-      ~onFail: 'a => 'b,
+      ~onSuccess: 'a => Js.Promise.t('b),
+      ~onFail: 'a => Js.Promise.t('b),
     ) => {
   fetch(url, {
                "headers": {
@@ -24,8 +24,8 @@ let postRequest =
       ~url: string,
       ~body: Js.t({..}),
       ~accessToken: string,
-      ~onSuccess: 'a => 'b,
-      ~onFail: 'a => 'b,
+      ~onSuccess: 'a => Js.Promise.t('b),
+      ~onFail: 'a => Js.Promise.t('b),
     ) => {
   fetch(
     url,

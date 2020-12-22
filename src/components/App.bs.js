@@ -6,6 +6,7 @@ import * as Footer$Turntableam from "./Footer.bs.js";
 import * as Header$Turntableam from "./Header.bs.js";
 import * as UsePage$Turntableam from "../hooks/UsePage.bs.js";
 import * as ParseUrl$Turntableam from "../services/ParseUrl.bs.js";
+import * as SpotifyAPI$Turntableam from "../services/SpotifyAPI.bs.js";
 import * as ApplicationContainer$Turntableam from "./ApplicationContainer.bs.js";
 
 function App(Props) {
@@ -20,6 +21,8 @@ function App(Props) {
           Curry._1(setAccessToken, (function (param) {
                   return accessToken;
                 }));
+          var futuresTracks = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchArtist(accessToken, "Future") : Promise.resolve(undefined);
+          console.log(futuresTracks);
           
         }), []);
   return React.createElement("main", undefined, React.createElement(Header$Turntableam.make, {
