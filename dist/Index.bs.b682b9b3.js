@@ -40468,7 +40468,15 @@ var Authorization = {
 exports.Authorization = Authorization;
 
 function searchArtist(accessToken, artist) {
-  return Ajax$Turntableam.getRequest("https://api.spotify.com/v1/search?q=lil%uzi&type=artist", accessToken, function (response) {
+  return Ajax$Turntableam.getRequest("https://api.spotify.com/v1/search?q=" + artist + "&type=artist", accessToken, function (response) {
+    return Promise.resolve((console.log(response), undefined));
+  }, function (error) {
+    return Promise.resolve((console.log(error), undefined));
+  });
+}
+
+function searchTrack(accessToken, track) {
+  return Ajax$Turntableam.getRequest("https://api.spotify.com/v1/search?q=" + track + "&type=track", accessToken, function (response) {
     return Promise.resolve((console.log(response), undefined));
   }, function (error) {
     return Promise.resolve((console.log(error), undefined));
@@ -40476,7 +40484,8 @@ function searchArtist(accessToken, artist) {
 }
 
 var Search = {
-  searchArtist: searchArtist
+  searchArtist: searchArtist,
+  searchTrack: searchTrack
 };
 exports.Search = Search;
 var base = "https://api.spotify.com";
@@ -40659,6 +40668,8 @@ function App(Props) {
 
     var futuresTracks = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchArtist(accessToken, "Future") : Promise.resolve(undefined);
     console.log(futuresTracks);
+    var moneyLonger = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchTrack(accessToken, "money%20longer") : Promise.resolve(undefined);
+    console.log("money longer", moneyLonger);
   }, []);
   return React.createElement("main", undefined, React.createElement(Header$Turntableam.make, {
     setPage: setPage

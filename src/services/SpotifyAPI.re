@@ -34,7 +34,16 @@ module Search = {
   let searchArtist =
       (~accessToken: string, ~artist: string): Js.Promise.t('a) => {
     Ajax.getRequest(
-      ~url="https://api.spotify.com/v1/search?q=lil%uzi&type=artist",
+      ~url={j|https://api.spotify.com/v1/search?q=$artist&type=artist|j},
+      ~accessToken,
+      ~onSuccess=response => Js.Promise.resolve(Js.log(response)),
+      ~onFail=error => Js.Promise.resolve(Js.log(error)),
+    );
+  };
+
+  let searchTrack = (~accessToken: string, ~track: string): Js.Promise.t('a) => {
+    Ajax.getRequest(
+      ~url={j|https://api.spotify.com/v1/search?q=$track&type=track|j},
       ~accessToken,
       ~onSuccess=response => Js.Promise.resolve(Js.log(response)),
       ~onFail=error => Js.Promise.resolve(Js.log(error)),
