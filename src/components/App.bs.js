@@ -23,6 +23,8 @@ function App(Props) {
                 }));
           var futuresTracks = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchArtist(accessToken, "Future") : Promise.resolve(undefined);
           console.log(futuresTracks);
+          var moneyLonger = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchTrack(accessToken, "money%20longer") : Promise.resolve(undefined);
+          console.log("money longer", moneyLonger);
           
         }), []);
   return React.createElement("main", undefined, React.createElement(Header$Turntableam.make, {
