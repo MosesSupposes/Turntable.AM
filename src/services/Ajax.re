@@ -1,22 +1,19 @@
-[@bs.val] external fetch: (string, Js.t({..})) => Js.Promise.t('a) = "fetch";
-[@bs.module "JSON"]
-external jsonStringify: Js.t({..}) => string = "stringify";
-
 let getRequest =
     (
       ~url: string,
       ~accessToken: string,
-      ~onSuccess: 'a => Js.Promise.t('b),
-      ~onFail: 'a => Js.Promise.t('b),
-    ) => {
-  fetch(url, {
-               "headers": {
-                 "Authorization": {j|Bearer $accessToken|j},
-               },
-             })
-  |> Js.Promise.then_(response => response##json())
-  |> Js.Promise.then_(onSuccess)
-  |> Js.Promise.catch(onFail);
+      ~onSuccess: Js.Promise.t('a) => Js.Promise.t('b),
+      ~onFail: Js.Promise.error => Js.Promise.t('b),
+    )
+    : Js.Promise.t('a) => {
+  let headers =
+    Axios.Headers.fromObj({"Authorization": {j|Bearer $accessToken|j}});
+  Js.Promise.(
+    Axios.getc(url, Axios.makeConfig(~headers, ()))
+    |> then_(response => resolve(response##data))
+    |> then_(onSuccess)
+    |> catch(onFail)
+  );
 };
 
 let postRequest =
@@ -24,21 +21,19 @@ let postRequest =
       ~url: string,
       ~body: Js.t({..}),
       ~accessToken: string,
-      ~onSuccess: 'a => Js.Promise.t('b),
-      ~onFail: 'a => Js.Promise.t('b),
-    ) => {
-  fetch(
-    url,
-    {
-      "method": "POST",
-      "headers": {
-        "Content-Type": "application/json",
-        "Authorization": {j|Bearer $accessToken|j},
-      },
-      "body": jsonStringify(body),
-    },
-  )
-  |> Js.Promise.then_(response => response##json())
-  |> Js.Promise.then_(onSuccess)
-  |> Js.Promise.catch(onFail);
+      ~onSuccess: Js.Promise.t('a) => Js.Promise.t('b),
+      ~onFail: Js.Promise.error => Js.Promise.t('b),
+    )
+    : Js.Promise.t('a) => {
+  let headers =
+    Axios.Headers.fromObj({
+      "Content-Type": "application/json",
+      "Authorization": {j|Bearer $accessToken|j},
+    });
+  Js.Promise.(
+    Axios.postDatac(url, body, Axios.makeConfig(~headers, ()))
+    |> then_(response => resolve(response##data))
+    |> then_(onSuccess)
+    |> catch(onFail)
+  );
 };
