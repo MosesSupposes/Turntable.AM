@@ -2,6 +2,7 @@
 
 import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
+import * as Caml_exceptions from "bs-platform/lib/es6/caml_exceptions.js";
 import * as Footer$Turntableam from "./Footer.bs.js";
 import * as Header$Turntableam from "./Header.bs.js";
 import * as UsePage$Turntableam from "../hooks/UsePage.bs.js";
@@ -27,12 +28,20 @@ function App(Props) {
                     return Promise.resolve((console.log(error), undefined));
                   })) : Promise.resolve(undefined);
           console.log(future);
-          var moneyLonger = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchTrack(accessToken, "money%20longer", (function (tracksPromise) {
+          if (accessToken !== undefined) {
+            SpotifyAPI$Turntableam.Search.searchTrack(accessToken, "money%20longer", (function (tracksPromise) {
+                    console.log(tracksPromise);
                     return tracksPromise;
                   }), (function (error) {
-                    return Promise.resolve((console.log(error), undefined));
-                  })) : Promise.resolve(undefined);
-          console.log("money longer", moneyLonger);
+                    console.log(error);
+                    return Promise.resolve(undefined);
+                  }));
+          } else {
+            var MissingAccessToken = Caml_exceptions.create("MissingAccessToken");
+            Promise.reject({
+                  RE_EXN_ID: MissingAccessToken
+                });
+          }
           
         }), []);
   return React.createElement("main", undefined, React.createElement(Header$Turntableam.make, {

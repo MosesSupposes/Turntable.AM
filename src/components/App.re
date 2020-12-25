@@ -29,15 +29,24 @@ let make = () => {
         SpotifyAPI.Search.searchTrack(
           ~accessToken=token,
           ~track="money%20longer",
-          ~onSuccess=tracksPromise => {tracksPromise},
-          ~onFail=error => {Js.Promise.resolve(Js.log(error))},
+          ~onSuccess=
+            tracksPromise => {
+              Js.log(tracksPromise);
+              tracksPromise;
+            },
+          ~onFail=
+            error => {
+              Js.log(error);
+              Js.Promise.resolve();
+            },
         )
-      | None => Js.Promise.resolve()
+      | None =>
+        exception MissingAccessToken;
+        Js.Promise.reject(MissingAccessToken);
       };
-    Js.log2("money longer", moneyLonger);
+
     None;
   });
-
   <main>
     <Header setPage />
     <ApplicationContainer page setPage />

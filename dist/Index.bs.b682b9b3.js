@@ -30572,7 +30572,39 @@ function __8(o) {
   }
 }
 /* No side effect */
-},{"./caml_array.js":"../node_modules/bs-platform/lib/es6/caml_array.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./caml_array.js":"../node_modules/bs-platform/lib/es6/caml_array.js"}],"../node_modules/bs-platform/lib/es6/caml_exceptions.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.create = create;
+exports.caml_is_extension = caml_is_extension;
+exports.caml_exn_slot_name = caml_exn_slot_name;
+exports.id = void 0;
+var id = {
+  contents: 0
+};
+exports.id = id;
+
+function create(str) {
+  id.contents = id.contents + 1 | 0;
+  return str + ("/" + id.contents);
+}
+
+function caml_is_extension(e) {
+  if (e == null) {
+    return false;
+  } else {
+    return typeof e.RE_EXN_ID === "string";
+  }
+}
+
+function caml_exn_slot_name(x) {
+  return x.RE_EXN_ID;
+}
+/* No side effect */
+},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -33838,38 +33870,6 @@ function get(s, i) {
 
 function make(n, ch) {
   return String.fromCharCode(ch).repeat(n);
-}
-/* No side effect */
-},{}],"../node_modules/bs-platform/lib/es6/caml_exceptions.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.create = create;
-exports.caml_is_extension = caml_is_extension;
-exports.caml_exn_slot_name = caml_exn_slot_name;
-exports.id = void 0;
-var id = {
-  contents: 0
-};
-exports.id = id;
-
-function create(str) {
-  id.contents = id.contents + 1 | 0;
-  return str + ("/" + id.contents);
-}
-
-function caml_is_extension(e) {
-  if (e == null) {
-    return false;
-  } else {
-    return typeof e.RE_EXN_ID === "string";
-  }
-}
-
-function caml_exn_slot_name(x) {
-  return x.RE_EXN_ID;
 }
 /* No side effect */
 },{}],"../node_modules/bs-platform/lib/es6/caml_js_exceptions.js":[function(require,module,exports) {
@@ -41828,6 +41828,8 @@ var Curry = _interopRequireWildcard(require("bs-platform/lib/es6/curry.js"));
 
 var React = _interopRequireWildcard(require("react"));
 
+var Caml_exceptions = _interopRequireWildcard(require("bs-platform/lib/es6/caml_exceptions.js"));
+
 var Footer$Turntableam = _interopRequireWildcard(require("./Footer.bs.js"));
 
 var Header$Turntableam = _interopRequireWildcard(require("./Header.bs.js"));
@@ -41863,12 +41865,21 @@ function App(Props) {
       return Promise.resolve((console.log(error), undefined));
     }) : Promise.resolve(undefined);
     console.log(future);
-    var moneyLonger = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchTrack(accessToken, "money%20longer", function (tracksPromise) {
-      return tracksPromise;
-    }, function (error) {
-      return Promise.resolve((console.log(error), undefined));
-    }) : Promise.resolve(undefined);
-    console.log("money longer", moneyLonger);
+
+    if (accessToken !== undefined) {
+      SpotifyAPI$Turntableam.Search.searchTrack(accessToken, "money%20longer", function (tracksPromise) {
+        console.log(tracksPromise);
+        return tracksPromise;
+      }, function (error) {
+        console.log(error);
+        return Promise.resolve(undefined);
+      });
+    } else {
+      var MissingAccessToken = Caml_exceptions.create("MissingAccessToken");
+      Promise.reject({
+        RE_EXN_ID: MissingAccessToken
+      });
+    }
   }, []);
   return React.createElement("main", undefined, React.createElement(Header$Turntableam.make, {
     setPage: setPage
@@ -41882,7 +41893,7 @@ var make = App;
 /* react Not a pure module */
 
 exports.make = make;
-},{"bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","react":"../node_modules/react/index.js","./Footer.bs.js":"components/Footer.bs.js","./Header.bs.js":"components/Header.bs.js","../hooks/UsePage.bs.js":"hooks/UsePage.bs.js","../services/ParseUrl.bs.js":"services/ParseUrl.bs.js","../services/SpotifyAPI.bs.js":"services/SpotifyAPI.bs.js","./ApplicationContainer.bs.js":"components/ApplicationContainer.bs.js"}],"styles/index.css":[function(require,module,exports) {
+},{"bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","react":"../node_modules/react/index.js","bs-platform/lib/es6/caml_exceptions.js":"../node_modules/bs-platform/lib/es6/caml_exceptions.js","./Footer.bs.js":"components/Footer.bs.js","./Header.bs.js":"components/Header.bs.js","../hooks/UsePage.bs.js":"hooks/UsePage.bs.js","../services/ParseUrl.bs.js":"services/ParseUrl.bs.js","../services/SpotifyAPI.bs.js":"services/SpotifyAPI.bs.js","./ApplicationContainer.bs.js":"components/ApplicationContainer.bs.js"}],"styles/index.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
