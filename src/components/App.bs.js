@@ -21,9 +21,17 @@ function App(Props) {
           Curry._1(setAccessToken, (function (param) {
                   return accessToken;
                 }));
-          var futuresTracks = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchArtist(accessToken, "Future") : Promise.resolve(undefined);
-          console.log(futuresTracks);
-          var moneyLonger = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchTrack(accessToken, "money%20longer") : Promise.resolve(undefined);
+          var future = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchArtist(accessToken, "Future", (function (future) {
+                    return Promise.resolve((console.log(future), undefined));
+                  }), (function (error) {
+                    return Promise.resolve((console.log(error), undefined));
+                  })) : Promise.resolve(undefined);
+          console.log(future);
+          var moneyLonger = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchTrack(accessToken, "money%20longer", (function (tracksPromise) {
+                    return tracksPromise;
+                  }), (function (error) {
+                    return Promise.resolve((console.log(error), undefined));
+                  })) : Promise.resolve(undefined);
           console.log("money longer", moneyLonger);
           
         }), []);

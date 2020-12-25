@@ -32,21 +32,34 @@ module Authorization = {
 
 module Search = {
   let searchArtist =
-      (~accessToken: string, ~artist: string): Js.Promise.t('a) => {
+      (
+        ~accessToken: string,
+        ~artist: string,
+        ~onSuccess: Js.Promise.t('a) => Js.Promise.t('b),
+        ~onFail: Js.Promise.error => Js.Promise.t('a),
+      )
+      : Js.Promise.t('a) => {
     Ajax.getRequest(
       ~url={j|https://api.spotify.com/v1/search?q=$artist&type=artist|j},
       ~accessToken,
-      ~onSuccess=response => Js.Promise.resolve(Js.log(response)),
-      ~onFail=error => Js.Promise.resolve(Js.log(error)),
+      ~onSuccess,
+      ~onFail,
     );
   };
 
-  let searchTrack = (~accessToken: string, ~track: string): Js.Promise.t('a) => {
+  let searchTrack =
+      (
+        ~accessToken: string,
+        ~track: string,
+        ~onSuccess: Js.Promise.t('a) => Js.Promise.t('b),
+        ~onFail: Js.Promise.error => Js.Promise.t('a),
+      )
+      : Js.Promise.t('a) => {
     Ajax.getRequest(
       ~url={j|https://api.spotify.com/v1/search?q=$track&type=track|j},
       ~accessToken,
-      ~onSuccess=response => Js.Promise.resolve(Js.log(response)),
-      ~onFail=error => Js.Promise.resolve(Js.log(error)),
+      ~onSuccess,
+      ~onFail,
     );
   };
 };

@@ -10,13 +10,18 @@ let make = () => {
     setAccessToken(_ => accessToken);
 
     // TODO: Try another endpoint
-    let futuresTracks =
+    let future =
       switch (accessToken) {
       | Some(token) =>
-        SpotifyAPI.Search.searchArtist(~accessToken=token, ~artist="Future")
+        SpotifyAPI.Search.searchArtist(
+          ~accessToken=token,
+          ~artist="Future",
+          ~onSuccess=future => Js.Promise.resolve(Js.log(future)),
+          ~onFail=error => Js.Promise.resolve(Js.log(error)),
+        )
       | None => Js.Promise.resolve()
       };
-    Js.log(futuresTracks);
+    Js.log(future);
 
     let moneyLonger =
       switch (accessToken) {
@@ -24,6 +29,8 @@ let make = () => {
         SpotifyAPI.Search.searchTrack(
           ~accessToken=token,
           ~track="money%20longer",
+          ~onSuccess=tracksPromise => {tracksPromise},
+          ~onFail=error => {Js.Promise.resolve(Js.log(error))},
         )
       | None => Js.Promise.resolve()
       };
