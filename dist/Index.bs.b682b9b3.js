@@ -41859,12 +41859,15 @@ function App(Props) {
       return accessToken;
     });
 
-    var future = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchArtist(accessToken, "Future", function (future) {
-      return Promise.resolve((console.log(future), undefined));
-    }, function (error) {
-      return Promise.resolve((console.log(error), undefined));
-    }) : Promise.resolve(undefined);
-    console.log(future);
+    if (accessToken !== undefined) {
+      SpotifyAPI$Turntableam.Search.searchArtist(accessToken, "Future", function (future) {
+        return Promise.resolve((console.log(future), undefined));
+      }, function (error) {
+        return Promise.resolve((console.log(error), undefined));
+      });
+    } else {
+      Promise.resolve(undefined);
+    }
 
     if (accessToken !== undefined) {
       SpotifyAPI$Turntableam.Search.searchTrack(accessToken, "money%20longer", function (tracksPromise) {

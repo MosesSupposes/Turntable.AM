@@ -9,7 +9,6 @@ let make = () => {
     let accessToken = ParseUrl.getAccessToken(document##location##href);
     setAccessToken(_ => accessToken);
 
-    // TODO: Try another endpoint
     let future =
       switch (accessToken) {
       | Some(token) =>
@@ -21,7 +20,6 @@ let make = () => {
         )
       | None => Js.Promise.resolve()
       };
-    Js.log(future);
 
     let moneyLonger =
       switch (accessToken) {
@@ -44,7 +42,6 @@ let make = () => {
         exception MissingAccessToken;
         Js.Promise.reject(MissingAccessToken);
       };
-
     None;
   });
   <main>

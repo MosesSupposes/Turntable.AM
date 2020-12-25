@@ -22,12 +22,15 @@ function App(Props) {
           Curry._1(setAccessToken, (function (param) {
                   return accessToken;
                 }));
-          var future = accessToken !== undefined ? SpotifyAPI$Turntableam.Search.searchArtist(accessToken, "Future", (function (future) {
+          if (accessToken !== undefined) {
+            SpotifyAPI$Turntableam.Search.searchArtist(accessToken, "Future", (function (future) {
                     return Promise.resolve((console.log(future), undefined));
                   }), (function (error) {
                     return Promise.resolve((console.log(error), undefined));
-                  })) : Promise.resolve(undefined);
-          console.log(future);
+                  }));
+          } else {
+            Promise.resolve(undefined);
+          }
           if (accessToken !== undefined) {
             SpotifyAPI$Turntableam.Search.searchTrack(accessToken, "money%20longer", (function (tracksPromise) {
                     console.log(tracksPromise);
