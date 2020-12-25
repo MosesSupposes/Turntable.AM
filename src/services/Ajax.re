@@ -3,7 +3,7 @@ let getRequest =
       ~url: string,
       ~accessToken: string,
       ~onSuccess: Js.Promise.t('a) => Js.Promise.t('b),
-      ~onFail: Js.Promise.error => Js.Promise.t('b),
+      ~onFail: Js.Promise.error => Js.Promise.t('a),
     )
     : Js.Promise.t('a) => {
   let headers =
