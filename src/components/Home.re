@@ -1,3 +1,6 @@
+[@bs.module "../services/SpotifyWebPlaybackSDK.js"]
+external startPlayer: string => unit = "default";
+
 open UsePage;
 
 // Don't render the welcome message and app description if the user has logged in to their Spotify account.
@@ -23,6 +26,14 @@ let renderAppDescription: unit => React.element =
 [@react.component]
 let make =
     (~setPage: (Page.t => Page.t) => unit, ~accessToken: option(string)) => {
+  React.useEffect0(() => {
+    let () =
+      switch (accessToken) {
+      | Some(token) => startPlayer(token)
+      | None => ()
+      };
+    None;
+  });
   <div>
     {shouldShowWelcomeMessageAndAppDescription(accessToken)
        ? <div> {renderWelcomeMessage()} {renderAppDescription()} </div>
