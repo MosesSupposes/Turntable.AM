@@ -8,10 +8,12 @@ import * as UserProfile$Turntableam from "./UserProfile.bs.js";
 function ApplicationContainer(Props) {
   var page = Props.page;
   var setPage = Props.setPage;
+  var accessToken = Props.accessToken;
   switch (page) {
     case /* Home */0 :
         return React.createElement(Home$Turntableam.make, {
-                    setPage: setPage
+                    setPage: setPage,
+                    accessToken: accessToken
                   });
     case /* UserProfile */1 :
         return React.createElement(UserProfile$Turntableam.make, {

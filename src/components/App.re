@@ -46,7 +46,7 @@ let make = () => {
   });
   <main>
     <Header setPage />
-    <ApplicationContainer page setPage />
+    <ApplicationContainer page setPage accessToken />
     <Footer />
   </main>;
 };

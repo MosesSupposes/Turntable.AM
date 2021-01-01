@@ -2,13 +2,29 @@
 
 import * as React from "react";
 
+function shouldShowWelcomeMessageAndAppDescription(accessToken) {
+  return accessToken === undefined;
+}
+
+function renderWelcomeMessage(param) {
+  return React.createElement("h1", undefined, "Welcome to Turntable.AM");
+}
+
+function renderAppDescription(param) {
+  return React.createElement("p", undefined, "Turntable.AM is a music sharing app that allows you to collaboratively create custom playlists with your friends. Click the Sign In link above to connect your Spotify account to the app.");
+}
+
 function Home(Props) {
-  return React.createElement("div", undefined, React.createElement("h1", undefined, "Welcome to Turntable.AM"), React.createElement("p", undefined, "Turntable.AM is a music sharing app that allows you to collaboratively create custom playlists with your friends. Click the Sign In link above to connect your Spotify account to the app."));
+  var accessToken = Props.accessToken;
+  return React.createElement("div", undefined, shouldShowWelcomeMessageAndAppDescription(accessToken) ? React.createElement("div", undefined, renderWelcomeMessage(undefined), renderAppDescription(undefined)) : React.createElement("div", undefined));
 }
 
 var make = Home;
 
 export {
+  shouldShowWelcomeMessageAndAppDescription ,
+  renderWelcomeMessage ,
+  renderAppDescription ,
   make ,
   
 }

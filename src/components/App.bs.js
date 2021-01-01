@@ -51,7 +51,8 @@ function App(Props) {
                   setPage: setPage
                 }), React.createElement(ApplicationContainer$Turntableam.make, {
                   page: match.page,
-                  setPage: setPage
+                  setPage: setPage,
+                  accessToken: match$1[0]
                 }), React.createElement(Footer$Turntableam.make, {}));
 }
 
