@@ -19,7 +19,8 @@ module Authorization = {
     "user-library-read", // used to get read access to a user's "Your Music" library
     "user-library-modify", // used to get write/delete access to a user's "Your Music" library (can be used to save tracks + albums for current user)
     "user-read-email", // used to get read access to user's email address (can be used to get the current user's profile)
-    "user-read-private" // used to get read access to a user's subscription details (type of user account) (can be used to search for an item; i.e. a song or album)
+    "user-read-private", // used to get read access to a user's subscription details (type of user account) (can be used to search for an item; i.e. a song or album)
+    "streaming" // used to enable Spotify Web Player
   |];
 
   // This function only encodes commas in a url

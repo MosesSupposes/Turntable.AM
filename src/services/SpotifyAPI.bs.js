@@ -21,7 +21,8 @@ var scopes = [
   "user-library-read",
   "user-library-modify",
   "user-read-email",
-  "user-read-private"
+  "user-read-private",
+  "streaming"
 ];
 
 function urlEncode(arr) {
