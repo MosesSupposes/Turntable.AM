@@ -1,11 +1,6 @@
 [@bs.module "../services/SpotifyWebPlaybackSDK.js"]
 external startPlayer: string => unit = "default";
 
-/*module SpotifyPlayer = {*/
-/*[@bs.module "../services/SpotifyWebPlaybackSDK.js"] [@react.component]*/
-/*external make: (~accessToken: string) => React.element = "default";*/
-/*};*/
-
 open UsePage;
 
 // Don't render the welcome message and app description if the user has logged in to their Spotify account.

@@ -1,5 +1,5 @@
 import React from "react";
-//const startPlayer = (accessToken) => {
+//const startPlayerOld = (accessToken) => {
 //window.onSpotifyWebPlaybackSDKReady = () => {
 //const play = ({
 //spotify_uri,
@@ -26,13 +26,40 @@ import React from "react";
 //};
 //};
 
+const createEventHandlers = (player) => {
+  player.on("initialization_error", (e) => {
+    console.error(e);
+  });
+  player.on("authentication_error", (e) => {
+    // TODO: Redirect to the "Sign In" page
+    console.error(e);
+  });
+  player.on("account_error", (e) => {
+    console.error(e);
+  });
+  player.on("playback_error", (e) => {
+    console.error(e);
+  });
+
+  // Playback status updates
+  player.on("player_state_changed", (state) => {
+    console.log(state);
+  });
+
+  player.on("ready", ({ device_id }) => {
+    console.log("Let the music play on!");
+  });
+};
+
 const startPlayer = (accessToken) => {
   window.onSpotifyWebPlaybackSDKReady = () => {
     const player = new Spotify.Player({
       name: "Moses' Spotify Player",
       getOAuthToken: (callback) => callback(accessToken),
-      volume: 0.5,
+      volume: 0.8,
     });
+
+    createEventHandlers(player);
 
     player.connect().then((connectionWasSuccessful) => {
       if (connectionWasSuccessful) {
@@ -42,10 +69,6 @@ const startPlayer = (accessToken) => {
           "The Web Playback SDK was unsuccessful in trying to connect to Spotify."
         );
       }
-    });
-
-    player.on("ready", (data) => {
-      console.log("Let the music play on!");
     });
   };
 };

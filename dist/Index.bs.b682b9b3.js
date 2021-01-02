@@ -41645,7 +41645,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var authorizationBaseURI = "https://accounts.spotify.com/authorize";
 var clientId = "96e25e1a56b5467fbbf82af545444904";
 var localhostUnencoded = "http://localhost:1234";
-var scopes = ["playlist-modify-public", "playlist-modify-private", "playlist-read-private", "playlist-read-collaborative", "user-read-recently-played", "user-top-read", "ugc-image-upload", "user-follow-read", "user-library-read", "user-library-modify", "user-read-email", "user-read-private"];
+var scopes = ["playlist-modify-public", "playlist-modify-private", "playlist-read-private", "playlist-read-collaborative", "user-read-recently-played", "user-top-read", "ugc-image-upload", "user-follow-read", "user-library-read", "user-library-modify", "user-read-email", "user-read-private", "streaming"];
 
 function urlEncode(arr) {
   return arr.join("%2C");
@@ -41683,141 +41683,7 @@ var base = "https://api.spotify.com";
 /* state Not a pure module */
 
 exports.base = base;
-},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js","./Ajax.bs.js":"services/Ajax.bs.js"}],"../node_modules/bs-platform/lib/es6/belt_Option.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.forEachU = forEachU;
-exports.forEach = forEach;
-exports.getExn = getExn;
-exports.mapWithDefaultU = mapWithDefaultU;
-exports.mapWithDefault = mapWithDefault;
-exports.mapU = mapU;
-exports.map = map;
-exports.flatMapU = flatMapU;
-exports.flatMap = flatMap;
-exports.getWithDefault = getWithDefault;
-exports.isSome = isSome;
-exports.isNone = isNone;
-exports.eqU = eqU;
-exports.eq = eq;
-exports.cmpU = cmpU;
-exports.cmp = cmp;
-
-var Curry = _interopRequireWildcard(require("./curry.js"));
-
-var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function forEachU(opt, f) {
-  if (opt !== undefined) {
-    return f(Caml_option.valFromOption(opt));
-  }
-}
-
-function forEach(opt, f) {
-  return forEachU(opt, Curry.__1(f));
-}
-
-function getExn(x) {
-  if (x !== undefined) {
-    return Caml_option.valFromOption(x);
-  }
-
-  throw {
-    RE_EXN_ID: "Not_found",
-    Error: new Error()
-  };
-}
-
-function mapWithDefaultU(opt, $$default, f) {
-  if (opt !== undefined) {
-    return f(Caml_option.valFromOption(opt));
-  } else {
-    return $$default;
-  }
-}
-
-function mapWithDefault(opt, $$default, f) {
-  return mapWithDefaultU(opt, $$default, Curry.__1(f));
-}
-
-function mapU(opt, f) {
-  if (opt !== undefined) {
-    return Caml_option.some(f(Caml_option.valFromOption(opt)));
-  }
-}
-
-function map(opt, f) {
-  return mapU(opt, Curry.__1(f));
-}
-
-function flatMapU(opt, f) {
-  if (opt !== undefined) {
-    return f(Caml_option.valFromOption(opt));
-  }
-}
-
-function flatMap(opt, f) {
-  return flatMapU(opt, Curry.__1(f));
-}
-
-function getWithDefault(opt, $$default) {
-  if (opt !== undefined) {
-    return Caml_option.valFromOption(opt);
-  } else {
-    return $$default;
-  }
-}
-
-function isSome(param) {
-  return param !== undefined;
-}
-
-function isNone(x) {
-  return x === undefined;
-}
-
-function eqU(a, b, f) {
-  if (a !== undefined) {
-    if (b !== undefined) {
-      return f(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
-    } else {
-      return false;
-    }
-  } else {
-    return b === undefined;
-  }
-}
-
-function eq(a, b, f) {
-  return eqU(a, b, Curry.__2(f));
-}
-
-function cmpU(a, b, f) {
-  if (a !== undefined) {
-    if (b !== undefined) {
-      return f(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
-    } else {
-      return 1;
-    }
-  } else if (b !== undefined) {
-    return -1;
-  } else {
-    return 0;
-  }
-}
-
-function cmp(a, b, f) {
-  return cmpU(a, b, Curry.__2(f));
-}
-/* No side effect */
-},{"./curry.js":"../node_modules/bs-platform/lib/es6/curry.js","./caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js"}],"services/SpotifyWebPlaybackSDK.js":[function(require,module,exports) {
+},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js","./Ajax.bs.js":"services/Ajax.bs.js"}],"services/SpotifyWebPlaybackSDK.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41847,7 +41713,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-//const startPlayer = (accessToken) => {
+//const startPlayerOld = (accessToken) => {
 //window.onSpotifyWebPlaybackSDKReady = () => {
 //const play = ({
 //spotify_uri,
@@ -41872,6 +41738,30 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //});
 //};
 //};
+var createEventHandlers = function createEventHandlers(player) {
+  player.on("initialization_error", function (e) {
+    console.error(e);
+  });
+  player.on("authentication_error", function (e) {
+    // TODO: Redirect to the "Sign In" page
+    console.error(e);
+  });
+  player.on("account_error", function (e) {
+    console.error(e);
+  });
+  player.on("playback_error", function (e) {
+    console.error(e);
+  }); // Playback status updates
+
+  player.on("player_state_changed", function (state) {
+    console.log(state);
+  });
+  player.on("ready", function (_ref) {
+    var device_id = _ref.device_id;
+    console.log("Let the music play on!");
+  });
+};
+
 var startPlayer = function startPlayer(accessToken) {
   window.onSpotifyWebPlaybackSDKReady = function () {
     var player = new Spotify.Player({
@@ -41879,17 +41769,15 @@ var startPlayer = function startPlayer(accessToken) {
       getOAuthToken: function getOAuthToken(callback) {
         return callback(accessToken);
       },
-      volume: 0.5
+      volume: 0.8
     });
+    createEventHandlers(player);
     player.connect().then(function (connectionWasSuccessful) {
       if (connectionWasSuccessful) {
         console.log("The Web Playback SDK successfully connected to Spotify!");
       } else {
         console.log("The Web Playback SDK was unsuccessful in trying to connect to Spotify.");
       }
-    });
-    player.on("ready", function (data) {
-      console.log("Let the music play on!");
     });
   };
 };
@@ -41989,8 +41877,6 @@ exports.make = void 0;
 
 var React = _interopRequireWildcard(require("react"));
 
-var Belt_Option = _interopRequireWildcard(require("bs-platform/lib/es6/belt_Option.js"));
-
 var _SpotifyWebPlaybackSDK = _interopRequireDefault(require("../services/SpotifyWebPlaybackSDK.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -42023,7 +41909,6 @@ function Home(Props) {
       (0, _SpotifyWebPlaybackSDK.default)(accessToken);
     }
   }, [accessToken]);
-  Belt_Option.getWithDefault(accessToken, "");
   return React.createElement("div", undefined, shouldShowWelcomeMessageAndAppDescription(accessToken) ? React.createElement("div", undefined, renderWelcomeMessage(undefined), renderAppDescription(undefined)) : React.createElement("div", undefined));
 }
 
@@ -42031,7 +41916,7 @@ var make = Home;
 /* react Not a pure module */
 
 exports.make = make;
-},{"react":"../node_modules/react/index.js","bs-platform/lib/es6/belt_Option.js":"../node_modules/bs-platform/lib/es6/belt_Option.js","../services/SpotifyWebPlaybackSDK.js":"services/SpotifyWebPlaybackSDK.js"}],"styles/login.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../services/SpotifyWebPlaybackSDK.js":"services/SpotifyWebPlaybackSDK.js"}],"styles/login.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
