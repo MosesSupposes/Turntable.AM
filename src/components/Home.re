@@ -42,11 +42,10 @@ let make =
     },
     [|accessToken|],
   );
-  let token = Belt.Option.getWithDefault(accessToken, "");
+
   <div>
     {shouldShowWelcomeMessageAndAppDescription(accessToken)
        ? <div> {renderWelcomeMessage()} {renderAppDescription()} </div>
-       /*: <SpotifyPlayer accessToken=token />}*/
        : <div />}
   </div>;
 };
