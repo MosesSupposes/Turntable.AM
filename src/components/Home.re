@@ -1,6 +1,11 @@
 [@bs.module "../services/SpotifyWebPlaybackSDK.js"]
 external startPlayer: string => unit = "default";
 
+/*module SpotifyPlayer = {*/
+/*[@bs.module "../services/SpotifyWebPlaybackSDK.js"] [@react.component]*/
+/*external make: (~accessToken: string) => React.element = "default";*/
+/*};*/
+
 open UsePage;
 
 // Don't render the welcome message and app description if the user has logged in to their Spotify account.
@@ -26,17 +31,22 @@ let renderAppDescription: unit => React.element =
 [@react.component]
 let make =
     (~setPage: (Page.t => Page.t) => unit, ~accessToken: option(string)) => {
-  React.useEffect0(() => {
-    let () =
-      switch (accessToken) {
-      | Some(token) => startPlayer(token)
-      | None => ()
-      };
-    None;
-  });
+  React.useEffect1(
+    () => {
+      let () =
+        switch (accessToken) {
+        | Some(token) => startPlayer(token)
+        | None => ()
+        };
+      None;
+    },
+    [|accessToken|],
+  );
+  let token = Belt.Option.getWithDefault(accessToken, "");
   <div>
     {shouldShowWelcomeMessageAndAppDescription(accessToken)
        ? <div> {renderWelcomeMessage()} {renderAppDescription()} </div>
+       /*: <SpotifyPlayer accessToken=token />}*/
        : <div />}
   </div>;
 };

@@ -41683,7 +41683,141 @@ var base = "https://api.spotify.com";
 /* state Not a pure module */
 
 exports.base = base;
-},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js","./Ajax.bs.js":"services/Ajax.bs.js"}],"services/SpotifyWebPlaybackSDK.js":[function(require,module,exports) {
+},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js","./Ajax.bs.js":"services/Ajax.bs.js"}],"../node_modules/bs-platform/lib/es6/belt_Option.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.forEachU = forEachU;
+exports.forEach = forEach;
+exports.getExn = getExn;
+exports.mapWithDefaultU = mapWithDefaultU;
+exports.mapWithDefault = mapWithDefault;
+exports.mapU = mapU;
+exports.map = map;
+exports.flatMapU = flatMapU;
+exports.flatMap = flatMap;
+exports.getWithDefault = getWithDefault;
+exports.isSome = isSome;
+exports.isNone = isNone;
+exports.eqU = eqU;
+exports.eq = eq;
+exports.cmpU = cmpU;
+exports.cmp = cmp;
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function forEachU(opt, f) {
+  if (opt !== undefined) {
+    return f(Caml_option.valFromOption(opt));
+  }
+}
+
+function forEach(opt, f) {
+  return forEachU(opt, Curry.__1(f));
+}
+
+function getExn(x) {
+  if (x !== undefined) {
+    return Caml_option.valFromOption(x);
+  }
+
+  throw {
+    RE_EXN_ID: "Not_found",
+    Error: new Error()
+  };
+}
+
+function mapWithDefaultU(opt, $$default, f) {
+  if (opt !== undefined) {
+    return f(Caml_option.valFromOption(opt));
+  } else {
+    return $$default;
+  }
+}
+
+function mapWithDefault(opt, $$default, f) {
+  return mapWithDefaultU(opt, $$default, Curry.__1(f));
+}
+
+function mapU(opt, f) {
+  if (opt !== undefined) {
+    return Caml_option.some(f(Caml_option.valFromOption(opt)));
+  }
+}
+
+function map(opt, f) {
+  return mapU(opt, Curry.__1(f));
+}
+
+function flatMapU(opt, f) {
+  if (opt !== undefined) {
+    return f(Caml_option.valFromOption(opt));
+  }
+}
+
+function flatMap(opt, f) {
+  return flatMapU(opt, Curry.__1(f));
+}
+
+function getWithDefault(opt, $$default) {
+  if (opt !== undefined) {
+    return Caml_option.valFromOption(opt);
+  } else {
+    return $$default;
+  }
+}
+
+function isSome(param) {
+  return param !== undefined;
+}
+
+function isNone(x) {
+  return x === undefined;
+}
+
+function eqU(a, b, f) {
+  if (a !== undefined) {
+    if (b !== undefined) {
+      return f(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
+    } else {
+      return false;
+    }
+  } else {
+    return b === undefined;
+  }
+}
+
+function eq(a, b, f) {
+  return eqU(a, b, Curry.__2(f));
+}
+
+function cmpU(a, b, f) {
+  if (a !== undefined) {
+    if (b !== undefined) {
+      return f(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
+    } else {
+      return 1;
+    }
+  } else if (b !== undefined) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
+function cmp(a, b, f) {
+  return cmpU(a, b, Curry.__2(f));
+}
+/* No side effect */
+},{"./curry.js":"../node_modules/bs-platform/lib/es6/curry.js","./caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js"}],"services/SpotifyWebPlaybackSDK.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41691,37 +41825,157 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+//const startPlayer = (accessToken) => {
+//window.onSpotifyWebPlaybackSDKReady = () => {
+//const play = ({
+//spotify_uri,
+//playerInstance: {
+//_options: { getOAuthToken, id },
+//},
+//}) => {
+//getOAuthToken((access_token) => {
+//fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
+//method: "PUT",
+//body: JSON.stringify({ uris: [spotify_uri] }),
+//headers: {
+//"Content-Type": "application/json",
+//Authorization: `Bearer ${access_token}`,
+//},
+//});
+//});
+//};
+//play({
+//playerInstance: new Spotify.Player({ name: "Moses' Spotify Player" }),
+//spotify_uri: "spotify:track:7xGfFoTpQ2E7fRF5lN10tr",
+//});
+//};
+//};
 var startPlayer = function startPlayer(accessToken) {
   window.onSpotifyWebPlaybackSDKReady = function () {
-    var play = function play(_ref) {
-      var spotify_uri = _ref.spotify_uri,
-          _ref$playerInstance$_ = _ref.playerInstance._options,
-          getOAuthToken = _ref$playerInstance$_.getOAuthToken,
-          id = _ref$playerInstance$_.id;
-      fetch("https://api.spotify.com/v1/me/player/play?device_id=".concat(id), {
-        method: "PUT",
-        body: JSON.stringify({
-          uris: [spotify_uri]
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer ".concat(accessToken)
-        }
-      });
-    };
-
-    play({
-      playerInstance: new Spotify.Player({
-        name: "Moses' Awesome Playlist"
-      }),
-      spotify_uri: "spotify:track:7xGfFoTpQ2E7fRF5lN10tr"
+    var player = new Spotify.Player({
+      name: "Moses' Spotify Player",
+      getOAuthToken: function getOAuthToken(callback) {
+        return callback(accessToken);
+      },
+      volume: 0.5
+    });
+    player.connect().then(function (connectionWasSuccessful) {
+      if (connectionWasSuccessful) {
+        console.log("The Web Playback SDK successfully connected to Spotify!");
+      } else {
+        console.log("The Web Playback SDK was unsuccessful in trying to connect to Spotify.");
+      }
+    });
+    player.on("ready", function (data) {
+      console.log("Let the music play on!");
     });
   };
 };
 
-var _default = startPlayer;
+function SpotifyPlayer(accessToken) {
+  var _React$useState = _react.default.useState({
+    token: "",
+    deviceId: "",
+    error: "",
+    trackName: "",
+    artistName: "",
+    albumName: "",
+    playing: false,
+    position: 0,
+    duration: 0,
+    player: {}
+  }),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      state = _React$useState2[0],
+      setState = _React$useState2[1];
+
+  var createEventHandlers = function createEventHandlers() {
+    state.player.on("initialization_error", function (e) {
+      return console.error(e);
+    }); // TODO: Set the page to the sign in page so the user can log back in.
+
+    state.player.on("authentication_error", function (e) {
+      return console.error(e);
+    });
+    state.player.on("account_error", function (e) {
+      return console.error(e);
+    });
+    state.player.on("playback_error", function (e) {
+      return console.error(e);
+    });
+    state.player.on("player_state_changed", function (state) {
+      return console.log(state);
+    });
+    state.player.on("ready", function (data) {
+      var device_id = data.device_id;
+      console.log("Let the music play on!");
+      setState(function (prevState) {
+        return _objectSpread(_objectSpread({}, prevState), {}, {
+          deviceId: device_id
+        });
+      });
+    });
+  };
+
+  var playerCheckInterval;
+
+  var checkForPlayer = function checkForPlayer() {
+    var accessToken = "BQDrvW_sGnbH4SHs_zMv5POZbwi7kX1ojjFVSTEKkOiZ4_Hna2CPo0nmL1tijfHGkky86h2iRidU45pJ3OBXUJfdss4zpVKncJbWC0gz0ARbGGvjphd4HHQd4EnK7z3tA8mH9lA565nxG0Xr0bpQh0Jt6pGM1UDdAWvXes_yZhgsM_xhIn4";
+
+    if (window.Spotify != null) {
+      clearInterval(playerCheckInterval);
+      setState(function (prevState) {
+        return _objectSpread(_objectSpread({}, prevState), {}, {
+          player: new window.Spotify.Player({
+            // TODO: Capture the user's name and use it here
+            name: "Moses' Spotify Player",
+            getOAuthToken: function getOAuthToken(cb) {
+              return cb(accessToken);
+            }
+          })
+        });
+      });
+      createEventHandlers();
+      state.player.connect();
+    }
+  }; // Start the Spotify Player once it's been mounted onto the DOM
+
+
+  _react.default.useEffect(function () {
+    playerCheckInterval = setInterval(function () {
+      return checkForPlayer();
+    }, 1000);
+  }, []);
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Now playing"), state.error && /*#__PURE__*/_react.default.createElement("p", null, "Error: ", state.error), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Artist: ", state.artistName), /*#__PURE__*/_react.default.createElement("p", null, "Track: ", state.trackName), /*#__PURE__*/_react.default.createElement("p", null, "Album: ", state.albumName)));
+}
+
+var _default = startPlayer; //export default SpotifyPlayer;
+
 exports.default = _default;
-},{}],"components/Home.bs.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"components/Home.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41734,6 +41988,8 @@ exports.renderAppDescription = renderAppDescription;
 exports.make = void 0;
 
 var React = _interopRequireWildcard(require("react"));
+
+var Belt_Option = _interopRequireWildcard(require("bs-platform/lib/es6/belt_Option.js"));
 
 var _SpotifyWebPlaybackSDK = _interopRequireDefault(require("../services/SpotifyWebPlaybackSDK.js"));
 
@@ -41766,7 +42022,8 @@ function Home(Props) {
     if (accessToken !== undefined) {
       (0, _SpotifyWebPlaybackSDK.default)(accessToken);
     }
-  }, []);
+  }, [accessToken]);
+  Belt_Option.getWithDefault(accessToken, "");
   return React.createElement("div", undefined, shouldShowWelcomeMessageAndAppDescription(accessToken) ? React.createElement("div", undefined, renderWelcomeMessage(undefined), renderAppDescription(undefined)) : React.createElement("div", undefined));
 }
 
@@ -41774,7 +42031,7 @@ var make = Home;
 /* react Not a pure module */
 
 exports.make = make;
-},{"react":"../node_modules/react/index.js","../services/SpotifyWebPlaybackSDK.js":"services/SpotifyWebPlaybackSDK.js"}],"styles/login.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","bs-platform/lib/es6/belt_Option.js":"../node_modules/bs-platform/lib/es6/belt_Option.js","../services/SpotifyWebPlaybackSDK.js":"services/SpotifyWebPlaybackSDK.js"}],"styles/login.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -42022,7 +42279,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56633" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50999" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
