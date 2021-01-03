@@ -32,7 +32,7 @@ const startPlayer = (accessToken) => {
     const player = new Spotify.Player({
       name: "Turntable.AM",
       getOAuthToken: (callback) => callback(accessToken),
-      volume: 0.8,
+      volume: 1.0,
     });
 
     createEventHandlers(player);
