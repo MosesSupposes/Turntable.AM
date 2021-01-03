@@ -1,5 +1,7 @@
+type token = string;
+
 [@bs.module "../services/SpotifyWebPlaybackSDK.js"]
-external startPlayer: string => unit = "default";
+external startPlayer: token => unit = "default";
 
 open UsePage;
 
