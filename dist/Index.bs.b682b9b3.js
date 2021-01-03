@@ -41765,7 +41765,7 @@ var createEventHandlers = function createEventHandlers(player) {
 var startPlayer = function startPlayer(accessToken) {
   window.onSpotifyWebPlaybackSDKReady = function () {
     var player = new Spotify.Player({
-      name: "Moses' Spotify Player",
+      name: "Turntable.AM",
       getOAuthToken: function getOAuthToken(callback) {
         return callback(accessToken);
       },
