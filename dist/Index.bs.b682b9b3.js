@@ -41733,7 +41733,7 @@ function MusicPlayer(Props) {
       currentTrack: "",
       currentArtist: "",
       currentAlbum: "",
-      deviceId: "",
+      deviceId: undefined,
       spotifyPlayer: undefined
     };
   });

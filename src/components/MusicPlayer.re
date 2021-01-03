@@ -9,7 +9,7 @@ type musicPlayerState('a) = {
   currentTrack: string,
   currentArtist: string,
   currentAlbum: string,
-  deviceId: string,
+  deviceId: option(string),
   spotifyPlayer: option(spotifyPlayer({..} as 'a)),
 };
 
@@ -34,7 +34,7 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
         currentTrack: "",
         currentArtist: "",
         currentAlbum: "",
-        deviceId: "",
+        deviceId: None,
         spotifyPlayer: None,
       }
     );
@@ -51,7 +51,7 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
               {
                 ...prevState,
                 spotifyPlayer: Some(window##player),
-                deviceId: window##deviceId,
+                deviceId: Some(window##deviceId),
               }
             )
           },
