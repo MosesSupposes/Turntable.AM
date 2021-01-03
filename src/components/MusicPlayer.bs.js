@@ -28,7 +28,11 @@ function MusicPlayer(Props) {
                 }), 1000);
           
         }), []);
-  return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("p", undefined, "Track: " + musicPlayer.currentTrack + " "), React.createElement("p", undefined, "Artist: " + musicPlayer.currentArtist), React.createElement("p", undefined, "Album: " + musicPlayer.currentAlbum));
+  if (musicPlayer.spotifyPlayer !== undefined) {
+    return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("p", undefined, "Track: " + musicPlayer.currentTrack + " "), React.createElement("p", undefined, "Artist: " + musicPlayer.currentArtist), React.createElement("p", undefined, "Album: " + musicPlayer.currentAlbum));
+  } else {
+    return React.createElement("p", undefined, "Loading...");
+  }
 }
 
 var make = MusicPlayer;

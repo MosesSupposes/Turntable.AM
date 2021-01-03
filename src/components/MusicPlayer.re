@@ -37,10 +37,14 @@ let make = () => {
       None;
     });
   let {currentTrack, currentArtist, currentAlbum, spotifyPlayer} = musicPlayer;
-  <div>
-    <h2> {React.string("Now Playing:")} </h2>
-    <p> {React.string({j|Track: $currentTrack |j})} </p>
-    <p> {React.string({j|Artist: $currentArtist|j})} </p>
-    <p> {React.string({j|Album: $currentAlbum|j})} </p>
-  </div>;
+  switch (spotifyPlayer) {
+  | Some(player) =>
+    <div>
+      <h2> {React.string("Now Playing:")} </h2>
+      <p> {React.string({j|Track: $currentTrack |j})} </p>
+      <p> {React.string({j|Artist: $currentArtist|j})} </p>
+      <p> {React.string({j|Album: $currentAlbum|j})} </p>
+    </div>
+  | None => <p> {React.string("Loading...")} </p>
+  };
 };
