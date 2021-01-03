@@ -6,7 +6,7 @@ const createEventHandlers = (player) => {
   });
   player.on("authentication_error", (e) => {
     alert(
-      'You must sign back in to your Spotify account to resume the music player. Click the "Sign In" link above.'
+      "You must sign back in to your Spotify account to resume the music player."
     );
     console.error(e);
   });

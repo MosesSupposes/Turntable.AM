@@ -41767,7 +41767,7 @@ var createEventHandlers = function createEventHandlers(player) {
     console.error(e);
   });
   player.on("authentication_error", function (e) {
-    alert('You must sign back in to your Spotify account to resume the music player. Click the "Sign In" link above.');
+    alert("You must sign back in to your Spotify account to resume the music player.");
     console.error(e);
   });
   player.on("account_error", function (e) {
@@ -41793,7 +41793,7 @@ var startPlayer = function startPlayer(accessToken) {
       getOAuthToken: function getOAuthToken(callback) {
         return callback(accessToken);
       },
-      volume: 0.8
+      volume: 1.0
     });
     createEventHandlers(player);
     player.connect().then(function (connectionWasSuccessful) {

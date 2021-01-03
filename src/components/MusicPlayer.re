@@ -8,6 +8,7 @@ type musicPlayerState('a) = {
   spotifyPlayer: Js.t({..} as 'a),
 };
 
+// TODO: Decode the spotifyPlayer object into a record
 [@react.component]
 let make = () => {
   let (musicPlayer: musicPlayerState({..}), setMusicPlayer) =
