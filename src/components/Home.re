@@ -43,6 +43,6 @@ let make =
   <div>
     {shouldShowWelcomeMessageAndAppDescription(accessToken)
        ? <div> {renderWelcomeMessage()} {renderAppDescription()} </div>
-       : <div />}
+       : <MusicPlayer />}
   </div>;
 };
