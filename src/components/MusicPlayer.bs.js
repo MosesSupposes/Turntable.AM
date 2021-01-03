@@ -2,6 +2,7 @@
 
 import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
+import * as Caml_option from "bs-platform/lib/es6/caml_option.js";
 
 function MusicPlayer(Props) {
   var match = React.useState(function () {
@@ -9,9 +10,7 @@ function MusicPlayer(Props) {
                 currentTrack: "",
                 currentArtist: "",
                 currentAlbum: "",
-                spotifyPlayer: {
-                  foo: "bar"
-                }
+                spotifyPlayer: undefined
               };
       });
   var setMusicPlayer = match[1];
@@ -23,7 +22,7 @@ function MusicPlayer(Props) {
                                         currentTrack: prevState.currentTrack,
                                         currentArtist: prevState.currentArtist,
                                         currentAlbum: prevState.currentAlbum,
-                                        spotifyPlayer: window.player
+                                        spotifyPlayer: Caml_option.some(window.player)
                                       };
                               }));
                 }), 1000);

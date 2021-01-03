@@ -41695,6 +41695,8 @@ var Curry = _interopRequireWildcard(require("bs-platform/lib/es6/curry.js"));
 
 var React = _interopRequireWildcard(require("react"));
 
+var Caml_option = _interopRequireWildcard(require("bs-platform/lib/es6/caml_option.js"));
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -41706,9 +41708,7 @@ function MusicPlayer(Props) {
       currentTrack: "",
       currentArtist: "",
       currentAlbum: "",
-      spotifyPlayer: {
-        foo: "bar"
-      }
+      spotifyPlayer: undefined
     };
   });
   var setMusicPlayer = match[1];
@@ -41720,7 +41720,7 @@ function MusicPlayer(Props) {
           currentTrack: prevState.currentTrack,
           currentArtist: prevState.currentArtist,
           currentAlbum: prevState.currentAlbum,
-          spotifyPlayer: window.player
+          spotifyPlayer: Caml_option.some(window.player)
         };
       });
     }, 1000);
@@ -41732,7 +41732,7 @@ var make = MusicPlayer;
 /* react Not a pure module */
 
 exports.make = make;
-},{"bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","react":"../node_modules/react/index.js"}],"services/SpotifyWebPlaybackSDK.js":[function(require,module,exports) {
+},{"bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","react":"../node_modules/react/index.js","bs-platform/lib/es6/caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js"}],"services/SpotifyWebPlaybackSDK.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

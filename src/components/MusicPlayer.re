@@ -5,10 +5,11 @@ type musicPlayerState('a) = {
   currentTrack: string,
   currentArtist: string,
   currentAlbum: string,
-  spotifyPlayer: Js.t({..} as 'a),
+  spotifyPlayer: option(Js.t({..} as 'a)),
 };
 
 // TODO: Decode the spotifyPlayer object into a record
+// TODO: Finish the rest of the tutorial to figure out how to enable automatic playback
 [@react.component]
 let make = () => {
   let (musicPlayer: musicPlayerState({..}), setMusicPlayer) =
@@ -17,9 +18,7 @@ let make = () => {
         currentTrack: "",
         currentArtist: "",
         currentAlbum: "",
-        spotifyPlayer: {
-          "foo": "bar",
-        },
+        spotifyPlayer: None,
       }
     );
 
@@ -30,7 +29,7 @@ let make = () => {
         setTimeout(
           () => {
             setMusicPlayer(prevState =>
-              {...prevState, spotifyPlayer: window##player}
+              {...prevState, spotifyPlayer: Some(window##player)}
             )
           },
           1000,
