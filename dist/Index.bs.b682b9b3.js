@@ -41713,37 +41713,12 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-//const startPlayerOld = (accessToken) => {
-//window.onSpotifyWebPlaybackSDKReady = () => {
-//const play = ({
-//spotify_uri,
-//playerInstance: {
-//_options: { getOAuthToken, id },
-//},
-//}) => {
-//getOAuthToken((access_token) => {
-//fetch(`https://api.spotify.com/v1/me/player/play?device_id=${id}`, {
-//method: "PUT",
-//body: JSON.stringify({ uris: [spotify_uri] }),
-//headers: {
-//"Content-Type": "application/json",
-//Authorization: `Bearer ${access_token}`,
-//},
-//});
-//});
-//};
-//play({
-//playerInstance: new Spotify.Player({ name: "Moses' Spotify Player" }),
-//spotify_uri: "spotify:track:7xGfFoTpQ2E7fRF5lN10tr",
-//});
-//};
-//};
 var createEventHandlers = function createEventHandlers(player) {
   player.on("initialization_error", function (e) {
     console.error(e);
   });
   player.on("authentication_error", function (e) {
-    // TODO: Redirect to the "Sign In" page
+    alert('You must sign back in to your Spotify account to resume the music player. Click the "Sign In" link above.');
     console.error(e);
   });
   player.on("account_error", function (e) {
