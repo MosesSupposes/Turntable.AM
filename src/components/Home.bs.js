@@ -22,6 +22,7 @@ function renderAppDescription(param) {
 }
 
 function Home(Props) {
+  var setPage = Props.setPage;
   var accessToken = Props.accessToken;
   React.useEffect((function () {
           if (accessToken !== undefined) {
@@ -29,7 +30,9 @@ function Home(Props) {
           }
           
         }), [accessToken]);
-  return React.createElement("div", undefined, shouldShowWelcomeMessageAndAppDescription(accessToken) ? React.createElement("div", undefined, renderWelcomeMessage(undefined), renderAppDescription(undefined)) : React.createElement(MusicPlayer$Turntableam.make, {}));
+  return React.createElement("div", undefined, shouldShowWelcomeMessageAndAppDescription(accessToken) ? React.createElement("div", undefined, renderWelcomeMessage(undefined), renderAppDescription(undefined)) : React.createElement(MusicPlayer$Turntableam.make, {
+                    setPage: setPage
+                  }));
 }
 
 var make = Home;

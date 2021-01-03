@@ -4,17 +4,45 @@ import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
 import * as Caml_option from "bs-platform/lib/es6/caml_option.js";
 
+function createEventHandlers(player, setPage) {
+  player.on("initialization_error", (function (e) {
+          console.log(e);
+          
+        }));
+  player.on("authentication_error", (function (e) {
+          return Curry._1(setPage, (function (param) {
+                        return /* Login */2;
+                      }));
+        }));
+  player.on("account_error", (function (e) {
+          console.log(e);
+          
+        }));
+  player.on("playback_error", (function (e) {
+          console.log(e);
+          
+        }));
+  player.on("player_state_changed", (function (state) {
+          console.log(state);
+          
+        }));
+  
+}
+
 function MusicPlayer(Props) {
+  var setPage = Props.setPage;
   var match = React.useState(function () {
         return {
                 currentTrack: "",
                 currentArtist: "",
                 currentAlbum: "",
+                deviceId: "",
                 spotifyPlayer: undefined
               };
       });
-  var setMusicPlayer = match[1];
   var musicPlayer = match[0];
+  var spotifyPlayer = musicPlayer.spotifyPlayer;
+  var setMusicPlayer = match[1];
   React.useEffect((function () {
           setTimeout((function (param) {
                   return Curry._1(setMusicPlayer, (function (prevState) {
@@ -22,13 +50,20 @@ function MusicPlayer(Props) {
                                         currentTrack: prevState.currentTrack,
                                         currentArtist: prevState.currentArtist,
                                         currentAlbum: prevState.currentAlbum,
+                                        deviceId: window.deviceId,
                                         spotifyPlayer: Caml_option.some(window.player)
                                       };
                               }));
                 }), 1000);
           
         }), []);
-  if (musicPlayer.spotifyPlayer !== undefined) {
+  React.useEffect((function () {
+          if (spotifyPlayer !== undefined) {
+            createEventHandlers(Caml_option.valFromOption(spotifyPlayer), setPage);
+          }
+          
+        }), [spotifyPlayer]);
+  if (spotifyPlayer !== undefined) {
     return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("p", undefined, "Track: " + musicPlayer.currentTrack + " "), React.createElement("p", undefined, "Artist: " + musicPlayer.currentArtist), React.createElement("p", undefined, "Album: " + musicPlayer.currentAlbum));
   } else {
     return React.createElement("p", undefined, "Loading...");
@@ -38,6 +73,7 @@ function MusicPlayer(Props) {
 var make = MusicPlayer;
 
 export {
+  createEventHandlers ,
   make ,
   
 }
