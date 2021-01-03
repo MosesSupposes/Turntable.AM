@@ -41691,6 +41691,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.make = void 0;
 
+var Curry = _interopRequireWildcard(require("bs-platform/lib/es6/curry.js"));
+
 var React = _interopRequireWildcard(require("react"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -41703,10 +41705,26 @@ function MusicPlayer(Props) {
     return {
       currentTrack: "",
       currentArtist: "",
-      currentAlbum: ""
+      currentAlbum: "",
+      spotifyPlayer: {
+        foo: "bar"
+      }
     };
   });
+  var setMusicPlayer = match[1];
   var musicPlayer = match[0];
+  React.useEffect(function () {
+    setTimeout(function (param) {
+      return Curry._1(setMusicPlayer, function (prevState) {
+        return {
+          currentTrack: prevState.currentTrack,
+          currentArtist: prevState.currentArtist,
+          currentAlbum: prevState.currentAlbum,
+          spotifyPlayer: window.player
+        };
+      });
+    }, 1000);
+  }, []);
   return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("p", undefined, "Track: " + musicPlayer.currentTrack + " "), React.createElement("p", undefined, "Artist: " + musicPlayer.currentArtist), React.createElement("p", undefined, "Album: " + musicPlayer.currentAlbum));
 }
 
@@ -41714,7 +41732,7 @@ var make = MusicPlayer;
 /* react Not a pure module */
 
 exports.make = make;
-},{"react":"../node_modules/react/index.js"}],"services/SpotifyWebPlaybackSDK.js":[function(require,module,exports) {
+},{"bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","react":"../node_modules/react/index.js"}],"services/SpotifyWebPlaybackSDK.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41785,6 +41803,7 @@ var startPlayer = function startPlayer(accessToken) {
         console.log("The Web Playback SDK was unsuccessful in trying to connect to Spotify.");
       }
     });
+    window.player = player;
   };
 };
 
@@ -42172,7 +42191,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50999" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62341" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

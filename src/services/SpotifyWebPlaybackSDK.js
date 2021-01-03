@@ -46,6 +46,7 @@ const startPlayer = (accessToken) => {
         );
       }
     });
+    window.player = player;
   };
 };
 

@@ -28,17 +28,18 @@ let renderAppDescription: unit => React.element =
 [@react.component]
 let make =
     (~setPage: (Page.t => Page.t) => unit, ~accessToken: option(string)) => {
-  React.useEffect1(
-    () => {
-      let () =
-        switch (accessToken) {
-        | Some(token) => startPlayer(token)
-        | None => ()
-        };
-      None;
-    },
-    [|accessToken|],
-  );
+  let () =
+    React.useEffect1(
+      () => {
+        let () =
+          switch (accessToken) {
+          | Some(token) => startPlayer(token)
+          | None => ()
+          };
+        None;
+      },
+      [|accessToken|],
+    );
 
   <div>
     {shouldShowWelcomeMessageAndAppDescription(accessToken)
