@@ -24,8 +24,6 @@ let createEventHandlers =
   ();
 };
 
-// TODO: Decode the spotifyPlayer object into a record
-// TODO: Finish the rest of the tutorial to figure out how to enable automatic playback
 [@react.component]
 let make = (~setPage: (Page.t => Page.t) => unit) => {
   let (musicPlayer: musicPlayerState({..}), setMusicPlayer) =
