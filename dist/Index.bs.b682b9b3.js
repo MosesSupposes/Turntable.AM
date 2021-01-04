@@ -41683,14 +41683,720 @@ var base = "https://api.spotify.com";
 /* state Not a pure module */
 
 exports.base = base;
-},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js","./Ajax.bs.js":"services/Ajax.bs.js"}],"components/MusicPlayer.bs.js":[function(require,module,exports) {
+},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js","./Ajax.bs.js":"services/Ajax.bs.js"}],"../node_modules/bs-platform/lib/es6/js_dict.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.get = get;
+exports.entries = entries;
+exports.values = values;
+exports.fromList = fromList;
+exports.fromArray = fromArray;
+exports.map = map;
+exports.unsafeDeleteKey = void 0;
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function get(dict, k) {
+  if (k in dict) {
+    return Caml_option.some(dict[k]);
+  }
+}
+
+var unsafeDeleteKey = function (dict, key) {
+  delete dict[key];
+};
+
+exports.unsafeDeleteKey = unsafeDeleteKey;
+
+function entries(dict) {
+  var keys = Object.keys(dict);
+  var l = keys.length;
+  var values = new Array(l);
+
+  for (var i = 0; i < l; ++i) {
+    var key = keys[i];
+    values[i] = [key, dict[key]];
+  }
+
+  return values;
+}
+
+function values(dict) {
+  var keys = Object.keys(dict);
+  var l = keys.length;
+  var values$1 = new Array(l);
+
+  for (var i = 0; i < l; ++i) {
+    values$1[i] = dict[keys[i]];
+  }
+
+  return values$1;
+}
+
+function fromList(entries) {
+  var dict = {};
+  var _param = entries;
+
+  while (true) {
+    var param = _param;
+
+    if (!param) {
+      return dict;
+    }
+
+    var match = param.hd;
+    dict[match[0]] = match[1];
+    _param = param.tl;
+    continue;
+  }
+
+  ;
+}
+
+function fromArray(entries) {
+  var dict = {};
+  var l = entries.length;
+
+  for (var i = 0; i < l; ++i) {
+    var match = entries[i];
+    dict[match[0]] = match[1];
+  }
+
+  return dict;
+}
+
+function map(f, source) {
+  var target = {};
+  var keys = Object.keys(source);
+  var l = keys.length;
+
+  for (var i = 0; i < l; ++i) {
+    var key = keys[i];
+    target[key] = f(source[key]);
+  }
+
+  return target;
+}
+/* No side effect */
+},{"./caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js"}],"../node_modules/@glennsl/bs-json/src/Json_decode.bs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.id = id;
+exports.bool = bool;
+exports.$$float = $$float;
+exports.$$int = $$int;
+exports.string = string;
+exports.$$char = $$char;
+exports.date = date;
+exports.nullable = nullable;
+exports.nullAs = nullAs;
+exports.array = array;
+exports.list = list;
+exports.pair = pair;
+exports.tuple3 = tuple3;
+exports.tuple4 = tuple4;
+exports.dict = dict;
+exports.field = field;
+exports.at = at;
+exports.optional = optional;
+exports.oneOf = oneOf;
+exports.either = either;
+exports.withDefault = withDefault;
+exports.map = map;
+exports.andThen = andThen;
+exports.tuple2 = exports.DecodeError = void 0;
+
+var List = _interopRequireWildcard(require("bs-platform/lib/es6/list.js"));
+
+var $$Array = _interopRequireWildcard(require("bs-platform/lib/es6/array.js"));
+
+var Curry = _interopRequireWildcard(require("bs-platform/lib/es6/curry.js"));
+
+var Js_dict = _interopRequireWildcard(require("bs-platform/lib/es6/js_dict.js"));
+
+var Caml_option = _interopRequireWildcard(require("bs-platform/lib/es6/caml_option.js"));
+
+var Caml_string = _interopRequireWildcard(require("bs-platform/lib/es6/caml_string.js"));
+
+var Caml_exceptions = _interopRequireWildcard(require("bs-platform/lib/es6/caml_exceptions.js"));
+
+var Caml_js_exceptions = _interopRequireWildcard(require("bs-platform/lib/es6/caml_js_exceptions.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _isInteger(value) {
+  if (isFinite(value)) {
+    return Math.floor(value) === value;
+  } else {
+    return false;
+  }
+}
+
+var DecodeError = Caml_exceptions.create("Json_decode.DecodeError");
+exports.DecodeError = DecodeError;
+
+function id(json) {
+  return json;
+}
+
+function bool(json) {
+  if (typeof json === "boolean") {
+    return json;
+  }
+
+  throw {
+    RE_EXN_ID: DecodeError,
+    _1: "Expected boolean, got " + JSON.stringify(json),
+    Error: new Error()
+  };
+}
+
+function $$float(json) {
+  if (typeof json === "number") {
+    return json;
+  }
+
+  throw {
+    RE_EXN_ID: DecodeError,
+    _1: "Expected number, got " + JSON.stringify(json),
+    Error: new Error()
+  };
+}
+
+function $$int(json) {
+  var f = $$float(json);
+
+  if (_isInteger(f)) {
+    return f;
+  }
+
+  throw {
+    RE_EXN_ID: DecodeError,
+    _1: "Expected integer, got " + JSON.stringify(json),
+    Error: new Error()
+  };
+}
+
+function string(json) {
+  if (typeof json === "string") {
+    return json;
+  }
+
+  throw {
+    RE_EXN_ID: DecodeError,
+    _1: "Expected string, got " + JSON.stringify(json),
+    Error: new Error()
+  };
+}
+
+function $$char(json) {
+  var s = string(json);
+
+  if (s.length === 1) {
+    return Caml_string.get(s, 0);
+  }
+
+  throw {
+    RE_EXN_ID: DecodeError,
+    _1: "Expected single-character string, got " + JSON.stringify(json),
+    Error: new Error()
+  };
+}
+
+function date(json) {
+  return new Date(string(json));
+}
+
+function nullable(decode, json) {
+  if (json === null) {
+    return null;
+  } else {
+    return Curry._1(decode, json);
+  }
+}
+
+function nullAs(value, json) {
+  if (json === null) {
+    return value;
+  }
+
+  throw {
+    RE_EXN_ID: DecodeError,
+    _1: "Expected null, got " + JSON.stringify(json),
+    Error: new Error()
+  };
+}
+
+function array(decode, json) {
+  if (Array.isArray(json)) {
+    var length = json.length;
+    var target = new Array(length);
+
+    for (var i = 0; i < length; ++i) {
+      var value;
+
+      try {
+        value = Curry._1(decode, json[i]);
+      } catch (raw_msg) {
+        var msg = Caml_js_exceptions.internalToOCamlException(raw_msg);
+
+        if (msg.RE_EXN_ID === DecodeError) {
+          throw {
+            RE_EXN_ID: DecodeError,
+            _1: msg._1 + ("\n\tin array at index " + String(i)),
+            Error: new Error()
+          };
+        }
+
+        throw msg;
+      }
+
+      target[i] = value;
+    }
+
+    return target;
+  }
+
+  throw {
+    RE_EXN_ID: DecodeError,
+    _1: "Expected array, got " + JSON.stringify(json),
+    Error: new Error()
+  };
+}
+
+function list(decode, json) {
+  return $$Array.to_list(array(decode, json));
+}
+
+function pair(decodeA, decodeB, json) {
+  if (Array.isArray(json)) {
+    var length = json.length;
+
+    if (length === 2) {
+      try {
+        return [Curry._1(decodeA, json[0]), Curry._1(decodeB, json[1])];
+      } catch (raw_msg) {
+        var msg = Caml_js_exceptions.internalToOCamlException(raw_msg);
+
+        if (msg.RE_EXN_ID === DecodeError) {
+          throw {
+            RE_EXN_ID: DecodeError,
+            _1: msg._1 + "\n\tin pair/tuple2",
+            Error: new Error()
+          };
+        }
+
+        throw msg;
+      }
+    } else {
+      throw {
+        RE_EXN_ID: DecodeError,
+        _1: "Expected array of length 2, got array of length " + length,
+        Error: new Error()
+      };
+    }
+  } else {
+    throw {
+      RE_EXN_ID: DecodeError,
+      _1: "Expected array, got " + JSON.stringify(json),
+      Error: new Error()
+    };
+  }
+}
+
+function tuple3(decodeA, decodeB, decodeC, json) {
+  if (Array.isArray(json)) {
+    var length = json.length;
+
+    if (length === 3) {
+      try {
+        return [Curry._1(decodeA, json[0]), Curry._1(decodeB, json[1]), Curry._1(decodeC, json[2])];
+      } catch (raw_msg) {
+        var msg = Caml_js_exceptions.internalToOCamlException(raw_msg);
+
+        if (msg.RE_EXN_ID === DecodeError) {
+          throw {
+            RE_EXN_ID: DecodeError,
+            _1: msg._1 + "\n\tin tuple3",
+            Error: new Error()
+          };
+        }
+
+        throw msg;
+      }
+    } else {
+      throw {
+        RE_EXN_ID: DecodeError,
+        _1: "Expected array of length 3, got array of length " + length,
+        Error: new Error()
+      };
+    }
+  } else {
+    throw {
+      RE_EXN_ID: DecodeError,
+      _1: "Expected array, got " + JSON.stringify(json),
+      Error: new Error()
+    };
+  }
+}
+
+function tuple4(decodeA, decodeB, decodeC, decodeD, json) {
+  if (Array.isArray(json)) {
+    var length = json.length;
+
+    if (length === 4) {
+      try {
+        return [Curry._1(decodeA, json[0]), Curry._1(decodeB, json[1]), Curry._1(decodeC, json[2]), Curry._1(decodeD, json[3])];
+      } catch (raw_msg) {
+        var msg = Caml_js_exceptions.internalToOCamlException(raw_msg);
+
+        if (msg.RE_EXN_ID === DecodeError) {
+          throw {
+            RE_EXN_ID: DecodeError,
+            _1: msg._1 + "\n\tin tuple4",
+            Error: new Error()
+          };
+        }
+
+        throw msg;
+      }
+    } else {
+      throw {
+        RE_EXN_ID: DecodeError,
+        _1: "Expected array of length 4, got array of length " + length,
+        Error: new Error()
+      };
+    }
+  } else {
+    throw {
+      RE_EXN_ID: DecodeError,
+      _1: "Expected array, got " + JSON.stringify(json),
+      Error: new Error()
+    };
+  }
+}
+
+function dict(decode, json) {
+  if (typeof json === "object" && !Array.isArray(json) && json !== null) {
+    var keys = Object.keys(json);
+    var l = keys.length;
+    var target = {};
+
+    for (var i = 0; i < l; ++i) {
+      var key = keys[i];
+      var value;
+
+      try {
+        value = Curry._1(decode, json[key]);
+      } catch (raw_msg) {
+        var msg = Caml_js_exceptions.internalToOCamlException(raw_msg);
+
+        if (msg.RE_EXN_ID === DecodeError) {
+          throw {
+            RE_EXN_ID: DecodeError,
+            _1: msg._1 + "\n\tin dict",
+            Error: new Error()
+          };
+        }
+
+        throw msg;
+      }
+
+      target[key] = value;
+    }
+
+    return target;
+  }
+
+  throw {
+    RE_EXN_ID: DecodeError,
+    _1: "Expected object, got " + JSON.stringify(json),
+    Error: new Error()
+  };
+}
+
+function field(key, decode, json) {
+  if (typeof json === "object" && !Array.isArray(json) && json !== null) {
+    var value = Js_dict.get(json, key);
+
+    if (value !== undefined) {
+      try {
+        return Curry._1(decode, Caml_option.valFromOption(value));
+      } catch (raw_msg) {
+        var msg = Caml_js_exceptions.internalToOCamlException(raw_msg);
+
+        if (msg.RE_EXN_ID === DecodeError) {
+          throw {
+            RE_EXN_ID: DecodeError,
+            _1: msg._1 + ("\n\tat field '" + (key + "'")),
+            Error: new Error()
+          };
+        }
+
+        throw msg;
+      }
+    } else {
+      throw {
+        RE_EXN_ID: DecodeError,
+        _1: "Expected field \'" + key + "\'",
+        Error: new Error()
+      };
+    }
+  } else {
+    throw {
+      RE_EXN_ID: DecodeError,
+      _1: "Expected object, got " + JSON.stringify(json),
+      Error: new Error()
+    };
+  }
+}
+
+function at(key_path, decoder) {
+  if (key_path) {
+    var rest = key_path.tl;
+    var key = key_path.hd;
+
+    if (!rest) {
+      return function (param) {
+        return field(key, decoder, param);
+      };
+    }
+
+    var partial_arg = at(rest, decoder);
+    return function (param) {
+      return field(key, partial_arg, param);
+    };
+  }
+
+  throw {
+    RE_EXN_ID: "Invalid_argument",
+    _1: "Expected key_path to contain at least one element",
+    Error: new Error()
+  };
+}
+
+function optional(decode, json) {
+  try {
+    return Caml_option.some(Curry._1(decode, json));
+  } catch (raw_exn) {
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+
+    if (exn.RE_EXN_ID === DecodeError) {
+      return;
+    }
+
+    throw exn;
+  }
+}
+
+function oneOf(decoders, json) {
+  var _decoders = decoders;
+  var _errors =
+  /* [] */
+  0;
+
+  while (true) {
+    var errors = _errors;
+    var decoders$1 = _decoders;
+
+    if (decoders$1) {
+      try {
+        return Curry._1(decoders$1.hd, json);
+      } catch (raw_e) {
+        var e = Caml_js_exceptions.internalToOCamlException(raw_e);
+
+        if (e.RE_EXN_ID === DecodeError) {
+          _errors = {
+            hd: e._1,
+            tl: errors
+          };
+          _decoders = decoders$1.tl;
+          continue;
+        }
+
+        throw e;
+      }
+    } else {
+      var revErrors = List.rev(errors);
+      throw {
+        RE_EXN_ID: DecodeError,
+        _1: "All decoders given to oneOf failed. Here are all the errors: " + revErrors + ". And the JSON being decoded: " + JSON.stringify(json),
+        Error: new Error()
+      };
+    }
+  }
+
+  ;
+}
+
+function either(a, b) {
+  var partial_arg_1 = {
+    hd: b,
+    tl:
+    /* [] */
+    0
+  };
+  var partial_arg = {
+    hd: a,
+    tl: partial_arg_1
+  };
+  return function (param) {
+    return oneOf(partial_arg, param);
+  };
+}
+
+function withDefault($$default, decode, json) {
+  try {
+    return Curry._1(decode, json);
+  } catch (raw_exn) {
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+
+    if (exn.RE_EXN_ID === DecodeError) {
+      return $$default;
+    }
+
+    throw exn;
+  }
+}
+
+function map(f, decode, json) {
+  return Curry._1(f, Curry._1(decode, json));
+}
+
+function andThen(b, a, json) {
+  return Curry._2(b, Curry._1(a, json), json);
+}
+
+var tuple2 = pair;
+/* No side effect */
+
+exports.tuple2 = tuple2;
+},{"bs-platform/lib/es6/list.js":"../node_modules/bs-platform/lib/es6/list.js","bs-platform/lib/es6/array.js":"../node_modules/bs-platform/lib/es6/array.js","bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","bs-platform/lib/es6/js_dict.js":"../node_modules/bs-platform/lib/es6/js_dict.js","bs-platform/lib/es6/caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js","bs-platform/lib/es6/caml_string.js":"../node_modules/bs-platform/lib/es6/caml_string.js","bs-platform/lib/es6/caml_exceptions.js":"../node_modules/bs-platform/lib/es6/caml_exceptions.js","bs-platform/lib/es6/caml_js_exceptions.js":"../node_modules/bs-platform/lib/es6/caml_js_exceptions.js"}],"services/Decoders.bs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MusicPlayer = void 0;
+
+var Json_decode = _interopRequireWildcard(require("@glennsl/bs-json/src/Json_decode.bs.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+// Generated by ReScript, PLEASE EDIT WITH CARE
+function decodeMetadata(json) {
+  return {
+    context_description: Json_decode.field("context_description", Json_decode.string, json)
+  };
+}
+
+function decodeContext(json) {
+  return {
+    metadata: Json_decode.field("metadata", decodeMetadata, json),
+    uri: Json_decode.field("uri", Json_decode.string, json)
+  };
+}
+
+function decodeImage(json) {
+  return {
+    url: Json_decode.field("url", Json_decode.string, json),
+    height: Json_decode.field("height", Json_decode.$$int, json),
+    width: Json_decode.field("width", Json_decode.$$int, json)
+  };
+}
+
+function decodeAlbum(json) {
+  return {
+    uri: Json_decode.field("uri", Json_decode.string, json),
+    name: Json_decode.field("name", Json_decode.string, json),
+    images: Json_decode.field("images", function (param) {
+      return Json_decode.list(decodeImage, param);
+    }, json)
+  };
+}
+
+function decodeArtist(json) {
+  return {
+    name: Json_decode.field("name", Json_decode.string, json),
+    uri: Json_decode.field("uri", Json_decode.string, json)
+  };
+}
+
+function decodeCurrentTrack(json) {
+  return {
+    album: Json_decode.field("album", decodeAlbum, json),
+    artists: Json_decode.field("artists", function (param) {
+      return Json_decode.list(decodeArtist, param);
+    }, json),
+    id: Json_decode.field("id", Json_decode.string, json),
+    media_type: Json_decode.field("media_type", Json_decode.string, json),
+    name: Json_decode.field("name", Json_decode.string, json),
+    type_: Json_decode.field("type", Json_decode.string, json),
+    uri: Json_decode.field("uri", Json_decode.string, json)
+  };
+}
+
+function decodeTrackWindow(json) {
+  return {
+    current_track: Json_decode.field("current_track", decodeCurrentTrack, json),
+    next_tracks: Json_decode.field("next_tracks", function (param) {
+      return Json_decode.list(decodeCurrentTrack, param);
+    }, json),
+    previous_tracks: Json_decode.field("previous_tracks", function (param) {
+      return Json_decode.list(function (param) {
+        return Json_decode.optional(decodeCurrentTrack, param);
+      }, param);
+    }, json)
+  };
+}
+
+function decodeTrackInfo(json) {
+  return {
+    context: Json_decode.field("context", decodeContext, json),
+    duration: Json_decode.field("duration", Json_decode.$$int, json),
+    position: Json_decode.field("position", Json_decode.$$float, json),
+    paused: Json_decode.field("paused", Json_decode.bool, json),
+    shuffle: Json_decode.field("shuffle", Json_decode.bool, json),
+    track_window: Json_decode.field("track_window", decodeTrackWindow, json)
+  };
+}
+
+var MusicPlayer = {
+  decodeMetadata: decodeMetadata,
+  decodeContext: decodeContext,
+  decodeImage: decodeImage,
+  decodeAlbum: decodeAlbum,
+  decodeArtist: decodeArtist,
+  decodeCurrentTrack: decodeCurrentTrack,
+  decodeTrackWindow: decodeTrackWindow,
+  decodeTrackInfo: decodeTrackInfo
+};
+/* No side effect */
+
+exports.MusicPlayer = MusicPlayer;
+},{"@glennsl/bs-json/src/Json_decode.bs.js":"../node_modules/@glennsl/bs-json/src/Json_decode.bs.js"}],"components/MusicPlayer.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.createEventHandlers = createEventHandlers;
-exports.make = void 0;
+exports.renderLoadingScreen = renderLoadingScreen;
+exports.make = exports.Helpers = void 0;
 
 var Curry = _interopRequireWildcard(require("bs-platform/lib/es6/curry.js"));
 
@@ -41698,12 +42404,43 @@ var React = _interopRequireWildcard(require("react"));
 
 var Caml_option = _interopRequireWildcard(require("bs-platform/lib/es6/caml_option.js"));
 
+var Decoders$Turntableam = _interopRequireWildcard(require("../services/Decoders.bs.js"));
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // Generated by ReScript, PLEASE EDIT WITH CARE
-function createEventHandlers(player, setPage) {
+function getCurrentTrack(trackInfo) {
+  return trackInfo.track_window.current_track.name;
+}
+
+function getArtistOrUnknown(artists) {
+  if (!artists) {
+    return "Unknown";
+  }
+
+  var artist = artists.hd;
+  return artist.name;
+}
+
+function getCurrentArtist(trackInfo) {
+  return getArtistOrUnknown(trackInfo.track_window.current_track.artists);
+}
+
+function getCurrentAlbum(trackInfo) {
+  return trackInfo.track_window.current_track.album.name;
+}
+
+var Helpers = {
+  getCurrentTrack: getCurrentTrack,
+  getArtistOrUnknown: getArtistOrUnknown,
+  getCurrentArtist: getCurrentArtist,
+  getCurrentAlbum: getCurrentAlbum
+};
+exports.Helpers = Helpers;
+
+function createEventHandlers(player, setPage, setMusicPlayer) {
   player.on("initialization_error", function (e) {
     console.log(e);
   });
@@ -41722,8 +42459,22 @@ function createEventHandlers(player, setPage) {
     console.log(e);
   });
   player.on("player_state_changed", function (state) {
-    console.log(state);
+    var decodedTrackInfo = Decoders$Turntableam.MusicPlayer.decodeTrackInfo(state);
+    return Curry._1(setMusicPlayer, function (prevState) {
+      return {
+        currentTrack: decodedTrackInfo.track_window.current_track.name,
+        currentArtist: getCurrentArtist(decodedTrackInfo),
+        currentAlbum: getCurrentAlbum(decodedTrackInfo),
+        deviceId: prevState.deviceId,
+        spotifyPlayer: prevState.spotifyPlayer,
+        trackInfo: decodedTrackInfo
+      };
+    });
   });
+}
+
+function renderLoadingScreen(param) {
+  return React.createElement("p", undefined, "Loading...");
 }
 
 function MusicPlayer(Props) {
@@ -41734,10 +42485,12 @@ function MusicPlayer(Props) {
       currentArtist: "",
       currentAlbum: "",
       deviceId: undefined,
-      spotifyPlayer: undefined
+      spotifyPlayer: undefined,
+      trackInfo: undefined
     };
   });
   var musicPlayer = match[0];
+  var trackInfo = musicPlayer.trackInfo;
   var spotifyPlayer = musicPlayer.spotifyPlayer;
   var setMusicPlayer = match[1];
   React.useEffect(function () {
@@ -41748,21 +42501,27 @@ function MusicPlayer(Props) {
           currentArtist: prevState.currentArtist,
           currentAlbum: prevState.currentAlbum,
           deviceId: window.deviceId,
-          spotifyPlayer: Caml_option.some(window.player)
+          spotifyPlayer: Caml_option.some(window.player),
+          trackInfo: prevState.trackInfo
         };
       });
     }, 1000);
   }, []);
   React.useEffect(function () {
     if (spotifyPlayer !== undefined) {
-      createEventHandlers(Caml_option.valFromOption(spotifyPlayer), setPage);
+      createEventHandlers(Caml_option.valFromOption(spotifyPlayer), setPage, setMusicPlayer);
     }
   }, [spotifyPlayer]);
+  React.useEffect(function () {
+    if (trackInfo !== undefined) {
+      console.log("here", trackInfo);
+    }
+  }, [trackInfo]);
 
-  if (spotifyPlayer !== undefined) {
+  if (spotifyPlayer !== undefined && trackInfo !== undefined) {
     return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("p", undefined, "Track: " + musicPlayer.currentTrack + " "), React.createElement("p", undefined, "Artist: " + musicPlayer.currentArtist), React.createElement("p", undefined, "Album: " + musicPlayer.currentAlbum));
   } else {
-    return React.createElement("p", undefined, "Loading...");
+    return renderLoadingScreen(undefined);
   }
 }
 
@@ -41770,7 +42529,7 @@ var make = MusicPlayer;
 /* react Not a pure module */
 
 exports.make = make;
-},{"bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","react":"../node_modules/react/index.js","bs-platform/lib/es6/caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js"}],"services/SpotifyWebPlaybackSDK.js":[function(require,module,exports) {
+},{"bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","react":"../node_modules/react/index.js","bs-platform/lib/es6/caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js","../services/Decoders.bs.js":"services/Decoders.bs.js"}],"services/SpotifyWebPlaybackSDK.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
