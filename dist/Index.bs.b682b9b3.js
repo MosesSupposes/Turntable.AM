@@ -42511,7 +42511,6 @@ function MusicPlayer(Props) {
     };
   });
   var musicPlayer = match[0];
-  var trackInfo = musicPlayer.trackInfo;
   var spotifyPlayer = musicPlayer.spotifyPlayer;
   var setMusicPlayer = match[1];
   React.useEffect(function () {
@@ -42535,14 +42534,9 @@ function MusicPlayer(Props) {
       createEventHandlers(Caml_option.valFromOption(spotifyPlayer), setPage, setMusicPlayer);
     }
   }, [spotifyPlayer]);
-  React.useEffect(function () {
-    if (trackInfo !== undefined) {
-      console.log("here", trackInfo);
-    }
-  }, [trackInfo]);
 
   if (spotifyPlayer !== undefined) {
-    if (trackInfo !== undefined) {
+    if (musicPlayer.trackInfo !== undefined) {
       return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("p", undefined, "Track: " + musicPlayer.currentTrack + " "), React.createElement("p", undefined, "Artist: " + musicPlayer.currentArtist), React.createElement("p", undefined, "Album: " + musicPlayer.currentAlbum), React.createElement("p", undefined, "Up Next: " + musicPlayer.nextSong + " by " + musicPlayer.nextArtist));
     } else {
       return renderConnectionInstructions(undefined);

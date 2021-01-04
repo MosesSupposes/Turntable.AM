@@ -91,6 +91,8 @@ let renderConnectionInstructions = () =>
   </p>;
 
 // TODO: Finish the tutorial to figure out how to enable automatic playback
+// TODO: Render the album cover
+// TODO: Add player controls (ex: pause, skip track, etc.)
 [@react.component]
 let make = (~setPage: (Page.t => Page.t) => unit) => {
   let (musicPlayer: musicPlayerState({..}), setMusicPlayer) =
@@ -146,17 +148,6 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
       None;
     },
     [|spotifyPlayer|],
-  );
-
-  React.useEffect1(
-    () => {
-      switch (trackInfo) {
-      | Some(info) => Js.log2("here", info)
-      | None => ()
-      };
-      None;
-    },
-    [|trackInfo|],
   );
 
   switch (spotifyPlayer) {
