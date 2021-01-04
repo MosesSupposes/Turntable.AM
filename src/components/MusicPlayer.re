@@ -68,6 +68,13 @@ let createEventHandlers =
 
 let renderLoadingScreen = () => <p> {React.string("Loading...")} </p>;
 
+let renderConnectionInstructions = () =>
+  <p>
+    {React.string(
+       "To interact with the Music Player, navigate to Spotify from your web browser and click the \"Connect to a device\" button. Then, select \"Turntable.AM\" from the menu.",
+     )}
+  </p>;
+
 // TODO: Render "Up Next" to the Music Player
 // TODO: Finish the tutorial to figure out how to enable automatic playback
 [@react.component]
@@ -144,7 +151,7 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
         <p> {React.string({j|Artist: $currentArtist|j})} </p>
         <p> {React.string({j|Album: $currentAlbum|j})} </p>
       </div>
-    | None => renderLoadingScreen()
+    | None => renderConnectionInstructions()
     }
   | None => renderLoadingScreen()
   };

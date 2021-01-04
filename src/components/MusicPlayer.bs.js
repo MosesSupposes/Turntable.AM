@@ -70,6 +70,10 @@ function renderLoadingScreen(param) {
   return React.createElement("p", undefined, "Loading...");
 }
 
+function renderConnectionInstructions(param) {
+  return React.createElement("p", undefined, "To interact with the Music Player, navigate to Spotify from your web browser and click the \"Connect to a device\" button. Then, select \"Turntable.AM\" from the menu.");
+}
+
 function MusicPlayer(Props) {
   var setPage = Props.setPage;
   var match = React.useState(function () {
@@ -113,8 +117,12 @@ function MusicPlayer(Props) {
           }
           
         }), [trackInfo]);
-  if (spotifyPlayer !== undefined && trackInfo !== undefined) {
-    return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("p", undefined, "Track: " + musicPlayer.currentTrack + " "), React.createElement("p", undefined, "Artist: " + musicPlayer.currentArtist), React.createElement("p", undefined, "Album: " + musicPlayer.currentAlbum));
+  if (spotifyPlayer !== undefined) {
+    if (trackInfo !== undefined) {
+      return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("p", undefined, "Track: " + musicPlayer.currentTrack + " "), React.createElement("p", undefined, "Artist: " + musicPlayer.currentArtist), React.createElement("p", undefined, "Album: " + musicPlayer.currentAlbum));
+    } else {
+      return renderConnectionInstructions(undefined);
+    }
   } else {
     return renderLoadingScreen(undefined);
   }
@@ -126,6 +134,7 @@ export {
   Helpers ,
   createEventHandlers ,
   renderLoadingScreen ,
+  renderConnectionInstructions ,
   make ,
   
 }
