@@ -9,6 +9,8 @@ type musicPlayerState('a) = {
   currentTrack: string,
   currentArtist: string,
   currentAlbum: string,
+  nextSong: string,
+  nextArtist: string,
   deviceId: option(string),
   spotifyPlayer: option(spotifyPlayer({..} as 'a)),
   trackInfo: option(Decoders.MusicPlayer.trackInfo),
@@ -35,6 +37,17 @@ module Helpers = {
   let getCurrentAlbum = (trackInfo: Decoders.MusicPlayer.trackInfo): string => {
     trackInfo.track_window.current_track.album.name;
   };
+
+  let getNextSong = (trackInfo: Decoders.MusicPlayer.trackInfo): string => {
+    trackInfo.track_window.next_tracks |> List.hd |> (x => x.name);
+  };
+
+  let getNextArtist = (trackInfo: Decoders.MusicPlayer.trackInfo): string => {
+    trackInfo.track_window.next_tracks
+    |> List.hd
+    |> (x => x.artists)
+    |> getArtistOrUnknown;
+  };
 };
 
 let createEventHandlers =
@@ -60,6 +73,8 @@ let createEventHandlers =
           currentTrack: Helpers.getCurrentTrack(decodedTrackInfo),
           currentArtist: Helpers.getCurrentArtist(decodedTrackInfo),
           currentAlbum: Helpers.getCurrentAlbum(decodedTrackInfo),
+          nextSong: Helpers.getNextSong(decodedTrackInfo),
+          nextArtist: Helpers.getNextArtist(decodedTrackInfo),
         }
       );
     });
@@ -75,7 +90,6 @@ let renderConnectionInstructions = () =>
      )}
   </p>;
 
-// TODO: Render "Up Next" to the Music Player
 // TODO: Finish the tutorial to figure out how to enable automatic playback
 [@react.component]
 let make = (~setPage: (Page.t => Page.t) => unit) => {
@@ -85,6 +99,8 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
         currentTrack: "",
         currentArtist: "",
         currentAlbum: "",
+        nextSong: "",
+        nextArtist: "",
         deviceId: None,
         spotifyPlayer: None,
         trackInfo: None,
@@ -95,6 +111,8 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
     currentTrack,
     currentArtist,
     currentAlbum,
+    nextSong,
+    nextArtist,
     deviceId,
     spotifyPlayer,
     trackInfo,
@@ -150,6 +168,7 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
         <p> {React.string({j|Track: $currentTrack |j})} </p>
         <p> {React.string({j|Artist: $currentArtist|j})} </p>
         <p> {React.string({j|Album: $currentAlbum|j})} </p>
+        <p> {React.string({j|Up Next: $nextSong by $nextArtist|j})} </p>
       </div>
     | None => renderConnectionInstructions()
     }

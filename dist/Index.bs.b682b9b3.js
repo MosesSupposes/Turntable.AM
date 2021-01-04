@@ -42399,6 +42399,8 @@ exports.renderLoadingScreen = renderLoadingScreen;
 exports.renderConnectionInstructions = renderConnectionInstructions;
 exports.make = exports.Helpers = void 0;
 
+var List = _interopRequireWildcard(require("bs-platform/lib/es6/list.js"));
+
 var Curry = _interopRequireWildcard(require("bs-platform/lib/es6/curry.js"));
 
 var React = _interopRequireWildcard(require("react"));
@@ -42433,11 +42435,21 @@ function getCurrentAlbum(trackInfo) {
   return trackInfo.track_window.current_track.album.name;
 }
 
+function getNextSong(trackInfo) {
+  return List.hd(trackInfo.track_window.next_tracks).name;
+}
+
+function getNextArtist(trackInfo) {
+  return getArtistOrUnknown(List.hd(trackInfo.track_window.next_tracks).artists);
+}
+
 var Helpers = {
   getCurrentTrack: getCurrentTrack,
   getArtistOrUnknown: getArtistOrUnknown,
   getCurrentArtist: getCurrentArtist,
-  getCurrentAlbum: getCurrentAlbum
+  getCurrentAlbum: getCurrentAlbum,
+  getNextSong: getNextSong,
+  getNextArtist: getNextArtist
 };
 exports.Helpers = Helpers;
 
@@ -42466,6 +42478,8 @@ function createEventHandlers(player, setPage, setMusicPlayer) {
         currentTrack: decodedTrackInfo.track_window.current_track.name,
         currentArtist: getCurrentArtist(decodedTrackInfo),
         currentAlbum: getCurrentAlbum(decodedTrackInfo),
+        nextSong: getNextSong(decodedTrackInfo),
+        nextArtist: getNextArtist(decodedTrackInfo),
         deviceId: prevState.deviceId,
         spotifyPlayer: prevState.spotifyPlayer,
         trackInfo: decodedTrackInfo
@@ -42489,6 +42503,8 @@ function MusicPlayer(Props) {
       currentTrack: "",
       currentArtist: "",
       currentAlbum: "",
+      nextSong: "",
+      nextArtist: "",
       deviceId: undefined,
       spotifyPlayer: undefined,
       trackInfo: undefined
@@ -42505,6 +42521,8 @@ function MusicPlayer(Props) {
           currentTrack: prevState.currentTrack,
           currentArtist: prevState.currentArtist,
           currentAlbum: prevState.currentAlbum,
+          nextSong: prevState.nextSong,
+          nextArtist: prevState.nextArtist,
           deviceId: window.deviceId,
           spotifyPlayer: Caml_option.some(window.player),
           trackInfo: prevState.trackInfo
@@ -42525,7 +42543,7 @@ function MusicPlayer(Props) {
 
   if (spotifyPlayer !== undefined) {
     if (trackInfo !== undefined) {
-      return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("p", undefined, "Track: " + musicPlayer.currentTrack + " "), React.createElement("p", undefined, "Artist: " + musicPlayer.currentArtist), React.createElement("p", undefined, "Album: " + musicPlayer.currentAlbum));
+      return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("p", undefined, "Track: " + musicPlayer.currentTrack + " "), React.createElement("p", undefined, "Artist: " + musicPlayer.currentArtist), React.createElement("p", undefined, "Album: " + musicPlayer.currentAlbum), React.createElement("p", undefined, "Up Next: " + musicPlayer.nextSong + " by " + musicPlayer.nextArtist));
     } else {
       return renderConnectionInstructions(undefined);
     }
@@ -42538,7 +42556,7 @@ var make = MusicPlayer;
 /* react Not a pure module */
 
 exports.make = make;
-},{"bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","react":"../node_modules/react/index.js","bs-platform/lib/es6/caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js","../services/Decoders.bs.js":"services/Decoders.bs.js"}],"services/SpotifyWebPlaybackSDK.js":[function(require,module,exports) {
+},{"bs-platform/lib/es6/list.js":"../node_modules/bs-platform/lib/es6/list.js","bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","react":"../node_modules/react/index.js","bs-platform/lib/es6/caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js","../services/Decoders.bs.js":"services/Decoders.bs.js"}],"services/SpotifyWebPlaybackSDK.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
