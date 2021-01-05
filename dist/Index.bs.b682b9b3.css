@@ -28,6 +28,12 @@ ul.left {
 	justify-content: left;
 }
 
+.album-cover {
+  border: 3px solid black;
+  width: 600px;
+  height: 600px;
+}
+
 button {
 	background-color: black;
 	height: 100px;

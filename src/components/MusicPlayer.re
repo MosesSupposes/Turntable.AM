@@ -1,6 +1,8 @@
 [@bs.val] external window: Js.t({..}) = "window";
 [@bs.val] external setTimeout: (unit => unit, int) => unit = "setTimeout";
 
+[%bs.raw {|require("../styles/musicPlayer.css")|}];
+
 open UsePage;
 
 type spotifyPlayer('a) = Js.t({..} as 'a);
@@ -47,6 +49,15 @@ module Helpers = {
     |> List.hd
     |> (x => x.artists)
     |> getArtistOrUnknown;
+  };
+
+  let getAlbumCoverUrl = (images: list(Decoders.MusicPlayer.image)): string => {
+    switch (images) {
+    | [] => ""
+    | [smallImg, mediumImg, largeImg] => largeImg.url
+    | [smallImg, mediumImg] => mediumImg.url
+    | [smallImg, ...restImgs] => smallImg.url
+    };
   };
 };
 
@@ -154,13 +165,16 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
   | Some(player) =>
     switch (trackInfo) {
     | Some(info) =>
+      let {track_window: {current_track: {album: {images: albumCovers}}}}: Decoders.MusicPlayer.trackInfo = info;
+      let albumCoverUrl = albumCovers |> Helpers.getAlbumCoverUrl;
       <div>
         <h2> {React.string("Now Playing:")} </h2>
         <p> {React.string({j|Track: $currentTrack |j})} </p>
         <p> {React.string({j|Artist: $currentArtist|j})} </p>
         <p> {React.string({j|Album: $currentAlbum|j})} </p>
         <p> {React.string({j|Up Next: $nextSong by $nextArtist|j})} </p>
-      </div>
+        <img className="album-cover" src=albumCoverUrl />
+      </div>;
     | None => renderConnectionInstructions()
     }
   | None => renderLoadingScreen()
