@@ -33,6 +33,14 @@ ul.left {
   border: 3px solid black;
 }
 
+.loading {
+  font-size: 5rem;
+}
+
+.connection-instructions {
+  font-size: 1.5rem;
+}
+
 /* For mobile */
 @media (max-width: 599px) {
   .album-cover {

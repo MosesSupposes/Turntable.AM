@@ -91,10 +91,11 @@ module Helpers = {
     ();
   };
 
-  let renderLoadingScreen = () => <p> {React.string("Loading...")} </p>;
+  let renderLoadingScreen = () =>
+    <p className="loading"> {React.string("Loading...")} </p>;
 
   let renderConnectionInstructions = () =>
-    <p>
+    <p className="connection-instructions">
       {React.string(
          "To interact with the Music Player, navigate to Spotify from your web browser and click the \"Connect to a device\" button. Then, select \"Turntable.AM\" from the menu.",
        )}

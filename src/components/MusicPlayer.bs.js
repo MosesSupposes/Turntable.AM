@@ -90,11 +90,15 @@ function createEventHandlers(player, setPage, setMusicPlayer) {
 }
 
 function renderLoadingScreen(param) {
-  return React.createElement("p", undefined, "Loading...");
+  return React.createElement("p", {
+              className: "loading"
+            }, "Loading...");
 }
 
 function renderConnectionInstructions(param) {
-  return React.createElement("p", undefined, "To interact with the Music Player, navigate to Spotify from your web browser and click the \"Connect to a device\" button. Then, select \"Turntable.AM\" from the menu.");
+  return React.createElement("p", {
+              className: "connection-instructions"
+            }, "To interact with the Music Player, navigate to Spotify from your web browser and click the \"Connect to a device\" button. Then, select \"Turntable.AM\" from the menu.");
 }
 
 var Helpers = {
