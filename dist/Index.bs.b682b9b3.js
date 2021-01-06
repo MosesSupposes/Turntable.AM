@@ -42456,20 +42456,15 @@ function getAlbumCoverUrl(images) {
   }
 
   var restImgs = images.tl;
-  var smallImg = images.hd;
 
   if (!restImgs) {
-    return smallImg.url;
+    return images.hd.url;
   }
 
-  var match = restImgs.tl;
+  var restImgs$1 = restImgs.tl;
 
-  if (match) {
-    if (match.tl) {
-      return smallImg.url;
-    } else {
-      return match.hd.url;
-    }
+  if (restImgs$1) {
+    return restImgs$1.hd.url;
   } else {
     return restImgs.hd.url;
   }

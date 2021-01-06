@@ -54,8 +54,8 @@ module Helpers = {
   let getAlbumCoverUrl = (images: list(Decoders.MusicPlayer.image)): string => {
     switch (images) {
     | [] => ""
-    | [smallImg, mediumImg, largeImg] => largeImg.url
-    | [smallImg, mediumImg] => mediumImg.url
+    | [smallImg, mediumImg, largeImg, ...restImgs] => largeImg.url
+    | [smallImg, mediumImg, ...restImgs] => mediumImg.url
     | [smallImg, ...restImgs] => smallImg.url
     };
   };
@@ -102,7 +102,6 @@ let renderConnectionInstructions = () =>
   </p>;
 
 // TODO: Finish the tutorial to figure out how to enable automatic playback
-// TODO: Render the album cover
 // TODO: Add player controls (ex: pause, skip track, etc.)
 [@react.component]
 let make = (~setPage: (Page.t => Page.t) => unit) => {
