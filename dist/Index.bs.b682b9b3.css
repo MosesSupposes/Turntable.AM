@@ -28,6 +28,11 @@ ul.left {
 	justify-content: left;
 }
 
+.media-control-card-container {
+  width: fit-content;
+  border: 3px solid black;
+}
+
 /* For mobile */
 @media (max-width: 599px) {
   .album-cover {

@@ -5,6 +5,7 @@ import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
 import * as Caml_option from "bs-platform/lib/es6/caml_option.js";
 import * as Decoders$Turntableam from "../services/Decoders.bs.js";
+import MediaControlCardJs from "./MediaControlCard.js";
 
 ((require("../styles/musicPlayer.css")));
 
@@ -106,6 +107,12 @@ function renderConnectionInstructions(param) {
   return React.createElement("p", undefined, "To interact with the Music Player, navigate to Spotify from your web browser and click the \"Connect to a device\" button. Then, select \"Turntable.AM\" from the menu.");
 }
 
+var make = MediaControlCardJs;
+
+var MediaControlCard = {
+  make: make
+};
+
 function MusicPlayer(Props) {
   var setPage = Props.setPage;
   var match = React.useState(function () {
@@ -154,20 +161,25 @@ function MusicPlayer(Props) {
     return renderConnectionInstructions(undefined);
   }
   var albumCoverUrl = getAlbumCoverUrl(trackInfo.track_window.current_track.album.images);
-  return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("p", undefined, "Track: " + musicPlayer.currentTrack + " "), React.createElement("p", undefined, "Artist: " + musicPlayer.currentArtist), React.createElement("p", undefined, "Album: " + musicPlayer.currentAlbum), React.createElement("p", undefined, "Up Next: " + musicPlayer.nextSong + " by " + musicPlayer.nextArtist), React.createElement("img", {
-                  className: "album-cover",
-                  src: albumCoverUrl
-                }));
+  return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("div", {
+                  className: "media-control-card-container"
+                }, React.createElement(make, {
+                      songTitle: musicPlayer.currentTrack,
+                      artist: musicPlayer.currentArtist,
+                      albumCoverUrl: albumCoverUrl,
+                      albumName: musicPlayer.currentAlbum
+                    })), React.createElement("p", undefined, "Up Next: " + musicPlayer.nextSong + " by " + musicPlayer.nextArtist));
 }
 
-var make = MusicPlayer;
+var make$1 = MusicPlayer;
 
 export {
   Helpers ,
   createEventHandlers ,
   renderLoadingScreen ,
   renderConnectionInstructions ,
-  make ,
+  MediaControlCard ,
+  make$1 as make,
   
 }
 /*  Not a pure module */

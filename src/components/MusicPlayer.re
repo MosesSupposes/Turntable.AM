@@ -101,6 +101,19 @@ let renderConnectionInstructions = () =>
      )}
   </p>;
 
+module MediaControlCard = {
+  [@bs.module "./MediaControlCard.js"] [@react.component]
+  external make:
+    (
+      ~songTitle: string,
+      ~artist: string,
+      ~albumCoverUrl: string,
+      ~albumName: string
+    ) =>
+    React.element =
+    "default";
+};
+
 // TODO: Finish the tutorial to figure out how to enable automatic playback
 // TODO: Add player controls (ex: pause, skip track, etc.)
 [@react.component]
@@ -159,7 +172,6 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
     },
     [|spotifyPlayer|],
   );
-
   switch (spotifyPlayer) {
   | Some(player) =>
     switch (trackInfo) {
@@ -168,11 +180,15 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
       let albumCoverUrl = albumCovers |> Helpers.getAlbumCoverUrl;
       <div>
         <h2> {React.string("Now Playing:")} </h2>
-        <p> {React.string({j|Track: $currentTrack |j})} </p>
-        <p> {React.string({j|Artist: $currentArtist|j})} </p>
-        <p> {React.string({j|Album: $currentAlbum|j})} </p>
+        <div className="media-control-card-container">
+          <MediaControlCard
+            songTitle=currentTrack
+            artist=currentArtist
+            albumCoverUrl
+            albumName=currentAlbum
+          />
+        </div>
         <p> {React.string({j|Up Next: $nextSong by $nextArtist|j})} </p>
-        <img className="album-cover" src=albumCoverUrl />
       </div>;
     | None => renderConnectionInstructions()
     }
