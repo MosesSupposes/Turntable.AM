@@ -1,0 +1,43 @@
+/* For mobile */
+@media (max-width: 599px) {
+  .album-cover {
+    border: 3px solid black;
+    width: 350px;
+    height: 350px;
+  }
+}
+
+/* For tablet in portrait mode */
+@media (min-width: 600px) {
+  .album-cover {
+    border: 3px solid black;
+    width: 400px;
+    height: 400px;
+  }
+}
+
+/* For tablet in landscape mode */
+@media (min-width: 900px) {
+  .album-cover {
+    border: 3px solid black;
+    width: 500px;
+    height: 500px;
+  }
+}
+
+/* For desktop */
+@media (min-width: 1200px) {
+  .album-cover {
+    border: 3px solid black;
+    width: 625px;
+    height: 625px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .album-cover {
+    border: 3px solid black;
+    width: 800px;
+    height: 800px;
+  }
+}
