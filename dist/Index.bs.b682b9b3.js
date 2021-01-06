@@ -58842,12 +58842,11 @@ function getCurrentTrack(trackInfo) {
 }
 
 function getArtistOrUnknown(artists) {
-  if (!artists) {
+  if (artists) {
+    return artists.hd.name;
+  } else {
     return "Unknown";
   }
-
-  var artist = artists.hd;
-  return artist.name;
 }
 
 function getCurrentArtist(trackInfo) {
