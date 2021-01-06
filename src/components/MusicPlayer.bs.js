@@ -53,16 +53,6 @@ function getAlbumCoverUrl(images) {
   }
 }
 
-var Helpers = {
-  getCurrentTrack: getCurrentTrack,
-  getArtistOrUnknown: getArtistOrUnknown,
-  getCurrentArtist: getCurrentArtist,
-  getCurrentAlbum: getCurrentAlbum,
-  getNextSong: getNextSong,
-  getNextArtist: getNextArtist,
-  getAlbumCoverUrl: getAlbumCoverUrl
-};
-
 function createEventHandlers(player, setPage, setMusicPlayer) {
   player.on("initialization_error", (function (e) {
           console.log(e);
@@ -106,6 +96,19 @@ function renderLoadingScreen(param) {
 function renderConnectionInstructions(param) {
   return React.createElement("p", undefined, "To interact with the Music Player, navigate to Spotify from your web browser and click the \"Connect to a device\" button. Then, select \"Turntable.AM\" from the menu.");
 }
+
+var Helpers = {
+  getCurrentTrack: getCurrentTrack,
+  getArtistOrUnknown: getArtistOrUnknown,
+  getCurrentArtist: getCurrentArtist,
+  getCurrentAlbum: getCurrentAlbum,
+  getNextSong: getNextSong,
+  getNextArtist: getNextArtist,
+  getAlbumCoverUrl: getAlbumCoverUrl,
+  createEventHandlers: createEventHandlers,
+  renderLoadingScreen: renderLoadingScreen,
+  renderConnectionInstructions: renderConnectionInstructions
+};
 
 var make = MediaControlCardJs;
 
@@ -175,9 +178,6 @@ var make$1 = MusicPlayer;
 
 export {
   Helpers ,
-  createEventHandlers ,
-  renderLoadingScreen ,
-  renderConnectionInstructions ,
   MediaControlCard ,
   make$1 as make,
   

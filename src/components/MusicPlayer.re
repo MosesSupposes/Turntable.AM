@@ -59,47 +59,47 @@ module Helpers = {
     | [smallImg, ...restImgs] => smallImg.url
     };
   };
+
+  let createEventHandlers =
+      (
+        player: spotifyPlayer({..}),
+        setPage: (Page.t => Page.t) => unit,
+        setMusicPlayer:
+          (musicPlayerState({..}) => musicPlayerState({..})) => unit,
+      )
+      : unit => {
+    // The "ready" event is handled from the JS side (see src/services/SpotifyWebPlaybackSDK.js)
+    let () = player##on("initialization_error", e => Js.log(e));
+    let () = player##on("authentication_error", e => setPage(_ => Page.Login));
+    let () = player##on("account_error", e => Js.log(e));
+    let () = player##on("playback_error", e => Js.log(e));
+    let () =
+      player##on("player_state_changed", state => {
+        let decodedTrackInfo = Decoders.MusicPlayer.decodeTrackInfo(state);
+        setMusicPlayer(prevState =>
+          {
+            ...prevState,
+            trackInfo: Some(decodedTrackInfo),
+            currentTrack: getCurrentTrack(decodedTrackInfo),
+            currentArtist: getCurrentArtist(decodedTrackInfo),
+            currentAlbum: getCurrentAlbum(decodedTrackInfo),
+            nextSong: getNextSong(decodedTrackInfo),
+            nextArtist: getNextArtist(decodedTrackInfo),
+          }
+        );
+      });
+    ();
+  };
+
+  let renderLoadingScreen = () => <p> {React.string("Loading...")} </p>;
+
+  let renderConnectionInstructions = () =>
+    <p>
+      {React.string(
+         "To interact with the Music Player, navigate to Spotify from your web browser and click the \"Connect to a device\" button. Then, select \"Turntable.AM\" from the menu.",
+       )}
+    </p>;
 };
-
-let createEventHandlers =
-    (
-      player: spotifyPlayer({..}),
-      setPage: (Page.t => Page.t) => unit,
-      setMusicPlayer:
-        (musicPlayerState({..}) => musicPlayerState({..})) => unit,
-    )
-    : unit => {
-  // The "ready" event is handled from the JS side (see src/services/SpotifyWebPlaybackSDK.js)
-  let () = player##on("initialization_error", e => Js.log(e));
-  let () = player##on("authentication_error", e => setPage(_ => Page.Login));
-  let () = player##on("account_error", e => Js.log(e));
-  let () = player##on("playback_error", e => Js.log(e));
-  let () =
-    player##on("player_state_changed", state => {
-      let decodedTrackInfo = Decoders.MusicPlayer.decodeTrackInfo(state);
-      setMusicPlayer(prevState =>
-        {
-          ...prevState,
-          trackInfo: Some(decodedTrackInfo),
-          currentTrack: Helpers.getCurrentTrack(decodedTrackInfo),
-          currentArtist: Helpers.getCurrentArtist(decodedTrackInfo),
-          currentAlbum: Helpers.getCurrentAlbum(decodedTrackInfo),
-          nextSong: Helpers.getNextSong(decodedTrackInfo),
-          nextArtist: Helpers.getNextArtist(decodedTrackInfo),
-        }
-      );
-    });
-  ();
-};
-
-let renderLoadingScreen = () => <p> {React.string("Loading...")} </p>;
-
-let renderConnectionInstructions = () =>
-  <p>
-    {React.string(
-       "To interact with the Music Player, navigate to Spotify from your web browser and click the \"Connect to a device\" button. Then, select \"Turntable.AM\" from the menu.",
-     )}
-  </p>;
 
 module MediaControlCard = {
   [@bs.module "./MediaControlCard.js"] [@react.component]
@@ -165,7 +165,8 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
   React.useEffect1(
     () => {
       switch (spotifyPlayer) {
-      | Some(player) => createEventHandlers(player, setPage, setMusicPlayer)
+      | Some(player) =>
+        Helpers.createEventHandlers(player, setPage, setMusicPlayer)
       | None => ()
       };
       None;
@@ -190,8 +191,8 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
         </div>
         <p> {React.string({j|Up Next: $nextSong by $nextArtist|j})} </p>
       </div>;
-    | None => renderConnectionInstructions()
+    | None => Helpers.renderConnectionInstructions()
     }
-  | None => renderLoadingScreen()
+  | None => Helpers.renderLoadingScreen()
   };
 };

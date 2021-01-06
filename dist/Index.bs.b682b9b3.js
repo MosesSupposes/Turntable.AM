@@ -58813,9 +58813,6 @@ module.hot.accept(reloadCSS);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createEventHandlers = createEventHandlers;
-exports.renderLoadingScreen = renderLoadingScreen;
-exports.renderConnectionInstructions = renderConnectionInstructions;
 exports.make = exports.MediaControlCard = exports.Helpers = void 0;
 
 var List = _interopRequireWildcard(require("bs-platform/lib/es6/list.js"));
@@ -58888,17 +58885,6 @@ function getAlbumCoverUrl(images) {
   }
 }
 
-var Helpers = {
-  getCurrentTrack: getCurrentTrack,
-  getArtistOrUnknown: getArtistOrUnknown,
-  getCurrentArtist: getCurrentArtist,
-  getCurrentAlbum: getCurrentAlbum,
-  getNextSong: getNextSong,
-  getNextArtist: getNextArtist,
-  getAlbumCoverUrl: getAlbumCoverUrl
-};
-exports.Helpers = Helpers;
-
 function createEventHandlers(player, setPage, setMusicPlayer) {
   player.on("initialization_error", function (e) {
     console.log(e);
@@ -58942,6 +58928,19 @@ function renderConnectionInstructions(param) {
   return React.createElement("p", undefined, "To interact with the Music Player, navigate to Spotify from your web browser and click the \"Connect to a device\" button. Then, select \"Turntable.AM\" from the menu.");
 }
 
+var Helpers = {
+  getCurrentTrack: getCurrentTrack,
+  getArtistOrUnknown: getArtistOrUnknown,
+  getCurrentArtist: getCurrentArtist,
+  getCurrentAlbum: getCurrentAlbum,
+  getNextSong: getNextSong,
+  getNextArtist: getNextArtist,
+  getAlbumCoverUrl: getAlbumCoverUrl,
+  createEventHandlers: createEventHandlers,
+  renderLoadingScreen: renderLoadingScreen,
+  renderConnectionInstructions: renderConnectionInstructions
+};
+exports.Helpers = Helpers;
 var make = _MediaControlCard.default;
 var MediaControlCard = {
   make: make
