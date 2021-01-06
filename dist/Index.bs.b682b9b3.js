@@ -58742,7 +58742,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var useStyles = (0, _styles.makeStyles)(function (theme) {
   return {
     root: {
-      display: "flex"
+      display: "flex",
+      backgroundImage: "linear-gradient(to right, white, #191414)"
     },
     details: {
       display: "flex",
