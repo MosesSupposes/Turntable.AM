@@ -58827,30 +58827,25 @@ function MediaControlCard(_ref) {
   }, artist)), /*#__PURE__*/_react.default.createElement("div", {
     className: classes.controls
   }, /*#__PURE__*/_react.default.createElement(_IconButton.default, {
-    "aria-label": "previous"
-  }, /*#__PURE__*/_react.default.createElement(_SkipPrevious.default, {
+    "aria-label": "previous",
     onClick: function onClick() {
       return skipToPreviousTrack(player);
     }
-  })), /*#__PURE__*/_react.default.createElement(_IconButton.default, {
-    "aria-label": "play/pause"
+  }, /*#__PURE__*/_react.default.createElement(_SkipPrevious.default, null)), /*#__PURE__*/_react.default.createElement(_IconButton.default, {
+    "aria-label": "play/pause",
+    onClick: function onClick(_) {
+      return togglePlay(player);
+    }
   }, isPaused ? /*#__PURE__*/_react.default.createElement(_PlayArrow.default, {
-    className: classes.playIcon,
-    onClick: function onClick(_) {
-      return togglePlay(player);
-    }
+    className: classes.playIcon
   }) : /*#__PURE__*/_react.default.createElement(_Pause.default, {
-    className: classes.playIcon,
-    onClick: function onClick(_) {
-      return togglePlay(player);
-    }
+    className: classes.playIcon
   })), /*#__PURE__*/_react.default.createElement(_IconButton.default, {
-    "aria-label": "next"
-  }, /*#__PURE__*/_react.default.createElement(_SkipNext.default, {
+    "aria-label": "next",
     onClick: function onClick() {
       return skipToNextTrack(player);
     }
-  })))), /*#__PURE__*/_react.default.createElement(_CardMedia.default, {
+  }, /*#__PURE__*/_react.default.createElement(_SkipNext.default, null)))), /*#__PURE__*/_react.default.createElement(_CardMedia.default, {
     className: classes.cover,
     image: albumCoverUrl,
     title: albumName
