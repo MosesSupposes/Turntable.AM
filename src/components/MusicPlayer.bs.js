@@ -29,21 +29,14 @@ function getCurrentAlbum(trackInfo) {
   return trackInfo.track_window.current_track.album.name;
 }
 
-function getNextSong(trackInfo) {
-  return List.hd(trackInfo.track_window.next_tracks).name;
-}
-
-function getNextArtist(trackInfo) {
-  return getArtistOrUnknown(List.hd(trackInfo.track_window.next_tracks).artists);
-}
-
-function getAlbumCoverUrl(images) {
-  if (!images) {
+function getCurrentAlbumCoverUrl(trackInfo) {
+  var albumCovers = trackInfo.track_window.current_track.album.images;
+  if (!albumCovers) {
     return "";
   }
-  var restImgs = images.tl;
+  var restImgs = albumCovers.tl;
   if (!restImgs) {
-    return images.hd.url;
+    return albumCovers.hd.url;
   }
   var restImgs$1 = restImgs.tl;
   if (restImgs$1) {
@@ -51,6 +44,18 @@ function getAlbumCoverUrl(images) {
   } else {
     return restImgs.hd.url;
   }
+}
+
+function getIsPaused(trackInfo) {
+  return trackInfo.paused;
+}
+
+function getNextSong(trackInfo) {
+  return List.hd(trackInfo.track_window.next_tracks).name;
+}
+
+function getNextArtist(trackInfo) {
+  return getArtistOrUnknown(List.hd(trackInfo.track_window.next_tracks).artists);
 }
 
 function createEventHandlers(player, setPage, setMusicPlayer) {
@@ -78,6 +83,8 @@ function createEventHandlers(player, setPage, setMusicPlayer) {
                                 currentTrack: decodedTrackInfo.track_window.current_track.name,
                                 currentArtist: getCurrentArtist(decodedTrackInfo),
                                 currentAlbum: getCurrentAlbum(decodedTrackInfo),
+                                currentAlbumCover: getCurrentAlbumCoverUrl(decodedTrackInfo),
+                                paused: decodedTrackInfo.paused,
                                 nextSong: getNextSong(decodedTrackInfo),
                                 nextArtist: getNextArtist(decodedTrackInfo),
                                 deviceId: prevState.deviceId,
@@ -106,9 +113,10 @@ var Helpers = {
   getArtistOrUnknown: getArtistOrUnknown,
   getCurrentArtist: getCurrentArtist,
   getCurrentAlbum: getCurrentAlbum,
+  getCurrentAlbumCoverUrl: getCurrentAlbumCoverUrl,
+  getIsPaused: getIsPaused,
   getNextSong: getNextSong,
   getNextArtist: getNextArtist,
-  getAlbumCoverUrl: getAlbumCoverUrl,
   createEventHandlers: createEventHandlers,
   renderLoadingScreen: renderLoadingScreen,
   renderConnectionInstructions: renderConnectionInstructions
@@ -127,6 +135,8 @@ function MusicPlayer(Props) {
                 currentTrack: "",
                 currentArtist: "",
                 currentAlbum: "",
+                currentAlbumCover: "",
+                paused: true,
                 nextSong: "",
                 nextArtist: "",
                 deviceId: undefined,
@@ -135,7 +145,6 @@ function MusicPlayer(Props) {
               };
       });
   var musicPlayer = match[0];
-  var trackInfo = musicPlayer.trackInfo;
   var spotifyPlayer = musicPlayer.spotifyPlayer;
   var setMusicPlayer = match[1];
   React.useEffect((function () {
@@ -145,6 +154,8 @@ function MusicPlayer(Props) {
                                         currentTrack: prevState.currentTrack,
                                         currentArtist: prevState.currentArtist,
                                         currentAlbum: prevState.currentAlbum,
+                                        currentAlbumCover: prevState.currentAlbumCover,
+                                        paused: prevState.paused,
                                         nextSong: prevState.nextSong,
                                         nextArtist: prevState.nextArtist,
                                         deviceId: window.deviceId,
@@ -161,23 +172,24 @@ function MusicPlayer(Props) {
           }
           
         }), [spotifyPlayer]);
-  if (spotifyPlayer === undefined) {
+  if (spotifyPlayer !== undefined) {
+    if (musicPlayer.trackInfo !== undefined) {
+      return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("div", {
+                      className: "media-control-card-container"
+                    }, React.createElement(make, {
+                          songTitle: musicPlayer.currentTrack,
+                          artist: musicPlayer.currentArtist,
+                          albumCoverUrl: musicPlayer.currentAlbumCover,
+                          albumName: musicPlayer.currentAlbum,
+                          player: Caml_option.valFromOption(spotifyPlayer),
+                          isPaused: musicPlayer.paused
+                        })), React.createElement("p", undefined, "Up Next: " + musicPlayer.nextSong + " by " + musicPlayer.nextArtist));
+    } else {
+      return renderConnectionInstructions(undefined);
+    }
+  } else {
     return renderLoadingScreen(undefined);
   }
-  if (trackInfo === undefined) {
-    return renderConnectionInstructions(undefined);
-  }
-  var albumCoverUrl = getAlbumCoverUrl(trackInfo.track_window.current_track.album.images);
-  return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("div", {
-                  className: "media-control-card-container"
-                }, React.createElement(make, {
-                      songTitle: musicPlayer.currentTrack,
-                      artist: musicPlayer.currentArtist,
-                      albumCoverUrl: albumCoverUrl,
-                      albumName: musicPlayer.currentAlbum,
-                      player: Caml_option.valFromOption(spotifyPlayer),
-                      isPaused: trackInfo.paused
-                    })), React.createElement("p", undefined, "Up Next: " + musicPlayer.nextSong + " by " + musicPlayer.nextArtist));
 }
 
 var make$1 = MusicPlayer;

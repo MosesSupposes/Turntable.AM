@@ -11,6 +11,8 @@ type musicPlayerState('a) = {
   currentTrack: string,
   currentArtist: string,
   currentAlbum: string,
+  currentAlbumCover: string,
+  paused: bool,
   nextSong: string,
   nextArtist: string,
   deviceId: option(string),
@@ -39,6 +41,21 @@ module Helpers = {
     trackInfo.track_window.current_track.album.name;
   };
 
+  let getCurrentAlbumCoverUrl =
+      (trackInfo: Decoders.MusicPlayer.trackInfo): string => {
+    let {track_window: {current_track: {album: {images: albumCovers}}}}: Decoders.MusicPlayer.trackInfo = trackInfo;
+    switch (albumCovers) {
+    | [] => ""
+    | [smallImg, mediumImg, largeImg, ...restImgs] => largeImg.url
+    | [smallImg, mediumImg, ...restImgs] => mediumImg.url
+    | [smallImg, ...restImgs] => smallImg.url
+    };
+  };
+
+  let getIsPaused = (trackInfo: Decoders.MusicPlayer.trackInfo): bool => {
+    trackInfo.paused;
+  };
+
   let getNextSong = (trackInfo: Decoders.MusicPlayer.trackInfo): string => {
     trackInfo.track_window.next_tracks |> List.hd |> (x => x.name);
   };
@@ -48,15 +65,6 @@ module Helpers = {
     |> List.hd
     |> (x => x.artists)
     |> getArtistOrUnknown;
-  };
-
-  let getAlbumCoverUrl = (images: list(Decoders.MusicPlayer.image)): string => {
-    switch (images) {
-    | [] => ""
-    | [smallImg, mediumImg, largeImg, ...restImgs] => largeImg.url
-    | [smallImg, mediumImg, ...restImgs] => mediumImg.url
-    | [smallImg, ...restImgs] => smallImg.url
-    };
   };
 
   let createEventHandlers =
@@ -82,6 +90,8 @@ module Helpers = {
             currentTrack: getCurrentTrack(decodedTrackInfo),
             currentArtist: getCurrentArtist(decodedTrackInfo),
             currentAlbum: getCurrentAlbum(decodedTrackInfo),
+            currentAlbumCover: getCurrentAlbumCoverUrl(decodedTrackInfo),
+            paused: getIsPaused(decodedTrackInfo),
             nextSong: getNextSong(decodedTrackInfo),
             nextArtist: getNextArtist(decodedTrackInfo),
           }
@@ -128,6 +138,8 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
         currentTrack: "",
         currentArtist: "",
         currentAlbum: "",
+        currentAlbumCover: "",
+        paused: true,
         nextSong: "",
         nextArtist: "",
         deviceId: None,
@@ -140,8 +152,10 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
     currentTrack,
     currentArtist,
     currentAlbum,
+    currentAlbumCover,
     nextSong,
     nextArtist,
+    paused,
     deviceId,
     spotifyPlayer,
     trackInfo,
@@ -177,29 +191,25 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
     },
     [|spotifyPlayer|],
   );
+
   switch (spotifyPlayer) {
   | Some(player) =>
     switch (trackInfo) {
     | Some(info) =>
-      let {
-        paused,
-        track_window: {current_track: {album: {images: albumCovers}}},
-      }: Decoders.MusicPlayer.trackInfo = info;
-      let albumCoverUrl = albumCovers |> Helpers.getAlbumCoverUrl;
       <div>
         <h2> {React.string("Now Playing:")} </h2>
         <div className="media-control-card-container">
           <MediaControlCard
             songTitle=currentTrack
             artist=currentArtist
-            albumCoverUrl
+            albumCoverUrl=currentAlbumCover
             albumName=currentAlbum
             player
             isPaused=paused
           />
         </div>
         <p> {React.string({j|Up Next: $nextSong by $nextArtist|j})} </p>
-      </div>;
+      </div>
     | None => Helpers.renderConnectionInstructions()
     }
   | None => Helpers.renderLoadingScreen()
