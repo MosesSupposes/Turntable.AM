@@ -127,8 +127,6 @@ module MediaControlCard = {
 };
 
 // TODO: Finish the tutorial to figure out how to enable automatic playback
-// TODO: Add player controls (ex: pause, skip track, etc.)
-// TODO: Render the pause icon when the music is playing and the play icon when the music is paused
 // TODO: Set breakpoints for the music player
 [@react.component]
 let make = (~setPage: (Page.t => Page.t) => unit) => {
