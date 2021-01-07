@@ -108,7 +108,9 @@ module MediaControlCard = {
       ~songTitle: string,
       ~artist: string,
       ~albumCoverUrl: string,
-      ~albumName: string
+      ~albumName: string,
+      ~player: Js.t({..}),
+      ~isPaused: bool
     ) =>
     React.element =
     "default";
@@ -117,6 +119,7 @@ module MediaControlCard = {
 // TODO: Finish the tutorial to figure out how to enable automatic playback
 // TODO: Add player controls (ex: pause, skip track, etc.)
 // TODO: Render the pause icon when the music is playing and the play icon when the music is paused
+// TODO: Set breakpoints for the music player
 [@react.component]
 let make = (~setPage: (Page.t => Page.t) => unit) => {
   let (musicPlayer: musicPlayerState({..}), setMusicPlayer) =
@@ -178,7 +181,10 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
   | Some(player) =>
     switch (trackInfo) {
     | Some(info) =>
-      let {track_window: {current_track: {album: {images: albumCovers}}}}: Decoders.MusicPlayer.trackInfo = info;
+      let {
+        paused,
+        track_window: {current_track: {album: {images: albumCovers}}},
+      }: Decoders.MusicPlayer.trackInfo = info;
       let albumCoverUrl = albumCovers |> Helpers.getAlbumCoverUrl;
       <div>
         <h2> {React.string("Now Playing:")} </h2>
@@ -188,6 +194,8 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
             artist=currentArtist
             albumCoverUrl
             albumName=currentAlbum
+            player
+            isPaused=paused
           />
         </div>
         <p> {React.string({j|Up Next: $nextSong by $nextArtist|j})} </p>

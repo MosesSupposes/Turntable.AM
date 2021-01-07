@@ -174,7 +174,9 @@ function MusicPlayer(Props) {
                       songTitle: musicPlayer.currentTrack,
                       artist: musicPlayer.currentArtist,
                       albumCoverUrl: albumCoverUrl,
-                      albumName: musicPlayer.currentAlbum
+                      albumName: musicPlayer.currentAlbum,
+                      player: Caml_option.valFromOption(spotifyPlayer),
+                      isPaused: trackInfo.paused
                     })), React.createElement("p", undefined, "Up Next: " + musicPlayer.nextSong + " by " + musicPlayer.nextArtist));
 }
 

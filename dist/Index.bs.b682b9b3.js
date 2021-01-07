@@ -58688,6 +58688,27 @@ var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("pa
 }), 'PlayArrow');
 
 exports.default = _default;
+},{"@babel/runtime/helpers/interopRequireDefault":"../node_modules/@babel/runtime/helpers/interopRequireDefault.js","@babel/runtime/helpers/interopRequireWildcard":"../node_modules/@babel/runtime/helpers/interopRequireWildcard.js","react":"../node_modules/react/index.js","./utils/createSvgIcon":"../node_modules/@material-ui/icons/utils/createSvgIcon.js"}],"../node_modules/@material-ui/icons/Pause.js":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+var _createSvgIcon = _interopRequireDefault(require("./utils/createSvgIcon"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M6 19h4V5H6v14zm8-14v14h4V5h-4z"
+}), 'Pause');
+
+exports.default = _default;
 },{"@babel/runtime/helpers/interopRequireDefault":"../node_modules/@babel/runtime/helpers/interopRequireDefault.js","@babel/runtime/helpers/interopRequireWildcard":"../node_modules/@babel/runtime/helpers/interopRequireWildcard.js","react":"../node_modules/react/index.js","./utils/createSvgIcon":"../node_modules/@material-ui/icons/utils/createSvgIcon.js"}],"../node_modules/@material-ui/icons/SkipNext.js":[function(require,module,exports) {
 "use strict";
 
@@ -58735,6 +58756,8 @@ var _SkipPrevious = _interopRequireDefault(require("@material-ui/icons/SkipPrevi
 
 var _PlayArrow = _interopRequireDefault(require("@material-ui/icons/PlayArrow"));
 
+var _Pause = _interopRequireDefault(require("@material-ui/icons/Pause"));
+
 var _SkipNext = _interopRequireDefault(require("@material-ui/icons/SkipNext"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -58768,11 +58791,17 @@ var useStyles = (0, _styles.makeStyles)(function (theme) {
   };
 });
 
+var togglePlay = function togglePlay(player) {
+  return player.togglePlay();
+};
+
 function MediaControlCard(_ref) {
   var songTitle = _ref.songTitle,
       artist = _ref.artist,
       albumCoverUrl = _ref.albumCoverUrl,
-      albumName = _ref.albumName;
+      albumName = _ref.albumName,
+      player = _ref.player,
+      isPaused = _ref.isPaused;
   var classes = useStyles();
   var theme = (0, _styles.useTheme)();
   return /*#__PURE__*/_react.default.createElement(_Card.default, {
@@ -58793,8 +58822,16 @@ function MediaControlCard(_ref) {
     "aria-label": "previous"
   }, theme.direction === "rtl" ? /*#__PURE__*/_react.default.createElement(_SkipNext.default, null) : /*#__PURE__*/_react.default.createElement(_SkipPrevious.default, null)), /*#__PURE__*/_react.default.createElement(_IconButton.default, {
     "aria-label": "play/pause"
-  }, /*#__PURE__*/_react.default.createElement(_PlayArrow.default, {
-    className: classes.playIcon
+  }, isPaused ? /*#__PURE__*/_react.default.createElement(_PlayArrow.default, {
+    className: classes.playIcon,
+    onClick: function onClick(_) {
+      return togglePlay(player);
+    }
+  }) : /*#__PURE__*/_react.default.createElement(_Pause.default, {
+    className: classes.playIcon,
+    onClick: function onClick(_) {
+      return togglePlay(player);
+    }
   })), /*#__PURE__*/_react.default.createElement(_IconButton.default, {
     "aria-label": "next"
   }, theme.direction === "rtl" ? /*#__PURE__*/_react.default.createElement(_SkipPrevious.default, null) : /*#__PURE__*/_react.default.createElement(_SkipNext.default, null)))), /*#__PURE__*/_react.default.createElement(_CardMedia.default, {
@@ -58803,7 +58840,7 @@ function MediaControlCard(_ref) {
     title: albumName
   }));
 }
-},{"react":"../node_modules/react/index.js","@material-ui/core/styles":"../node_modules/@material-ui/core/esm/styles/index.js","@material-ui/core/Card":"../node_modules/@material-ui/core/esm/Card/index.js","@material-ui/core/CardContent":"../node_modules/@material-ui/core/esm/CardContent/index.js","@material-ui/core/CardMedia":"../node_modules/@material-ui/core/esm/CardMedia/index.js","@material-ui/core/IconButton":"../node_modules/@material-ui/core/esm/IconButton/index.js","@material-ui/core/Typography":"../node_modules/@material-ui/core/esm/Typography/index.js","@material-ui/icons/SkipPrevious":"../node_modules/@material-ui/icons/SkipPrevious.js","@material-ui/icons/PlayArrow":"../node_modules/@material-ui/icons/PlayArrow.js","@material-ui/icons/SkipNext":"../node_modules/@material-ui/icons/SkipNext.js"}],"styles/musicPlayer.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@material-ui/core/styles":"../node_modules/@material-ui/core/esm/styles/index.js","@material-ui/core/Card":"../node_modules/@material-ui/core/esm/Card/index.js","@material-ui/core/CardContent":"../node_modules/@material-ui/core/esm/CardContent/index.js","@material-ui/core/CardMedia":"../node_modules/@material-ui/core/esm/CardMedia/index.js","@material-ui/core/IconButton":"../node_modules/@material-ui/core/esm/IconButton/index.js","@material-ui/core/Typography":"../node_modules/@material-ui/core/esm/Typography/index.js","@material-ui/icons/SkipPrevious":"../node_modules/@material-ui/icons/SkipPrevious.js","@material-ui/icons/PlayArrow":"../node_modules/@material-ui/icons/PlayArrow.js","@material-ui/icons/Pause":"../node_modules/@material-ui/icons/Pause.js","@material-ui/icons/SkipNext":"../node_modules/@material-ui/icons/SkipNext.js"}],"styles/musicPlayer.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -59006,7 +59043,9 @@ function MusicPlayer(Props) {
     songTitle: musicPlayer.currentTrack,
     artist: musicPlayer.currentArtist,
     albumCoverUrl: albumCoverUrl,
-    albumName: musicPlayer.currentAlbum
+    albumName: musicPlayer.currentAlbum,
+    player: Caml_option.valFromOption(spotifyPlayer),
+    isPaused: trackInfo.paused
   })), React.createElement("p", undefined, "Up Next: " + musicPlayer.nextSong + " by " + musicPlayer.nextArtist));
 }
 
