@@ -41631,7 +41631,7 @@ function postRequest(url, body, accessToken, onSuccess, onFail) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Search = exports.Authorization = exports.base = void 0;
+exports.Playlist = exports.Search = exports.Authorization = exports.base = void 0;
 
 var Uuid = _interopRequireWildcard(require("uuid"));
 
@@ -41679,6 +41679,8 @@ var Search = {
   searchTrack: searchTrack
 };
 exports.Search = Search;
+var Playlist = {};
+exports.Playlist = Playlist;
 var base = "https://api.spotify.com";
 /* state Not a pure module */
 

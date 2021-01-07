@@ -64,3 +64,5 @@ module Search = {
     );
   };
 };
+
+module Playlist = {};

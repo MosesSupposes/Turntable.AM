@@ -59,12 +59,15 @@ var Search = {
   searchTrack: searchTrack
 };
 
+var Playlist = {};
+
 var base = "https://api.spotify.com";
 
 export {
   base ,
   Authorization ,
   Search ,
+  Playlist ,
   
 }
 /* state Not a pure module */

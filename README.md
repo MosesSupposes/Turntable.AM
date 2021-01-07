@@ -21,5 +21,5 @@ After running the following command, navigate to localhost:1234.
 yarn start
 
 # for npm
-npm run start
+npm start
 ```
