@@ -161,7 +161,7 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
     trackInfo,
   } = musicPlayer;
 
-  // Store the Spotify player object in state once it loads
+  // Store the Spotify player object and its device ID in state once it loads
   let () =
     React.useEffect0(() => {
       let () =
