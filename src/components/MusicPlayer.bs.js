@@ -174,7 +174,9 @@ function MusicPlayer(Props) {
         }), [spotifyPlayer]);
   if (spotifyPlayer !== undefined) {
     if (musicPlayer.trackInfo !== undefined) {
-      return React.createElement("div", undefined, React.createElement("h2", undefined, "Now Playing:"), React.createElement("div", {
+      return React.createElement("div", {
+                  className: "music-player-container"
+                }, React.createElement("h2", undefined, "Now Playing:"), React.createElement("div", {
                       className: "media-control-card-container"
                     }, React.createElement(make, {
                           songTitle: musicPlayer.currentTrack,

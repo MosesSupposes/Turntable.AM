@@ -196,7 +196,7 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
   | Some(player) =>
     switch (trackInfo) {
     | Some(info) =>
-      <div>
+      <div className="music-player-container">
         <h2> {React.string("Now Playing:")} </h2>
         <div className="media-control-card-container">
           <MediaControlCard
