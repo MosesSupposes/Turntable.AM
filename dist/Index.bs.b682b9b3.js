@@ -59057,7 +59057,9 @@ function MusicPlayer(Props) {
     if (musicPlayer.trackInfo !== undefined) {
       return React.createElement("div", {
         className: "music-player-container"
-      }, React.createElement("h2", undefined, "Now Playing:"), React.createElement("div", {
+      }, React.createElement("h2", {
+        className: "now-playing"
+      }, "Now Playing:"), React.createElement("div", {
         className: "media-control-card-container"
       }, React.createElement(make, {
         songTitle: musicPlayer.currentTrack,
