@@ -58784,7 +58784,8 @@ var useStyles = (0, _styles.makeStyles)(function (theme) {
       display: "flex",
       alignItems: "center",
       paddingLeft: theme.spacing(1),
-      paddingBottom: theme.spacing(1)
+      paddingBottom: theme.spacing(1),
+      cursor: "pointer"
     },
     playIcon: {
       height: 38,
