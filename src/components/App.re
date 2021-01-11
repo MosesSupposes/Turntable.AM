@@ -5,6 +5,8 @@ let make = () => {
   let {page, setPage}: UsePage.export = UsePage.make();
   let (accessToken, setAccessToken) = React.useState(() => None);
 
+  exception MissingAccessToken;
+
   let () =
     React.useEffect0(() => {
       let accessToken = ParseUrl.getAccessToken(document##location##href);
@@ -39,9 +41,12 @@ let make = () => {
                 Js.Promise.resolve();
               },
           )
-        | None =>
-          exception MissingAccessToken;
-          Js.Promise.reject(MissingAccessToken);
+        | None => Js.Promise.reject(MissingAccessToken)
+        };
+      let currentUser =
+        switch (accessToken) {
+        | Some(token) => SpotifyAPI.Profile.getCurrentUsersProfile(token)
+        | None => Js.Promise.reject(MissingAccessToken)
         };
       None;
     });

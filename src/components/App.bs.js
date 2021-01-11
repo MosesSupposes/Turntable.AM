@@ -17,6 +17,7 @@ function App(Props) {
         
       });
   var setAccessToken = match$1[1];
+  var MissingAccessToken = Caml_exceptions.create("MissingAccessToken");
   React.useEffect((function () {
           var accessToken = ParseUrl$Turntableam.getAccessToken(document.location.href);
           Curry._1(setAccessToken, (function (param) {
@@ -40,7 +41,13 @@ function App(Props) {
                     return Promise.resolve(undefined);
                   }));
           } else {
-            var MissingAccessToken = Caml_exceptions.create("MissingAccessToken");
+            Promise.reject({
+                  RE_EXN_ID: MissingAccessToken
+                });
+          }
+          if (accessToken !== undefined) {
+            SpotifyAPI$Turntableam.Profile.getCurrentUsersProfile(accessToken);
+          } else {
             Promise.reject({
                   RE_EXN_ID: MissingAccessToken
                 });

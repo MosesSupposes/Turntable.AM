@@ -39950,7 +39950,5204 @@ var _stringify = _interopRequireDefault(require("./stringify.js"));
 var _parse = _interopRequireDefault(require("./parse.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./v1.js":"../node_modules/uuid/dist/esm-browser/v1.js","./v3.js":"../node_modules/uuid/dist/esm-browser/v3.js","./v4.js":"../node_modules/uuid/dist/esm-browser/v4.js","./v5.js":"../node_modules/uuid/dist/esm-browser/v5.js","./nil.js":"../node_modules/uuid/dist/esm-browser/nil.js","./version.js":"../node_modules/uuid/dist/esm-browser/version.js","./validate.js":"../node_modules/uuid/dist/esm-browser/validate.js","./stringify.js":"../node_modules/uuid/dist/esm-browser/stringify.js","./parse.js":"../node_modules/uuid/dist/esm-browser/parse.js"}],"../node_modules/bs-axios/src/axios.bs.js":[function(require,module,exports) {
+},{"./v1.js":"../node_modules/uuid/dist/esm-browser/v1.js","./v3.js":"../node_modules/uuid/dist/esm-browser/v3.js","./v4.js":"../node_modules/uuid/dist/esm-browser/v4.js","./v5.js":"../node_modules/uuid/dist/esm-browser/v5.js","./nil.js":"../node_modules/uuid/dist/esm-browser/nil.js","./version.js":"../node_modules/uuid/dist/esm-browser/version.js","./validate.js":"../node_modules/uuid/dist/esm-browser/validate.js","./stringify.js":"../node_modules/uuid/dist/esm-browser/stringify.js","./parse.js":"../node_modules/uuid/dist/esm-browser/parse.js"}],"../node_modules/bs-platform/lib/es6/caml_oo.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.caml_get_public_method = caml_get_public_method;
+exports.caml_set_oo_id = caml_set_oo_id;
+
+var Caml_array = _interopRequireWildcard(require("./caml_array.js"));
+
+var Caml_exceptions = _interopRequireWildcard(require("./caml_exceptions.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var caml_methods_cache = Caml_array.caml_make_vect(1000, 0);
+
+function caml_set_oo_id(b) {
+  b[1] = Caml_exceptions.id.contents;
+  Caml_exceptions.id.contents = Caml_exceptions.id.contents + 1 | 0;
+  return b;
+}
+
+function caml_get_public_method(obj, tag, cacheid) {
+  var meths = obj[0];
+  var offs = caml_methods_cache[cacheid];
+
+  if (meths[offs] === tag) {
+    return meths[offs - 1 | 0];
+  }
+
+  var aux = function (_i) {
+    while (true) {
+      var i = _i;
+
+      if (i < 3) {
+        throw {
+          RE_EXN_ID: "Assert_failure",
+          _1: ["caml_oo.ml", 80, 20],
+          Error: new Error()
+        };
+      }
+
+      if (meths[i] === tag) {
+        caml_methods_cache[cacheid] = i;
+        return i;
+      }
+
+      _i = i - 2 | 0;
+      continue;
+    }
+
+    ;
+  };
+
+  return meths[aux((meths[0] << 1) + 1 | 0) - 1 | 0];
+}
+/* No side effect */
+},{"./caml_array.js":"../node_modules/bs-platform/lib/es6/caml_array.js","./caml_exceptions.js":"../node_modules/bs-platform/lib/es6/caml_exceptions.js"}],"../node_modules/bs-platform/lib/es6/js_int.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.equal = equal;
+exports.min = exports.max = void 0;
+
+function equal(x, y) {
+  return x === y;
+}
+
+var max = 2147483647;
+exports.max = max;
+var min = -2147483648;
+/* No side effect */
+
+exports.min = min;
+},{}],"../node_modules/bs-platform/lib/es6/js_math.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.unsafe_ceil = unsafe_ceil;
+exports.ceil_int = ceil_int;
+exports.unsafe_floor = unsafe_floor;
+exports.floor_int = floor_int;
+exports.random_int = random_int;
+exports.floor = exports.ceil = void 0;
+
+var Js_int = _interopRequireWildcard(require("./js_int.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function unsafe_ceil(prim) {
+  return Math.ceil(prim);
+}
+
+function ceil_int(f) {
+  if (f > Js_int.max) {
+    return Js_int.max;
+  } else if (f < Js_int.min) {
+    return Js_int.min;
+  } else {
+    return Math.ceil(f);
+  }
+}
+
+function unsafe_floor(prim) {
+  return Math.floor(prim);
+}
+
+function floor_int(f) {
+  if (f > Js_int.max) {
+    return Js_int.max;
+  } else if (f < Js_int.min) {
+    return Js_int.min;
+  } else {
+    return Math.floor(f);
+  }
+}
+
+function random_int(min, max) {
+  return floor_int(Math.random() * (max - min | 0)) + min | 0;
+}
+
+var ceil = ceil_int;
+exports.ceil = ceil;
+var floor = floor_int;
+/* No side effect */
+
+exports.floor = floor;
+},{"./js_int.js":"../node_modules/bs-platform/lib/es6/js_int.js"}],"../node_modules/bs-platform/lib/es6/belt_Array.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.get = get;
+exports.getExn = getExn;
+exports.set = set;
+exports.setExn = setExn;
+exports.shuffleInPlace = shuffleInPlace;
+exports.shuffle = shuffle;
+exports.reverseInPlace = reverseInPlace;
+exports.reverse = reverse;
+exports.make = make;
+exports.range = range;
+exports.rangeBy = rangeBy;
+exports.makeByU = makeByU;
+exports.makeBy = makeBy;
+exports.makeByAndShuffleU = makeByAndShuffleU;
+exports.makeByAndShuffle = makeByAndShuffle;
+exports.zip = zip;
+exports.zipByU = zipByU;
+exports.zipBy = zipBy;
+exports.unzip = unzip;
+exports.concat = concat;
+exports.concatMany = concatMany;
+exports.slice = slice;
+exports.sliceToEnd = sliceToEnd;
+exports.fill = fill;
+exports.blit = blit;
+exports.blitUnsafe = blitUnsafe;
+exports.forEachU = forEachU;
+exports.forEach = forEach;
+exports.mapU = mapU;
+exports.map = map;
+exports.getByU = getByU;
+exports.getBy = getBy;
+exports.getIndexByU = getIndexByU;
+exports.getIndexBy = getIndexBy;
+exports.keepU = keepU;
+exports.keep = keep;
+exports.keepWithIndexU = keepWithIndexU;
+exports.keepWithIndex = keepWithIndex;
+exports.keepMapU = keepMapU;
+exports.keepMap = keepMap;
+exports.forEachWithIndexU = forEachWithIndexU;
+exports.forEachWithIndex = forEachWithIndex;
+exports.mapWithIndexU = mapWithIndexU;
+exports.mapWithIndex = mapWithIndex;
+exports.partitionU = partitionU;
+exports.partition = partition;
+exports.reduceU = reduceU;
+exports.reduce = reduce;
+exports.reduceReverseU = reduceReverseU;
+exports.reduceReverse = reduceReverse;
+exports.reduceReverse2U = reduceReverse2U;
+exports.reduceReverse2 = reduceReverse2;
+exports.reduceWithIndexU = reduceWithIndexU;
+exports.reduceWithIndex = reduceWithIndex;
+exports.joinWithU = joinWithU;
+exports.joinWith = joinWith;
+exports.someU = someU;
+exports.some = some;
+exports.everyU = everyU;
+exports.every = every;
+exports.every2U = every2U;
+exports.every2 = every2;
+exports.some2U = some2U;
+exports.some2 = some2;
+exports.cmpU = cmpU;
+exports.cmp = cmp;
+exports.eqU = eqU;
+exports.eq = eq;
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Js_math = _interopRequireWildcard(require("./js_math.js"));
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+var Caml_primitive = _interopRequireWildcard(require("./caml_primitive.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function get(arr, i) {
+  if (i >= 0 && i < arr.length) {
+    return Caml_option.some(arr[i]);
+  }
+}
+
+function getExn(arr, i) {
+  if (!(i >= 0 && i < arr.length)) {
+    throw {
+      RE_EXN_ID: "Assert_failure",
+      _1: ["belt_Array.ml", 27, 4],
+      Error: new Error()
+    };
+  }
+
+  return arr[i];
+}
+
+function set(arr, i, v) {
+  if (i >= 0 && i < arr.length) {
+    arr[i] = v;
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function setExn(arr, i, v) {
+  if (!(i >= 0 && i < arr.length)) {
+    throw {
+      RE_EXN_ID: "Assert_failure",
+      _1: ["belt_Array.ml", 33, 2],
+      Error: new Error()
+    };
+  }
+
+  arr[i] = v;
+}
+
+function swapUnsafe(xs, i, j) {
+  var tmp = xs[i];
+  xs[i] = xs[j];
+  xs[j] = tmp;
+}
+
+function shuffleInPlace(xs) {
+  var len = xs.length;
+
+  for (var i = 0; i < len; ++i) {
+    swapUnsafe(xs, i, Js_math.random_int(i, len));
+  }
+}
+
+function shuffle(xs) {
+  var result = xs.slice(0);
+  shuffleInPlace(result);
+  return result;
+}
+
+function reverseInPlace(xs) {
+  var len = xs.length;
+  var ofs = 0;
+
+  for (var i = 0, i_finish = len / 2 | 0; i < i_finish; ++i) {
+    swapUnsafe(xs, ofs + i | 0, ((ofs + len | 0) - i | 0) - 1 | 0);
+  }
+}
+
+function reverse(xs) {
+  var len = xs.length;
+  var result = new Array(len);
+
+  for (var i = 0; i < len; ++i) {
+    result[i] = xs[(len - 1 | 0) - i | 0];
+  }
+
+  return result;
+}
+
+function make(l, f) {
+  if (l <= 0) {
+    return [];
+  }
+
+  var res = new Array(l);
+
+  for (var i = 0; i < l; ++i) {
+    res[i] = f;
+  }
+
+  return res;
+}
+
+function makeByU(l, f) {
+  if (l <= 0) {
+    return [];
+  }
+
+  var res = new Array(l);
+
+  for (var i = 0; i < l; ++i) {
+    res[i] = f(i);
+  }
+
+  return res;
+}
+
+function makeBy(l, f) {
+  return makeByU(l, Curry.__1(f));
+}
+
+function makeByAndShuffleU(l, f) {
+  var u = makeByU(l, f);
+  shuffleInPlace(u);
+  return u;
+}
+
+function makeByAndShuffle(l, f) {
+  return makeByAndShuffleU(l, Curry.__1(f));
+}
+
+function range(start, finish) {
+  var cut = finish - start | 0;
+
+  if (cut < 0) {
+    return [];
+  }
+
+  var arr = new Array(cut + 1 | 0);
+
+  for (var i = 0; i <= cut; ++i) {
+    arr[i] = start + i | 0;
+  }
+
+  return arr;
+}
+
+function rangeBy(start, finish, step) {
+  var cut = finish - start | 0;
+
+  if (cut < 0 || step <= 0) {
+    return [];
+  }
+
+  var nb = (cut / step | 0) + 1 | 0;
+  var arr = new Array(nb);
+  var cur = start;
+
+  for (var i = 0; i < nb; ++i) {
+    arr[i] = cur;
+    cur = cur + step | 0;
+  }
+
+  return arr;
+}
+
+function zip(xs, ys) {
+  var lenx = xs.length;
+  var leny = ys.length;
+  var len = lenx < leny ? lenx : leny;
+  var s = new Array(len);
+
+  for (var i = 0; i < len; ++i) {
+    s[i] = [xs[i], ys[i]];
+  }
+
+  return s;
+}
+
+function zipByU(xs, ys, f) {
+  var lenx = xs.length;
+  var leny = ys.length;
+  var len = lenx < leny ? lenx : leny;
+  var s = new Array(len);
+
+  for (var i = 0; i < len; ++i) {
+    s[i] = f(xs[i], ys[i]);
+  }
+
+  return s;
+}
+
+function zipBy(xs, ys, f) {
+  return zipByU(xs, ys, Curry.__2(f));
+}
+
+function concat(a1, a2) {
+  var l1 = a1.length;
+  var l2 = a2.length;
+  var a1a2 = new Array(l1 + l2 | 0);
+
+  for (var i = 0; i < l1; ++i) {
+    a1a2[i] = a1[i];
+  }
+
+  for (var i$1 = 0; i$1 < l2; ++i$1) {
+    a1a2[l1 + i$1 | 0] = a2[i$1];
+  }
+
+  return a1a2;
+}
+
+function concatMany(arrs) {
+  var lenArrs = arrs.length;
+  var totalLen = 0;
+
+  for (var i = 0; i < lenArrs; ++i) {
+    totalLen = totalLen + arrs[i].length | 0;
+  }
+
+  var result = new Array(totalLen);
+  totalLen = 0;
+
+  for (var j = 0; j < lenArrs; ++j) {
+    var cur = arrs[j];
+
+    for (var k = 0, k_finish = cur.length; k < k_finish; ++k) {
+      result[totalLen] = cur[k];
+      totalLen = totalLen + 1 | 0;
+    }
+  }
+
+  return result;
+}
+
+function slice(a, offset, len) {
+  if (len <= 0) {
+    return [];
+  }
+
+  var lena = a.length;
+  var ofs = offset < 0 ? Caml_primitive.caml_int_max(lena + offset | 0, 0) : offset;
+  var hasLen = lena - ofs | 0;
+  var copyLength = hasLen < len ? hasLen : len;
+
+  if (copyLength <= 0) {
+    return [];
+  }
+
+  var result = new Array(copyLength);
+
+  for (var i = 0; i < copyLength; ++i) {
+    result[i] = a[ofs + i | 0];
+  }
+
+  return result;
+}
+
+function sliceToEnd(a, offset) {
+  var lena = a.length;
+  var ofs = offset < 0 ? Caml_primitive.caml_int_max(lena + offset | 0, 0) : offset;
+  var len = lena - ofs | 0;
+  var result = new Array(len);
+
+  for (var i = 0; i < len; ++i) {
+    result[i] = a[ofs + i | 0];
+  }
+
+  return result;
+}
+
+function fill(a, offset, len, v) {
+  if (len <= 0) {
+    return;
+  }
+
+  var lena = a.length;
+  var ofs = offset < 0 ? Caml_primitive.caml_int_max(lena + offset | 0, 0) : offset;
+  var hasLen = lena - ofs | 0;
+  var fillLength = hasLen < len ? hasLen : len;
+
+  if (fillLength <= 0) {
+    return;
+  }
+
+  for (var i = ofs, i_finish = ofs + fillLength | 0; i < i_finish; ++i) {
+    a[i] = v;
+  }
+}
+
+function blitUnsafe(a1, srcofs1, a2, srcofs2, blitLength) {
+  if (srcofs2 <= srcofs1) {
+    for (var j = 0; j < blitLength; ++j) {
+      a2[j + srcofs2 | 0] = a1[j + srcofs1 | 0];
+    }
+
+    return;
+  }
+
+  for (var j$1 = blitLength - 1 | 0; j$1 >= 0; --j$1) {
+    a2[j$1 + srcofs2 | 0] = a1[j$1 + srcofs1 | 0];
+  }
+}
+
+function blit(a1, ofs1, a2, ofs2, len) {
+  var lena1 = a1.length;
+  var lena2 = a2.length;
+  var srcofs1 = ofs1 < 0 ? Caml_primitive.caml_int_max(lena1 + ofs1 | 0, 0) : ofs1;
+  var srcofs2 = ofs2 < 0 ? Caml_primitive.caml_int_max(lena2 + ofs2 | 0, 0) : ofs2;
+  var blitLength = Caml_primitive.caml_int_min(len, Caml_primitive.caml_int_min(lena1 - srcofs1 | 0, lena2 - srcofs2 | 0));
+
+  if (srcofs2 <= srcofs1) {
+    for (var j = 0; j < blitLength; ++j) {
+      a2[j + srcofs2 | 0] = a1[j + srcofs1 | 0];
+    }
+
+    return;
+  }
+
+  for (var j$1 = blitLength - 1 | 0; j$1 >= 0; --j$1) {
+    a2[j$1 + srcofs2 | 0] = a1[j$1 + srcofs1 | 0];
+  }
+}
+
+function forEachU(a, f) {
+  for (var i = 0, i_finish = a.length; i < i_finish; ++i) {
+    f(a[i]);
+  }
+}
+
+function forEach(a, f) {
+  return forEachU(a, Curry.__1(f));
+}
+
+function mapU(a, f) {
+  var l = a.length;
+  var r = new Array(l);
+
+  for (var i = 0; i < l; ++i) {
+    r[i] = f(a[i]);
+  }
+
+  return r;
+}
+
+function map(a, f) {
+  return mapU(a, Curry.__1(f));
+}
+
+function getByU(a, p) {
+  var l = a.length;
+  var i = 0;
+  var r;
+
+  while (r === undefined && i < l) {
+    var v = a[i];
+
+    if (p(v)) {
+      r = Caml_option.some(v);
+    }
+
+    i = i + 1 | 0;
+  }
+
+  ;
+  return r;
+}
+
+function getBy(a, p) {
+  return getByU(a, Curry.__1(p));
+}
+
+function getIndexByU(a, p) {
+  var l = a.length;
+  var i = 0;
+  var r;
+
+  while (r === undefined && i < l) {
+    var v = a[i];
+
+    if (p(v)) {
+      r = i;
+    }
+
+    i = i + 1 | 0;
+  }
+
+  ;
+  return r;
+}
+
+function getIndexBy(a, p) {
+  return getIndexByU(a, Curry.__1(p));
+}
+
+function keepU(a, f) {
+  var l = a.length;
+  var r = new Array(l);
+  var j = 0;
+
+  for (var i = 0; i < l; ++i) {
+    var v = a[i];
+
+    if (f(v)) {
+      r[j] = v;
+      j = j + 1 | 0;
+    }
+  }
+
+  r.length = j;
+  return r;
+}
+
+function keep(a, f) {
+  return keepU(a, Curry.__1(f));
+}
+
+function keepWithIndexU(a, f) {
+  var l = a.length;
+  var r = new Array(l);
+  var j = 0;
+
+  for (var i = 0; i < l; ++i) {
+    var v = a[i];
+
+    if (f(v, i)) {
+      r[j] = v;
+      j = j + 1 | 0;
+    }
+  }
+
+  r.length = j;
+  return r;
+}
+
+function keepWithIndex(a, f) {
+  return keepWithIndexU(a, Curry.__2(f));
+}
+
+function keepMapU(a, f) {
+  var l = a.length;
+  var r = new Array(l);
+  var j = 0;
+
+  for (var i = 0; i < l; ++i) {
+    var v = a[i];
+    var v$1 = f(v);
+
+    if (v$1 !== undefined) {
+      r[j] = Caml_option.valFromOption(v$1);
+      j = j + 1 | 0;
+    }
+  }
+
+  r.length = j;
+  return r;
+}
+
+function keepMap(a, f) {
+  return keepMapU(a, Curry.__1(f));
+}
+
+function forEachWithIndexU(a, f) {
+  for (var i = 0, i_finish = a.length; i < i_finish; ++i) {
+    f(i, a[i]);
+  }
+}
+
+function forEachWithIndex(a, f) {
+  return forEachWithIndexU(a, Curry.__2(f));
+}
+
+function mapWithIndexU(a, f) {
+  var l = a.length;
+  var r = new Array(l);
+
+  for (var i = 0; i < l; ++i) {
+    r[i] = f(i, a[i]);
+  }
+
+  return r;
+}
+
+function mapWithIndex(a, f) {
+  return mapWithIndexU(a, Curry.__2(f));
+}
+
+function reduceU(a, x, f) {
+  var r = x;
+
+  for (var i = 0, i_finish = a.length; i < i_finish; ++i) {
+    r = f(r, a[i]);
+  }
+
+  return r;
+}
+
+function reduce(a, x, f) {
+  return reduceU(a, x, Curry.__2(f));
+}
+
+function reduceReverseU(a, x, f) {
+  var r = x;
+
+  for (var i = a.length - 1 | 0; i >= 0; --i) {
+    r = f(r, a[i]);
+  }
+
+  return r;
+}
+
+function reduceReverse(a, x, f) {
+  return reduceReverseU(a, x, Curry.__2(f));
+}
+
+function reduceReverse2U(a, b, x, f) {
+  var r = x;
+  var len = Caml_primitive.caml_int_min(a.length, b.length);
+
+  for (var i = len - 1 | 0; i >= 0; --i) {
+    r = f(r, a[i], b[i]);
+  }
+
+  return r;
+}
+
+function reduceReverse2(a, b, x, f) {
+  return reduceReverse2U(a, b, x, Curry.__3(f));
+}
+
+function reduceWithIndexU(a, x, f) {
+  var r = x;
+
+  for (var i = 0, i_finish = a.length; i < i_finish; ++i) {
+    r = f(r, a[i], i);
+  }
+
+  return r;
+}
+
+function reduceWithIndex(a, x, f) {
+  return reduceWithIndexU(a, x, Curry.__3(f));
+}
+
+function everyU(arr, b) {
+  var len = arr.length;
+  var _i = 0;
+
+  while (true) {
+    var i = _i;
+
+    if (i === len) {
+      return true;
+    }
+
+    if (!b(arr[i])) {
+      return false;
+    }
+
+    _i = i + 1 | 0;
+    continue;
+  }
+
+  ;
+}
+
+function every(arr, f) {
+  return everyU(arr, Curry.__1(f));
+}
+
+function someU(arr, b) {
+  var len = arr.length;
+  var _i = 0;
+
+  while (true) {
+    var i = _i;
+
+    if (i === len) {
+      return false;
+    }
+
+    if (b(arr[i])) {
+      return true;
+    }
+
+    _i = i + 1 | 0;
+    continue;
+  }
+
+  ;
+}
+
+function some(arr, f) {
+  return someU(arr, Curry.__1(f));
+}
+
+function everyAux2(arr1, arr2, _i, b, len) {
+  while (true) {
+    var i = _i;
+
+    if (i === len) {
+      return true;
+    }
+
+    if (!b(arr1[i], arr2[i])) {
+      return false;
+    }
+
+    _i = i + 1 | 0;
+    continue;
+  }
+
+  ;
+}
+
+function every2U(a, b, p) {
+  return everyAux2(a, b, 0, p, Caml_primitive.caml_int_min(a.length, b.length));
+}
+
+function every2(a, b, p) {
+  return every2U(a, b, Curry.__2(p));
+}
+
+function some2U(a, b, p) {
+  var _i = 0;
+  var len = Caml_primitive.caml_int_min(a.length, b.length);
+
+  while (true) {
+    var i = _i;
+
+    if (i === len) {
+      return false;
+    }
+
+    if (p(a[i], b[i])) {
+      return true;
+    }
+
+    _i = i + 1 | 0;
+    continue;
+  }
+
+  ;
+}
+
+function some2(a, b, p) {
+  return some2U(a, b, Curry.__2(p));
+}
+
+function eqU(a, b, p) {
+  var lena = a.length;
+  var lenb = b.length;
+
+  if (lena === lenb) {
+    return everyAux2(a, b, 0, p, lena);
+  } else {
+    return false;
+  }
+}
+
+function eq(a, b, p) {
+  return eqU(a, b, Curry.__2(p));
+}
+
+function cmpU(a, b, p) {
+  var lena = a.length;
+  var lenb = b.length;
+
+  if (lena > lenb) {
+    return 1;
+  } else if (lena < lenb) {
+    return -1;
+  } else {
+    var _i = 0;
+
+    while (true) {
+      var i = _i;
+
+      if (i === lena) {
+        return 0;
+      }
+
+      var c = p(a[i], b[i]);
+
+      if (c !== 0) {
+        return c;
+      }
+
+      _i = i + 1 | 0;
+      continue;
+    }
+
+    ;
+  }
+}
+
+function cmp(a, b, p) {
+  return cmpU(a, b, Curry.__2(p));
+}
+
+function partitionU(a, f) {
+  var l = a.length;
+  var i = 0;
+  var j = 0;
+  var a1 = new Array(l);
+  var a2 = new Array(l);
+
+  for (var ii = 0; ii < l; ++ii) {
+    var v = a[ii];
+
+    if (f(v)) {
+      a1[i] = v;
+      i = i + 1 | 0;
+    } else {
+      a2[j] = v;
+      j = j + 1 | 0;
+    }
+  }
+
+  a1.length = i;
+  a2.length = j;
+  return [a1, a2];
+}
+
+function partition(a, f) {
+  return partitionU(a, Curry.__1(f));
+}
+
+function unzip(a) {
+  var l = a.length;
+  var a1 = new Array(l);
+  var a2 = new Array(l);
+
+  for (var i = 0; i < l; ++i) {
+    var match = a[i];
+    a1[i] = match[0];
+    a2[i] = match[1];
+  }
+
+  return [a1, a2];
+}
+
+function joinWithU(a, sep, toString) {
+  var l = a.length;
+
+  if (l === 0) {
+    return "";
+  }
+
+  var lastIndex = l - 1 | 0;
+  var _i = 0;
+  var _res = "";
+
+  while (true) {
+    var res = _res;
+    var i = _i;
+
+    if (i === lastIndex) {
+      return res + toString(a[i]);
+    }
+
+    _res = res + (toString(a[i]) + sep);
+    _i = i + 1 | 0;
+    continue;
+  }
+
+  ;
+}
+
+function joinWith(a, sep, toString) {
+  return joinWithU(a, sep, Curry.__1(toString));
+}
+/* No side effect */
+},{"./curry.js":"../node_modules/bs-platform/lib/es6/curry.js","./js_math.js":"../node_modules/bs-platform/lib/es6/js_math.js","./caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js","./caml_primitive.js":"../node_modules/bs-platform/lib/es6/caml_primitive.js"}],"../node_modules/bs-platform/lib/es6/belt_SortArray.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.strictlySortedLengthU = strictlySortedLengthU;
+exports.strictlySortedLength = strictlySortedLength;
+exports.isSortedU = isSortedU;
+exports.isSorted = isSorted;
+exports.stableSortInPlaceByU = stableSortInPlaceByU;
+exports.stableSortInPlaceBy = stableSortInPlaceBy;
+exports.stableSortByU = stableSortByU;
+exports.stableSortBy = stableSortBy;
+exports.binarySearchByU = binarySearchByU;
+exports.binarySearchBy = binarySearchBy;
+exports.unionU = unionU;
+exports.union = union;
+exports.intersectU = intersectU;
+exports.intersect = intersect;
+exports.diffU = diffU;
+exports.diff = diff;
+exports.$$String = exports.Int = void 0;
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Belt_Array = _interopRequireWildcard(require("./belt_Array.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function sortedLengthAuxMore(xs, _prec, _acc, len, lt) {
+  while (true) {
+    var acc = _acc;
+    var prec = _prec;
+
+    if (acc >= len) {
+      return acc;
+    }
+
+    var v = xs[acc];
+
+    if (!lt(v, prec)) {
+      return acc;
+    }
+
+    _acc = acc + 1 | 0;
+    _prec = v;
+    continue;
+  }
+
+  ;
+}
+
+function strictlySortedLengthU(xs, lt) {
+  var len = xs.length;
+
+  if (len === 0 || len === 1) {
+    return len;
+  }
+
+  var x0 = xs[0];
+  var x1 = xs[1];
+
+  if (lt(x0, x1)) {
+    var _prec = x1;
+    var _acc = 2;
+
+    while (true) {
+      var acc = _acc;
+      var prec = _prec;
+
+      if (acc >= len) {
+        return acc;
+      }
+
+      var v = xs[acc];
+
+      if (!lt(prec, v)) {
+        return acc;
+      }
+
+      _acc = acc + 1 | 0;
+      _prec = v;
+      continue;
+    }
+
+    ;
+  } else if (lt(x1, x0)) {
+    return -sortedLengthAuxMore(xs, x1, 2, len, lt) | 0;
+  } else {
+    return 1;
+  }
+}
+
+function strictlySortedLength(xs, lt) {
+  return strictlySortedLengthU(xs, Curry.__2(lt));
+}
+
+function isSortedU(a, cmp) {
+  var len = a.length;
+
+  if (len === 0) {
+    return true;
+  } else {
+    var _i = 0;
+    var last_bound = len - 1 | 0;
+
+    while (true) {
+      var i = _i;
+
+      if (i === last_bound) {
+        return true;
+      }
+
+      if (cmp(a[i], a[i + 1 | 0]) > 0) {
+        return false;
+      }
+
+      _i = i + 1 | 0;
+      continue;
+    }
+
+    ;
+  }
+}
+
+function isSorted(a, cmp) {
+  return isSortedU(a, Curry.__2(cmp));
+}
+
+function merge(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  var src1r = src1ofs + src1len | 0;
+  var src2r = src2ofs + src2len | 0;
+  var _i1 = src1ofs;
+  var _s1 = src[src1ofs];
+  var _i2 = src2ofs;
+  var _s2 = src2[src2ofs];
+  var _d = dstofs;
+
+  while (true) {
+    var d = _d;
+    var s2 = _s2;
+    var i2 = _i2;
+    var s1 = _s1;
+    var i1 = _i1;
+
+    if (cmp(s1, s2) <= 0) {
+      dst[d] = s1;
+      var i1$1 = i1 + 1 | 0;
+
+      if (i1$1 >= src1r) {
+        return Belt_Array.blitUnsafe(src2, i2, dst, d + 1 | 0, src2r - i2 | 0);
+      }
+
+      _d = d + 1 | 0;
+      _s1 = src[i1$1];
+      _i1 = i1$1;
+      continue;
+    }
+
+    dst[d] = s2;
+    var i2$1 = i2 + 1 | 0;
+
+    if (i2$1 >= src2r) {
+      return Belt_Array.blitUnsafe(src, i1, dst, d + 1 | 0, src1r - i1 | 0);
+    }
+
+    _d = d + 1 | 0;
+    _s2 = src2[i2$1];
+    _i2 = i2$1;
+    continue;
+  }
+
+  ;
+}
+
+function unionU(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  var src1r = src1ofs + src1len | 0;
+  var src2r = src2ofs + src2len | 0;
+  var _i1 = src1ofs;
+  var _s1 = src[src1ofs];
+  var _i2 = src2ofs;
+  var _s2 = src2[src2ofs];
+  var _d = dstofs;
+
+  while (true) {
+    var d = _d;
+    var s2 = _s2;
+    var i2 = _i2;
+    var s1 = _s1;
+    var i1 = _i1;
+    var c = cmp(s1, s2);
+
+    if (c < 0) {
+      dst[d] = s1;
+      var i1$1 = i1 + 1 | 0;
+      var d$1 = d + 1 | 0;
+
+      if (i1$1 < src1r) {
+        _d = d$1;
+        _s1 = src[i1$1];
+        _i1 = i1$1;
+        continue;
+      }
+
+      Belt_Array.blitUnsafe(src2, i2, dst, d$1, src2r - i2 | 0);
+      return (d$1 + src2r | 0) - i2 | 0;
+    }
+
+    if (c === 0) {
+      dst[d] = s1;
+      var i1$2 = i1 + 1 | 0;
+      var i2$1 = i2 + 1 | 0;
+      var d$2 = d + 1 | 0;
+
+      if (!(i1$2 < src1r && i2$1 < src2r)) {
+        if (i1$2 === src1r) {
+          Belt_Array.blitUnsafe(src2, i2$1, dst, d$2, src2r - i2$1 | 0);
+          return (d$2 + src2r | 0) - i2$1 | 0;
+        } else {
+          Belt_Array.blitUnsafe(src, i1$2, dst, d$2, src1r - i1$2 | 0);
+          return (d$2 + src1r | 0) - i1$2 | 0;
+        }
+      }
+
+      _d = d$2;
+      _s2 = src2[i2$1];
+      _i2 = i2$1;
+      _s1 = src[i1$2];
+      _i1 = i1$2;
+      continue;
+    }
+
+    dst[d] = s2;
+    var i2$2 = i2 + 1 | 0;
+    var d$3 = d + 1 | 0;
+
+    if (i2$2 < src2r) {
+      _d = d$3;
+      _s2 = src2[i2$2];
+      _i2 = i2$2;
+      continue;
+    }
+
+    Belt_Array.blitUnsafe(src, i1, dst, d$3, src1r - i1 | 0);
+    return (d$3 + src1r | 0) - i1 | 0;
+  }
+
+  ;
+}
+
+function union(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  return unionU(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, Curry.__2(cmp));
+}
+
+function intersectU(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  var src1r = src1ofs + src1len | 0;
+  var src2r = src2ofs + src2len | 0;
+  var _i1 = src1ofs;
+  var _s1 = src[src1ofs];
+  var _i2 = src2ofs;
+  var _s2 = src2[src2ofs];
+  var _d = dstofs;
+
+  while (true) {
+    var d = _d;
+    var s2 = _s2;
+    var i2 = _i2;
+    var s1 = _s1;
+    var i1 = _i1;
+    var c = cmp(s1, s2);
+
+    if (c < 0) {
+      var i1$1 = i1 + 1 | 0;
+
+      if (i1$1 >= src1r) {
+        return d;
+      }
+
+      _s1 = src[i1$1];
+      _i1 = i1$1;
+      continue;
+    }
+
+    if (c === 0) {
+      dst[d] = s1;
+      var i1$2 = i1 + 1 | 0;
+      var i2$1 = i2 + 1 | 0;
+      var d$1 = d + 1 | 0;
+
+      if (!(i1$2 < src1r && i2$1 < src2r)) {
+        return d$1;
+      }
+
+      _d = d$1;
+      _s2 = src2[i2$1];
+      _i2 = i2$1;
+      _s1 = src[i1$2];
+      _i1 = i1$2;
+      continue;
+    }
+
+    var i2$2 = i2 + 1 | 0;
+
+    if (i2$2 >= src2r) {
+      return d;
+    }
+
+    _s2 = src2[i2$2];
+    _i2 = i2$2;
+    continue;
+  }
+
+  ;
+}
+
+function intersect(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  return intersectU(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, Curry.__2(cmp));
+}
+
+function diffU(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  var src1r = src1ofs + src1len | 0;
+  var src2r = src2ofs + src2len | 0;
+  var _i1 = src1ofs;
+  var _s1 = src[src1ofs];
+  var _i2 = src2ofs;
+  var _s2 = src2[src2ofs];
+  var _d = dstofs;
+
+  while (true) {
+    var d = _d;
+    var s2 = _s2;
+    var i2 = _i2;
+    var s1 = _s1;
+    var i1 = _i1;
+    var c = cmp(s1, s2);
+
+    if (c < 0) {
+      dst[d] = s1;
+      var d$1 = d + 1 | 0;
+      var i1$1 = i1 + 1 | 0;
+
+      if (i1$1 >= src1r) {
+        return d$1;
+      }
+
+      _d = d$1;
+      _s1 = src[i1$1];
+      _i1 = i1$1;
+      continue;
+    }
+
+    if (c === 0) {
+      var i1$2 = i1 + 1 | 0;
+      var i2$1 = i2 + 1 | 0;
+
+      if (!(i1$2 < src1r && i2$1 < src2r)) {
+        if (i1$2 === src1r) {
+          return d;
+        } else {
+          Belt_Array.blitUnsafe(src, i1$2, dst, d, src1r - i1$2 | 0);
+          return (d + src1r | 0) - i1$2 | 0;
+        }
+      }
+
+      _s2 = src2[i2$1];
+      _i2 = i2$1;
+      _s1 = src[i1$2];
+      _i1 = i1$2;
+      continue;
+    }
+
+    var i2$2 = i2 + 1 | 0;
+
+    if (i2$2 < src2r) {
+      _s2 = src2[i2$2];
+      _i2 = i2$2;
+      continue;
+    }
+
+    Belt_Array.blitUnsafe(src, i1, dst, d, src1r - i1 | 0);
+    return (d + src1r | 0) - i1 | 0;
+  }
+
+  ;
+}
+
+function diff(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, cmp) {
+  return diffU(src, src1ofs, src1len, src2, src2ofs, src2len, dst, dstofs, Curry.__2(cmp));
+}
+
+function insertionSort(src, srcofs, dst, dstofs, len, cmp) {
+  for (var i = 0; i < len; ++i) {
+    var e = src[srcofs + i | 0];
+    var j = (dstofs + i | 0) - 1 | 0;
+
+    while (j >= dstofs && cmp(dst[j], e) > 0) {
+      dst[j + 1 | 0] = dst[j];
+      j = j - 1 | 0;
+    }
+
+    ;
+    dst[j + 1 | 0] = e;
+  }
+}
+
+function sortTo(src, srcofs, dst, dstofs, len, cmp) {
+  if (len <= 5) {
+    return insertionSort(src, srcofs, dst, dstofs, len, cmp);
+  }
+
+  var l1 = len / 2 | 0;
+  var l2 = len - l1 | 0;
+  sortTo(src, srcofs + l1 | 0, dst, dstofs + l1 | 0, l2, cmp);
+  sortTo(src, srcofs, src, srcofs + l2 | 0, l1, cmp);
+  return merge(src, srcofs + l2 | 0, l1, dst, dstofs + l1 | 0, l2, dst, dstofs, cmp);
+}
+
+function stableSortInPlaceByU(a, cmp) {
+  var l = a.length;
+
+  if (l <= 5) {
+    return insertionSort(a, 0, a, 0, l, cmp);
+  }
+
+  var l1 = l / 2 | 0;
+  var l2 = l - l1 | 0;
+  var t = new Array(l2);
+  sortTo(a, l1, t, 0, l2, cmp);
+  sortTo(a, 0, a, l2, l1, cmp);
+  return merge(a, l2, l1, t, 0, l2, a, 0, cmp);
+}
+
+function stableSortInPlaceBy(a, cmp) {
+  return stableSortInPlaceByU(a, Curry.__2(cmp));
+}
+
+function stableSortByU(a, cmp) {
+  var b = a.slice(0);
+  stableSortInPlaceByU(b, cmp);
+  return b;
+}
+
+function stableSortBy(a, cmp) {
+  return stableSortByU(a, Curry.__2(cmp));
+}
+
+function binarySearchByU(sorted, key, cmp) {
+  var len = sorted.length;
+
+  if (len === 0) {
+    return -1;
+  }
+
+  var lo = sorted[0];
+  var c = cmp(key, lo);
+
+  if (c < 0) {
+    return -1;
+  }
+
+  var hi = sorted[len - 1 | 0];
+  var c2 = cmp(key, hi);
+
+  if (c2 > 0) {
+    return -(len + 1 | 0) | 0;
+  } else {
+    var _lo = 0;
+
+    var _hi = len - 1 | 0;
+
+    while (true) {
+      var hi$1 = _hi;
+      var lo$1 = _lo;
+      var mid = (lo$1 + hi$1 | 0) / 2 | 0;
+      var midVal = sorted[mid];
+      var c$1 = cmp(key, midVal);
+
+      if (c$1 === 0) {
+        return mid;
+      }
+
+      if (c$1 < 0) {
+        if (hi$1 === mid) {
+          if (cmp(sorted[lo$1], key) === 0) {
+            return lo$1;
+          } else {
+            return -(hi$1 + 1 | 0) | 0;
+          }
+        }
+
+        _hi = mid;
+        continue;
+      }
+
+      if (lo$1 === mid) {
+        if (cmp(sorted[hi$1], key) === 0) {
+          return hi$1;
+        } else {
+          return -(hi$1 + 1 | 0) | 0;
+        }
+      }
+
+      _lo = mid;
+      continue;
+    }
+
+    ;
+  }
+}
+
+function binarySearchBy(sorted, key, cmp) {
+  return binarySearchByU(sorted, key, Curry.__2(cmp));
+}
+
+var Int;
+exports.Int = Int;
+var $$String;
+/* No side effect */
+
+exports.$$String = $$String;
+},{"./curry.js":"../node_modules/bs-platform/lib/es6/curry.js","./belt_Array.js":"../node_modules/bs-platform/lib/es6/belt_Array.js"}],"../node_modules/bs-platform/lib/es6/belt_internalAVLtree.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.copy = copy;
+exports.create = create;
+exports.bal = bal;
+exports.singleton = singleton;
+exports.updateValue = updateValue;
+exports.minKey = minKey;
+exports.minKeyUndefined = minKeyUndefined;
+exports.maxKey = maxKey;
+exports.maxKeyUndefined = maxKeyUndefined;
+exports.minimum = minimum;
+exports.minUndefined = minUndefined;
+exports.maximum = maximum;
+exports.maxUndefined = maxUndefined;
+exports.removeMinAuxWithRef = removeMinAuxWithRef;
+exports.isEmpty = isEmpty;
+exports.stackAllLeft = stackAllLeft;
+exports.findFirstByU = findFirstByU;
+exports.findFirstBy = findFirstBy;
+exports.forEachU = forEachU;
+exports.forEach = forEach;
+exports.mapU = mapU;
+exports.map = map;
+exports.mapWithKeyU = mapWithKeyU;
+exports.mapWithKey = mapWithKey;
+exports.reduceU = reduceU;
+exports.reduce = reduce;
+exports.everyU = everyU;
+exports.every = every;
+exports.someU = someU;
+exports.some = some;
+exports.join = join;
+exports.concat = concat;
+exports.concatOrJoin = concatOrJoin;
+exports.keepSharedU = keepSharedU;
+exports.keepShared = keepShared;
+exports.keepMapU = keepMapU;
+exports.keepMap = keepMap;
+exports.partitionSharedU = partitionSharedU;
+exports.partitionShared = partitionShared;
+exports.lengthNode = lengthNode;
+exports.size = size;
+exports.toList = toList;
+exports.checkInvariantInternal = checkInvariantInternal;
+exports.fillArray = fillArray;
+exports.toArray = toArray;
+exports.keysToArray = keysToArray;
+exports.valuesToArray = valuesToArray;
+exports.fromSortedArrayAux = fromSortedArrayAux;
+exports.fromSortedArrayRevAux = fromSortedArrayRevAux;
+exports.fromSortedArrayUnsafe = fromSortedArrayUnsafe;
+exports.cmpU = cmpU;
+exports.cmp = cmp;
+exports.eqU = eqU;
+exports.eq = eq;
+exports.get = get;
+exports.getUndefined = getUndefined;
+exports.getWithDefault = getWithDefault;
+exports.getExn = getExn;
+exports.has = has;
+exports.fromArray = fromArray;
+exports.updateMutate = updateMutate;
+exports.balMutate = balMutate;
+exports.removeMinAuxWithRootMutate = removeMinAuxWithRootMutate;
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+var Belt_SortArray = _interopRequireWildcard(require("./belt_SortArray.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function treeHeight(n) {
+  if (n !== undefined) {
+    return n.h;
+  } else {
+    return 0;
+  }
+}
+
+function copy(n) {
+  if (n !== undefined) {
+    return {
+      k: n.k,
+      v: n.v,
+      h: n.h,
+      l: copy(n.l),
+      r: copy(n.r)
+    };
+  } else {
+    return n;
+  }
+}
+
+function create(l, x, d, r) {
+  var hl = treeHeight(l);
+  var hr = treeHeight(r);
+  return {
+    k: x,
+    v: d,
+    h: hl >= hr ? hl + 1 | 0 : hr + 1 | 0,
+    l: l,
+    r: r
+  };
+}
+
+function singleton(x, d) {
+  return {
+    k: x,
+    v: d,
+    h: 1,
+    l: undefined,
+    r: undefined
+  };
+}
+
+function heightGe(l, r) {
+  if (r !== undefined) {
+    if (l !== undefined) {
+      return l.h >= r.h;
+    } else {
+      return false;
+    }
+  } else {
+    return true;
+  }
+}
+
+function updateValue(n, newValue) {
+  if (n.v === newValue) {
+    return n;
+  } else {
+    return {
+      k: n.k,
+      v: newValue,
+      h: n.h,
+      l: n.l,
+      r: n.r
+    };
+  }
+}
+
+function bal(l, x, d, r) {
+  var hl = l !== undefined ? l.h : 0;
+  var hr = r !== undefined ? r.h : 0;
+
+  if (hl > (hr + 2 | 0)) {
+    var ll = l.l;
+    var lr = l.r;
+
+    if (treeHeight(ll) >= treeHeight(lr)) {
+      return create(ll, l.k, l.v, create(lr, x, d, r));
+    } else {
+      return create(create(ll, l.k, l.v, lr.l), lr.k, lr.v, create(lr.r, x, d, r));
+    }
+  }
+
+  if (hr <= (hl + 2 | 0)) {
+    return {
+      k: x,
+      v: d,
+      h: hl >= hr ? hl + 1 | 0 : hr + 1 | 0,
+      l: l,
+      r: r
+    };
+  }
+
+  var rl = r.l;
+  var rr = r.r;
+
+  if (treeHeight(rr) >= treeHeight(rl)) {
+    return create(create(l, x, d, rl), r.k, r.v, rr);
+  } else {
+    return create(create(l, x, d, rl.l), rl.k, rl.v, create(rl.r, r.k, r.v, rr));
+  }
+}
+
+function minKey0Aux(_n) {
+  while (true) {
+    var n = _n;
+    var n$1 = n.l;
+
+    if (n$1 === undefined) {
+      return n.k;
+    }
+
+    _n = n$1;
+    continue;
+  }
+
+  ;
+}
+
+function minKey(n) {
+  if (n !== undefined) {
+    return Caml_option.some(minKey0Aux(n));
+  }
+}
+
+function minKeyUndefined(n) {
+  if (n !== undefined) {
+    return minKey0Aux(n);
+  }
+}
+
+function maxKey0Aux(_n) {
+  while (true) {
+    var n = _n;
+    var n$1 = n.r;
+
+    if (n$1 === undefined) {
+      return n.k;
+    }
+
+    _n = n$1;
+    continue;
+  }
+
+  ;
+}
+
+function maxKey(n) {
+  if (n !== undefined) {
+    return Caml_option.some(maxKey0Aux(n));
+  }
+}
+
+function maxKeyUndefined(n) {
+  if (n !== undefined) {
+    return maxKey0Aux(n);
+  }
+}
+
+function minKV0Aux(_n) {
+  while (true) {
+    var n = _n;
+    var n$1 = n.l;
+
+    if (n$1 === undefined) {
+      return [n.k, n.v];
+    }
+
+    _n = n$1;
+    continue;
+  }
+
+  ;
+}
+
+function minimum(n) {
+  if (n !== undefined) {
+    return minKV0Aux(n);
+  }
+}
+
+function minUndefined(n) {
+  if (n !== undefined) {
+    return minKV0Aux(n);
+  }
+}
+
+function maxKV0Aux(_n) {
+  while (true) {
+    var n = _n;
+    var n$1 = n.r;
+
+    if (n$1 === undefined) {
+      return [n.k, n.v];
+    }
+
+    _n = n$1;
+    continue;
+  }
+
+  ;
+}
+
+function maximum(n) {
+  if (n !== undefined) {
+    return maxKV0Aux(n);
+  }
+}
+
+function maxUndefined(n) {
+  if (n !== undefined) {
+    return maxKV0Aux(n);
+  }
+}
+
+function removeMinAuxWithRef(n, kr, vr) {
+  var ln = n.l;
+
+  if (ln !== undefined) {
+    return bal(removeMinAuxWithRef(ln, kr, vr), n.k, n.v, n.r);
+  } else {
+    kr.contents = n.k;
+    vr.contents = n.v;
+    return n.r;
+  }
+}
+
+function isEmpty(x) {
+  return x === undefined;
+}
+
+function stackAllLeft(_v, _s) {
+  while (true) {
+    var s = _s;
+    var v = _v;
+
+    if (v === undefined) {
+      return s;
+    }
+
+    _s = {
+      hd: v,
+      tl: s
+    };
+    _v = v.l;
+    continue;
+  }
+
+  ;
+}
+
+function findFirstByU(n, p) {
+  if (n === undefined) {
+    return;
+  }
+
+  var left = findFirstByU(n.l, p);
+
+  if (left !== undefined) {
+    return left;
+  }
+
+  var v = n.k;
+  var d = n.v;
+  var pvd = p(v, d);
+
+  if (pvd) {
+    return [v, d];
+  }
+
+  var right = findFirstByU(n.r, p);
+
+  if (right !== undefined) {
+    return right;
+  }
+}
+
+function findFirstBy(n, p) {
+  return findFirstByU(n, Curry.__2(p));
+}
+
+function forEachU(_n, f) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return;
+    }
+
+    forEachU(n.l, f);
+    f(n.k, n.v);
+    _n = n.r;
+    continue;
+  }
+
+  ;
+}
+
+function forEach(n, f) {
+  return forEachU(n, Curry.__2(f));
+}
+
+function mapU(n, f) {
+  if (n === undefined) {
+    return;
+  }
+
+  var newLeft = mapU(n.l, f);
+  var newD = f(n.v);
+  var newRight = mapU(n.r, f);
+  return {
+    k: n.k,
+    v: newD,
+    h: n.h,
+    l: newLeft,
+    r: newRight
+  };
+}
+
+function map(n, f) {
+  return mapU(n, Curry.__1(f));
+}
+
+function mapWithKeyU(n, f) {
+  if (n === undefined) {
+    return;
+  }
+
+  var key = n.k;
+  var newLeft = mapWithKeyU(n.l, f);
+  var newD = f(key, n.v);
+  var newRight = mapWithKeyU(n.r, f);
+  return {
+    k: key,
+    v: newD,
+    h: n.h,
+    l: newLeft,
+    r: newRight
+  };
+}
+
+function mapWithKey(n, f) {
+  return mapWithKeyU(n, Curry.__2(f));
+}
+
+function reduceU(_m, _accu, f) {
+  while (true) {
+    var accu = _accu;
+    var m = _m;
+
+    if (m === undefined) {
+      return accu;
+    }
+
+    var v = m.k;
+    var d = m.v;
+    var l = m.l;
+    var r = m.r;
+    _accu = f(reduceU(l, accu, f), v, d);
+    _m = r;
+    continue;
+  }
+
+  ;
+}
+
+function reduce(m, accu, f) {
+  return reduceU(m, accu, Curry.__3(f));
+}
+
+function everyU(_n, p) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return true;
+    }
+
+    if (!p(n.k, n.v)) {
+      return false;
+    }
+
+    if (!everyU(n.l, p)) {
+      return false;
+    }
+
+    _n = n.r;
+    continue;
+  }
+
+  ;
+}
+
+function every(n, p) {
+  return everyU(n, Curry.__2(p));
+}
+
+function someU(_n, p) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return false;
+    }
+
+    if (p(n.k, n.v)) {
+      return true;
+    }
+
+    if (someU(n.l, p)) {
+      return true;
+    }
+
+    _n = n.r;
+    continue;
+  }
+
+  ;
+}
+
+function some(n, p) {
+  return someU(n, Curry.__2(p));
+}
+
+function addMinElement(n, k, v) {
+  if (n !== undefined) {
+    return bal(addMinElement(n.l, k, v), n.k, n.v, n.r);
+  } else {
+    return singleton(k, v);
+  }
+}
+
+function addMaxElement(n, k, v) {
+  if (n !== undefined) {
+    return bal(n.l, n.k, n.v, addMaxElement(n.r, k, v));
+  } else {
+    return singleton(k, v);
+  }
+}
+
+function join(ln, v, d, rn) {
+  if (ln === undefined) {
+    return addMinElement(rn, v, d);
+  }
+
+  if (rn === undefined) {
+    return addMaxElement(ln, v, d);
+  }
+
+  var lv = ln.k;
+  var ld = ln.v;
+  var lh = ln.h;
+  var ll = ln.l;
+  var lr = ln.r;
+  var rv = rn.k;
+  var rd = rn.v;
+  var rh = rn.h;
+  var rl = rn.l;
+  var rr = rn.r;
+
+  if (lh > (rh + 2 | 0)) {
+    return bal(ll, lv, ld, join(lr, v, d, rn));
+  } else if (rh > (lh + 2 | 0)) {
+    return bal(join(ln, v, d, rl), rv, rd, rr);
+  } else {
+    return create(ln, v, d, rn);
+  }
+}
+
+function concat(t1, t2) {
+  if (t1 === undefined) {
+    return t2;
+  }
+
+  if (t2 === undefined) {
+    return t1;
+  }
+
+  var kr = {
+    contents: t2.k
+  };
+  var vr = {
+    contents: t2.v
+  };
+  var t2r = removeMinAuxWithRef(t2, kr, vr);
+  return join(t1, kr.contents, vr.contents, t2r);
+}
+
+function concatOrJoin(t1, v, d, t2) {
+  if (d !== undefined) {
+    return join(t1, v, Caml_option.valFromOption(d), t2);
+  } else {
+    return concat(t1, t2);
+  }
+}
+
+function keepSharedU(n, p) {
+  if (n === undefined) {
+    return;
+  }
+
+  var v = n.k;
+  var d = n.v;
+  var newLeft = keepSharedU(n.l, p);
+  var pvd = p(v, d);
+  var newRight = keepSharedU(n.r, p);
+
+  if (pvd) {
+    return join(newLeft, v, d, newRight);
+  } else {
+    return concat(newLeft, newRight);
+  }
+}
+
+function keepShared(n, p) {
+  return keepSharedU(n, Curry.__2(p));
+}
+
+function keepMapU(n, p) {
+  if (n === undefined) {
+    return;
+  }
+
+  var v = n.k;
+  var d = n.v;
+  var newLeft = keepMapU(n.l, p);
+  var pvd = p(v, d);
+  var newRight = keepMapU(n.r, p);
+
+  if (pvd !== undefined) {
+    return join(newLeft, v, Caml_option.valFromOption(pvd), newRight);
+  } else {
+    return concat(newLeft, newRight);
+  }
+}
+
+function keepMap(n, p) {
+  return keepMapU(n, Curry.__2(p));
+}
+
+function partitionSharedU(n, p) {
+  if (n === undefined) {
+    return [undefined, undefined];
+  }
+
+  var key = n.k;
+  var value = n.v;
+  var match = partitionSharedU(n.l, p);
+  var lf = match[1];
+  var lt = match[0];
+  var pvd = p(key, value);
+  var match$1 = partitionSharedU(n.r, p);
+  var rf = match$1[1];
+  var rt = match$1[0];
+
+  if (pvd) {
+    return [join(lt, key, value, rt), concat(lf, rf)];
+  } else {
+    return [concat(lt, rt), join(lf, key, value, rf)];
+  }
+}
+
+function partitionShared(n, p) {
+  return partitionSharedU(n, Curry.__2(p));
+}
+
+function lengthNode(n) {
+  var l = n.l;
+  var r = n.r;
+  var sizeL = l !== undefined ? lengthNode(l) : 0;
+  var sizeR = r !== undefined ? lengthNode(r) : 0;
+  return (1 + sizeL | 0) + sizeR | 0;
+}
+
+function size(n) {
+  if (n !== undefined) {
+    return lengthNode(n);
+  } else {
+    return 0;
+  }
+}
+
+function toListAux(_n, _accu) {
+  while (true) {
+    var accu = _accu;
+    var n = _n;
+
+    if (n === undefined) {
+      return accu;
+    }
+
+    var k = n.k;
+    var v = n.v;
+    var l = n.l;
+    var r = n.r;
+    _accu = {
+      hd: [k, v],
+      tl: toListAux(r, accu)
+    };
+    _n = l;
+    continue;
+  }
+
+  ;
+}
+
+function toList(s) {
+  return toListAux(s,
+  /* [] */
+  0);
+}
+
+function checkInvariantInternal(_v) {
+  while (true) {
+    var v = _v;
+
+    if (v === undefined) {
+      return;
+    }
+
+    var l = v.l;
+    var r = v.r;
+    var diff = treeHeight(l) - treeHeight(r) | 0;
+
+    if (!(diff <= 2 && diff >= -2)) {
+      throw {
+        RE_EXN_ID: "Assert_failure",
+        _1: ["belt_internalAVLtree.ml", 373, 4],
+        Error: new Error()
+      };
+    }
+
+    checkInvariantInternal(l);
+    _v = r;
+    continue;
+  }
+
+  ;
+}
+
+function fillArrayKey(_n, _i, arr) {
+  while (true) {
+    var i = _i;
+    var n = _n;
+    var v = n.k;
+    var l = n.l;
+    var r = n.r;
+    var next = l !== undefined ? fillArrayKey(l, i, arr) : i;
+    arr[next] = v;
+    var rnext = next + 1 | 0;
+
+    if (r === undefined) {
+      return rnext;
+    }
+
+    _i = rnext;
+    _n = r;
+    continue;
+  }
+
+  ;
+}
+
+function fillArrayValue(_n, _i, arr) {
+  while (true) {
+    var i = _i;
+    var n = _n;
+    var l = n.l;
+    var r = n.r;
+    var next = l !== undefined ? fillArrayValue(l, i, arr) : i;
+    arr[next] = n.v;
+    var rnext = next + 1 | 0;
+
+    if (r === undefined) {
+      return rnext;
+    }
+
+    _i = rnext;
+    _n = r;
+    continue;
+  }
+
+  ;
+}
+
+function fillArray(_n, _i, arr) {
+  while (true) {
+    var i = _i;
+    var n = _n;
+    var l = n.l;
+    var v = n.k;
+    var r = n.r;
+    var next = l !== undefined ? fillArray(l, i, arr) : i;
+    arr[next] = [v, n.v];
+    var rnext = next + 1 | 0;
+
+    if (r === undefined) {
+      return rnext;
+    }
+
+    _i = rnext;
+    _n = r;
+    continue;
+  }
+
+  ;
+}
+
+function toArray(n) {
+  if (n === undefined) {
+    return [];
+  }
+
+  var size = lengthNode(n);
+  var v = new Array(size);
+  fillArray(n, 0, v);
+  return v;
+}
+
+function keysToArray(n) {
+  if (n === undefined) {
+    return [];
+  }
+
+  var size = lengthNode(n);
+  var v = new Array(size);
+  fillArrayKey(n, 0, v);
+  return v;
+}
+
+function valuesToArray(n) {
+  if (n === undefined) {
+    return [];
+  }
+
+  var size = lengthNode(n);
+  var v = new Array(size);
+  fillArrayValue(n, 0, v);
+  return v;
+}
+
+function fromSortedArrayRevAux(arr, off, len) {
+  switch (len) {
+    case 0:
+      return;
+
+    case 1:
+      var match = arr[off];
+      return singleton(match[0], match[1]);
+
+    case 2:
+      var match_0 = arr[off];
+      var match_1 = arr[off - 1 | 0];
+      var match$1 = match_1;
+      var match$2 = match_0;
+      return {
+        k: match$1[0],
+        v: match$1[1],
+        h: 2,
+        l: singleton(match$2[0], match$2[1]),
+        r: undefined
+      };
+
+    case 3:
+      var match_0$1 = arr[off];
+      var match_1$1 = arr[off - 1 | 0];
+      var match_2 = arr[off - 2 | 0];
+      var match$3 = match_2;
+      var match$4 = match_1$1;
+      var match$5 = match_0$1;
+      return {
+        k: match$4[0],
+        v: match$4[1],
+        h: 2,
+        l: singleton(match$5[0], match$5[1]),
+        r: singleton(match$3[0], match$3[1])
+      };
+
+    default:
+      var nl = len / 2 | 0;
+      var left = fromSortedArrayRevAux(arr, off, nl);
+      var match$6 = arr[off - nl | 0];
+      var right = fromSortedArrayRevAux(arr, (off - nl | 0) - 1 | 0, (len - nl | 0) - 1 | 0);
+      return create(left, match$6[0], match$6[1], right);
+  }
+}
+
+function fromSortedArrayAux(arr, off, len) {
+  switch (len) {
+    case 0:
+      return;
+
+    case 1:
+      var match = arr[off];
+      return singleton(match[0], match[1]);
+
+    case 2:
+      var match_0 = arr[off];
+      var match_1 = arr[off + 1 | 0];
+      var match$1 = match_1;
+      var match$2 = match_0;
+      return {
+        k: match$1[0],
+        v: match$1[1],
+        h: 2,
+        l: singleton(match$2[0], match$2[1]),
+        r: undefined
+      };
+
+    case 3:
+      var match_0$1 = arr[off];
+      var match_1$1 = arr[off + 1 | 0];
+      var match_2 = arr[off + 2 | 0];
+      var match$3 = match_2;
+      var match$4 = match_1$1;
+      var match$5 = match_0$1;
+      return {
+        k: match$4[0],
+        v: match$4[1],
+        h: 2,
+        l: singleton(match$5[0], match$5[1]),
+        r: singleton(match$3[0], match$3[1])
+      };
+
+    default:
+      var nl = len / 2 | 0;
+      var left = fromSortedArrayAux(arr, off, nl);
+      var match$6 = arr[off + nl | 0];
+      var right = fromSortedArrayAux(arr, (off + nl | 0) + 1 | 0, (len - nl | 0) - 1 | 0);
+      return create(left, match$6[0], match$6[1], right);
+  }
+}
+
+function fromSortedArrayUnsafe(arr) {
+  return fromSortedArrayAux(arr, 0, arr.length);
+}
+
+function cmpU(s1, s2, kcmp, vcmp) {
+  var len1 = size(s1);
+  var len2 = size(s2);
+
+  if (len1 === len2) {
+    var _e1 = stackAllLeft(s1,
+    /* [] */
+    0);
+
+    var _e2 = stackAllLeft(s2,
+    /* [] */
+    0);
+
+    while (true) {
+      var e2 = _e2;
+      var e1 = _e1;
+
+      if (!e1) {
+        return 0;
+      }
+
+      if (!e2) {
+        return 0;
+      }
+
+      var h2 = e2.hd;
+      var h1 = e1.hd;
+      var c = kcmp(h1.k, h2.k);
+
+      if (c !== 0) {
+        return c;
+      }
+
+      var cx = vcmp(h1.v, h2.v);
+
+      if (cx !== 0) {
+        return cx;
+      }
+
+      _e2 = stackAllLeft(h2.r, e2.tl);
+      _e1 = stackAllLeft(h1.r, e1.tl);
+      continue;
+    }
+
+    ;
+  } else if (len1 < len2) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function cmp(s1, s2, kcmp, vcmp) {
+  return cmpU(s1, s2, kcmp, Curry.__2(vcmp));
+}
+
+function eqU(s1, s2, kcmp, veq) {
+  var len1 = size(s1);
+  var len2 = size(s2);
+
+  if (len1 === len2) {
+    var _e1 = stackAllLeft(s1,
+    /* [] */
+    0);
+
+    var _e2 = stackAllLeft(s2,
+    /* [] */
+    0);
+
+    while (true) {
+      var e2 = _e2;
+      var e1 = _e1;
+
+      if (!e1) {
+        return true;
+      }
+
+      if (!e2) {
+        return true;
+      }
+
+      var h2 = e2.hd;
+      var h1 = e1.hd;
+
+      if (!(kcmp(h1.k, h2.k) === 0 && veq(h1.v, h2.v))) {
+        return false;
+      }
+
+      _e2 = stackAllLeft(h2.r, e2.tl);
+      _e1 = stackAllLeft(h1.r, e1.tl);
+      continue;
+    }
+
+    ;
+  } else {
+    return false;
+  }
+}
+
+function eq(s1, s2, kcmp, veq) {
+  return eqU(s1, s2, kcmp, Curry.__2(veq));
+}
+
+function get(_n, x, cmp) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return;
+    }
+
+    var v = n.k;
+    var c = cmp(x, v);
+
+    if (c === 0) {
+      return Caml_option.some(n.v);
+    }
+
+    _n = c < 0 ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function getUndefined(_n, x, cmp) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return;
+    }
+
+    var v = n.k;
+    var c = cmp(x, v);
+
+    if (c === 0) {
+      return n.v;
+    }
+
+    _n = c < 0 ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function getExn(_n, x, cmp) {
+  while (true) {
+    var n = _n;
+
+    if (n !== undefined) {
+      var v = n.k;
+      var c = cmp(x, v);
+
+      if (c === 0) {
+        return n.v;
+      }
+
+      _n = c < 0 ? n.l : n.r;
+      continue;
+    }
+
+    throw {
+      RE_EXN_ID: "Not_found",
+      Error: new Error()
+    };
+  }
+
+  ;
+}
+
+function getWithDefault(_n, x, def, cmp) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return def;
+    }
+
+    var v = n.k;
+    var c = cmp(x, v);
+
+    if (c === 0) {
+      return n.v;
+    }
+
+    _n = c < 0 ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function has(_n, x, cmp) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return false;
+    }
+
+    var v = n.k;
+    var c = cmp(x, v);
+
+    if (c === 0) {
+      return true;
+    }
+
+    _n = c < 0 ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function rotateWithLeftChild(k2) {
+  var k1 = k2.l;
+  k2.l = k1.r;
+  k1.r = k2;
+  var hlk2 = treeHeight(k2.l);
+  var hrk2 = treeHeight(k2.r);
+  k2.h = (hlk2 > hrk2 ? hlk2 : hrk2) + 1 | 0;
+  var hlk1 = treeHeight(k1.l);
+  var hk2 = k2.h;
+  k1.h = (hlk1 > hk2 ? hlk1 : hk2) + 1 | 0;
+  return k1;
+}
+
+function rotateWithRightChild(k1) {
+  var k2 = k1.r;
+  k1.r = k2.l;
+  k2.l = k1;
+  var hlk1 = treeHeight(k1.l);
+  var hrk1 = treeHeight(k1.r);
+  k1.h = (hlk1 > hrk1 ? hlk1 : hrk1) + 1 | 0;
+  var hrk2 = treeHeight(k2.r);
+  var hk1 = k1.h;
+  k2.h = (hrk2 > hk1 ? hrk2 : hk1) + 1 | 0;
+  return k2;
+}
+
+function doubleWithLeftChild(k3) {
+  var x = k3.l;
+  var v = rotateWithRightChild(x);
+  k3.l = v;
+  return rotateWithLeftChild(k3);
+}
+
+function doubleWithRightChild(k2) {
+  var x = k2.r;
+  var v = rotateWithLeftChild(x);
+  k2.r = v;
+  return rotateWithRightChild(k2);
+}
+
+function heightUpdateMutate(t) {
+  var hlt = treeHeight(t.l);
+  var hrt = treeHeight(t.r);
+  t.h = (hlt > hrt ? hlt : hrt) + 1 | 0;
+  return t;
+}
+
+function balMutate(nt) {
+  var l = nt.l;
+  var r = nt.r;
+  var hl = treeHeight(l);
+  var hr = treeHeight(r);
+
+  if (hl > (2 + hr | 0)) {
+    var ll = l.l;
+    var lr = l.r;
+
+    if (heightGe(ll, lr)) {
+      return heightUpdateMutate(rotateWithLeftChild(nt));
+    } else {
+      return heightUpdateMutate(doubleWithLeftChild(nt));
+    }
+  }
+
+  if (hr > (2 + hl | 0)) {
+    var rl = r.l;
+    var rr = r.r;
+
+    if (heightGe(rr, rl)) {
+      return heightUpdateMutate(rotateWithRightChild(nt));
+    } else {
+      return heightUpdateMutate(doubleWithRightChild(nt));
+    }
+  }
+
+  nt.h = (hl > hr ? hl : hr) + 1 | 0;
+  return nt;
+}
+
+function updateMutate(t, x, data, cmp) {
+  if (t === undefined) {
+    return singleton(x, data);
+  }
+
+  var k = t.k;
+  var c = cmp(x, k);
+
+  if (c === 0) {
+    t.v = data;
+    return t;
+  }
+
+  var l = t.l;
+  var r = t.r;
+
+  if (c < 0) {
+    var ll = updateMutate(l, x, data, cmp);
+    t.l = ll;
+  } else {
+    t.r = updateMutate(r, x, data, cmp);
+  }
+
+  return balMutate(t);
+}
+
+function fromArray(xs, cmp) {
+  var len = xs.length;
+
+  if (len === 0) {
+    return;
+  }
+
+  var next = Belt_SortArray.strictlySortedLengthU(xs, function (param, param$1) {
+    return cmp(param[0], param$1[0]) < 0;
+  });
+  var result;
+
+  if (next >= 0) {
+    result = fromSortedArrayAux(xs, 0, next);
+  } else {
+    next = -next | 0;
+    result = fromSortedArrayRevAux(xs, next - 1 | 0, next);
+  }
+
+  for (var i = next; i < len; ++i) {
+    var match = xs[i];
+    result = updateMutate(result, match[0], match[1], cmp);
+  }
+
+  return result;
+}
+
+function removeMinAuxWithRootMutate(nt, n) {
+  var rn = n.r;
+  var ln = n.l;
+
+  if (ln !== undefined) {
+    n.l = removeMinAuxWithRootMutate(nt, ln);
+    return balMutate(n);
+  } else {
+    nt.k = n.k;
+    nt.v = n.v;
+    return rn;
+  }
+}
+/* No side effect */
+},{"./curry.js":"../node_modules/bs-platform/lib/es6/curry.js","./caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js","./belt_SortArray.js":"../node_modules/bs-platform/lib/es6/belt_SortArray.js"}],"../node_modules/bs-platform/lib/es6/belt_internalMapInt.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.add = add;
+exports.get = get;
+exports.getUndefined = getUndefined;
+exports.getExn = getExn;
+exports.getWithDefault = getWithDefault;
+exports.has = has;
+exports.remove = remove;
+exports.splitAux = splitAux;
+exports.split = split;
+exports.mergeU = mergeU;
+exports.merge = merge;
+exports.compareAux = compareAux;
+exports.cmpU = cmpU;
+exports.cmp = cmp;
+exports.eqAux = eqAux;
+exports.eqU = eqU;
+exports.eq = eq;
+exports.addMutate = addMutate;
+exports.fromArray = fromArray;
+exports.S = exports.A = exports.N = void 0;
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+var Belt_SortArray = _interopRequireWildcard(require("./belt_SortArray.js"));
+
+var Caml_primitive = _interopRequireWildcard(require("./caml_primitive.js"));
+
+var Belt_internalAVLtree = _interopRequireWildcard(require("./belt_internalAVLtree.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function add(t, x, data) {
+  if (t === undefined) {
+    return Belt_internalAVLtree.singleton(x, data);
+  }
+
+  var k = t.k;
+
+  if (x === k) {
+    return Belt_internalAVLtree.updateValue(t, data);
+  }
+
+  var v = t.v;
+
+  if (x < k) {
+    return Belt_internalAVLtree.bal(add(t.l, x, data), k, v, t.r);
+  } else {
+    return Belt_internalAVLtree.bal(t.l, k, v, add(t.r, x, data));
+  }
+}
+
+function get(_n, x) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return;
+    }
+
+    var v = n.k;
+
+    if (x === v) {
+      return Caml_option.some(n.v);
+    }
+
+    _n = x < v ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function getUndefined(_n, x) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return;
+    }
+
+    var v = n.k;
+
+    if (x === v) {
+      return n.v;
+    }
+
+    _n = x < v ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function getExn(_n, x) {
+  while (true) {
+    var n = _n;
+
+    if (n !== undefined) {
+      var v = n.k;
+
+      if (x === v) {
+        return n.v;
+      }
+
+      _n = x < v ? n.l : n.r;
+      continue;
+    }
+
+    throw {
+      RE_EXN_ID: "Not_found",
+      Error: new Error()
+    };
+  }
+
+  ;
+}
+
+function getWithDefault(_n, x, def) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return def;
+    }
+
+    var v = n.k;
+
+    if (x === v) {
+      return n.v;
+    }
+
+    _n = x < v ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function has(_n, x) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return false;
+    }
+
+    var v = n.k;
+
+    if (x === v) {
+      return true;
+    }
+
+    _n = x < v ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function remove(n, x) {
+  if (n === undefined) {
+    return n;
+  }
+
+  var v = n.k;
+  var l = n.l;
+  var r = n.r;
+
+  if (x !== v) {
+    if (x < v) {
+      return Belt_internalAVLtree.bal(remove(l, x), v, n.v, r);
+    } else {
+      return Belt_internalAVLtree.bal(l, v, n.v, remove(r, x));
+    }
+  }
+
+  if (l === undefined) {
+    return r;
+  }
+
+  if (r === undefined) {
+    return l;
+  }
+
+  var kr = {
+    contents: r.k
+  };
+  var vr = {
+    contents: r.v
+  };
+  var r$1 = Belt_internalAVLtree.removeMinAuxWithRef(r, kr, vr);
+  return Belt_internalAVLtree.bal(l, kr.contents, vr.contents, r$1);
+}
+
+function splitAux(x, n) {
+  var v = n.k;
+  var d = n.v;
+  var l = n.l;
+  var r = n.r;
+
+  if (x === v) {
+    return [l, Caml_option.some(d), r];
+  }
+
+  if (x < v) {
+    if (l === undefined) {
+      return [undefined, undefined, n];
+    }
+
+    var match = splitAux(x, l);
+    return [match[0], match[1], Belt_internalAVLtree.join(match[2], v, d, r)];
+  }
+
+  if (r === undefined) {
+    return [n, undefined, undefined];
+  }
+
+  var match$1 = splitAux(x, r);
+  return [Belt_internalAVLtree.join(l, v, d, match$1[0]), match$1[1], match$1[2]];
+}
+
+function split(x, n) {
+  if (n !== undefined) {
+    return splitAux(x, n);
+  } else {
+    return [undefined, undefined, undefined];
+  }
+}
+
+function mergeU(s1, s2, f) {
+  if (s1 !== undefined) {
+    if (s1.h >= (s2 !== undefined ? s2.h : 0)) {
+      var v1 = s1.k;
+      var d1 = s1.v;
+      var l1 = s1.l;
+      var r1 = s1.r;
+      var match = split(v1, s2);
+      return Belt_internalAVLtree.concatOrJoin(mergeU(l1, match[0], f), v1, f(v1, Caml_option.some(d1), match[1]), mergeU(r1, match[2], f));
+    }
+  } else if (s2 === undefined) {
+    return;
+  }
+
+  var v2 = s2.k;
+  var d2 = s2.v;
+  var l2 = s2.l;
+  var r2 = s2.r;
+  var match$1 = split(v2, s1);
+  return Belt_internalAVLtree.concatOrJoin(mergeU(match$1[0], l2, f), v2, f(v2, match$1[1], Caml_option.some(d2)), mergeU(match$1[2], r2, f));
+}
+
+function merge(s1, s2, f) {
+  return mergeU(s1, s2, Curry.__3(f));
+}
+
+function compareAux(_e1, _e2, vcmp) {
+  while (true) {
+    var e2 = _e2;
+    var e1 = _e1;
+
+    if (!e1) {
+      return 0;
+    }
+
+    if (!e2) {
+      return 0;
+    }
+
+    var h2 = e2.hd;
+    var h1 = e1.hd;
+    var c = Caml_primitive.caml_int_compare(h1.k, h2.k);
+
+    if (c !== 0) {
+      return c;
+    }
+
+    var cx = vcmp(h1.v, h2.v);
+
+    if (cx !== 0) {
+      return cx;
+    }
+
+    _e2 = Belt_internalAVLtree.stackAllLeft(h2.r, e2.tl);
+    _e1 = Belt_internalAVLtree.stackAllLeft(h1.r, e1.tl);
+    continue;
+  }
+
+  ;
+}
+
+function cmpU(s1, s2, cmp) {
+  var len1 = Belt_internalAVLtree.size(s1);
+  var len2 = Belt_internalAVLtree.size(s2);
+
+  if (len1 === len2) {
+    return compareAux(Belt_internalAVLtree.stackAllLeft(s1,
+    /* [] */
+    0), Belt_internalAVLtree.stackAllLeft(s2,
+    /* [] */
+    0), cmp);
+  } else if (len1 < len2) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function cmp(s1, s2, f) {
+  return cmpU(s1, s2, Curry.__2(f));
+}
+
+function eqAux(_e1, _e2, eq) {
+  while (true) {
+    var e2 = _e2;
+    var e1 = _e1;
+
+    if (!e1) {
+      return true;
+    }
+
+    if (!e2) {
+      return true;
+    }
+
+    var h2 = e2.hd;
+    var h1 = e1.hd;
+
+    if (!(h1.k === h2.k && eq(h1.v, h2.v))) {
+      return false;
+    }
+
+    _e2 = Belt_internalAVLtree.stackAllLeft(h2.r, e2.tl);
+    _e1 = Belt_internalAVLtree.stackAllLeft(h1.r, e1.tl);
+    continue;
+  }
+
+  ;
+}
+
+function eqU(s1, s2, eq) {
+  var len1 = Belt_internalAVLtree.size(s1);
+  var len2 = Belt_internalAVLtree.size(s2);
+
+  if (len1 === len2) {
+    return eqAux(Belt_internalAVLtree.stackAllLeft(s1,
+    /* [] */
+    0), Belt_internalAVLtree.stackAllLeft(s2,
+    /* [] */
+    0), eq);
+  } else {
+    return false;
+  }
+}
+
+function eq(s1, s2, f) {
+  return eqU(s1, s2, Curry.__2(f));
+}
+
+function addMutate(t, x, data) {
+  if (t === undefined) {
+    return Belt_internalAVLtree.singleton(x, data);
+  }
+
+  var k = t.k;
+
+  if (x === k) {
+    t.k = x;
+    t.v = data;
+    return t;
+  }
+
+  var l = t.l;
+  var r = t.r;
+
+  if (x < k) {
+    var ll = addMutate(l, x, data);
+    t.l = ll;
+  } else {
+    t.r = addMutate(r, x, data);
+  }
+
+  return Belt_internalAVLtree.balMutate(t);
+}
+
+function fromArray(xs) {
+  var len = xs.length;
+
+  if (len === 0) {
+    return;
+  }
+
+  var next = Belt_SortArray.strictlySortedLengthU(xs, function (param, param$1) {
+    return param[0] < param$1[0];
+  });
+  var result;
+
+  if (next >= 0) {
+    result = Belt_internalAVLtree.fromSortedArrayAux(xs, 0, next);
+  } else {
+    next = -next | 0;
+    result = Belt_internalAVLtree.fromSortedArrayRevAux(xs, next - 1 | 0, next);
+  }
+
+  for (var i = next; i < len; ++i) {
+    var match = xs[i];
+    result = addMutate(result, match[0], match[1]);
+  }
+
+  return result;
+}
+
+var N;
+exports.N = N;
+var A;
+exports.A = A;
+var S;
+/* No side effect */
+
+exports.S = S;
+},{"./curry.js":"../node_modules/bs-platform/lib/es6/curry.js","./caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js","./belt_SortArray.js":"../node_modules/bs-platform/lib/es6/belt_SortArray.js","./caml_primitive.js":"../node_modules/bs-platform/lib/es6/caml_primitive.js","./belt_internalAVLtree.js":"../node_modules/bs-platform/lib/es6/belt_internalAVLtree.js"}],"../node_modules/bs-platform/lib/es6/belt_MapInt.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.remove = remove;
+exports.removeMany = removeMany;
+exports.set = set;
+exports.updateU = updateU;
+exports.update = update;
+exports.mergeMany = mergeMany;
+exports.mapWithKey = exports.mapWithKeyU = exports.map = exports.mapU = exports.split = exports.partition = exports.partitionU = exports.keep = exports.keepU = exports.merge = exports.mergeU = exports.checkInvariantInternal = exports.getExn = exports.getWithDefault = exports.getUndefined = exports.get = exports.maxUndefined = exports.maximum = exports.minUndefined = exports.minimum = exports.maxKeyUndefined = exports.maxKey = exports.minKeyUndefined = exports.minKey = exports.valuesToArray = exports.keysToArray = exports.fromArray = exports.toArray = exports.toList = exports.size = exports.some = exports.someU = exports.every = exports.everyU = exports.reduce = exports.reduceU = exports.forEach = exports.forEachU = exports.findFirstBy = exports.findFirstByU = exports.eq = exports.eqU = exports.cmp = exports.cmpU = exports.has = exports.isEmpty = exports.empty = void 0;
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+var Belt_internalMapInt = _interopRequireWildcard(require("./belt_internalMapInt.js"));
+
+var Belt_internalAVLtree = _interopRequireWildcard(require("./belt_internalAVLtree.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function set(t, newK, newD) {
+  if (t === undefined) {
+    return Belt_internalAVLtree.singleton(newK, newD);
+  }
+
+  var k = t.k;
+
+  if (newK === k) {
+    return Belt_internalAVLtree.updateValue(t, newD);
+  }
+
+  var v = t.v;
+
+  if (newK < k) {
+    return Belt_internalAVLtree.bal(set(t.l, newK, newD), k, v, t.r);
+  } else {
+    return Belt_internalAVLtree.bal(t.l, k, v, set(t.r, newK, newD));
+  }
+}
+
+function updateU(t, x, f) {
+  if (t !== undefined) {
+    var k = t.k;
+
+    if (x === k) {
+      var data = f(Caml_option.some(t.v));
+
+      if (data !== undefined) {
+        return Belt_internalAVLtree.updateValue(t, Caml_option.valFromOption(data));
+      }
+
+      var l = t.l;
+      var r = t.r;
+
+      if (l === undefined) {
+        return r;
+      }
+
+      if (r === undefined) {
+        return l;
+      }
+
+      var kr = {
+        contents: r.k
+      };
+      var vr = {
+        contents: r.v
+      };
+      var r$1 = Belt_internalAVLtree.removeMinAuxWithRef(r, kr, vr);
+      return Belt_internalAVLtree.bal(l, kr.contents, vr.contents, r$1);
+    }
+
+    var v = t.v;
+    var l$1 = t.l;
+    var r$2 = t.r;
+
+    if (x < k) {
+      var ll = updateU(l$1, x, f);
+
+      if (l$1 === ll) {
+        return t;
+      } else {
+        return Belt_internalAVLtree.bal(ll, k, v, r$2);
+      }
+    }
+
+    var rr = updateU(r$2, x, f);
+
+    if (r$2 === rr) {
+      return t;
+    } else {
+      return Belt_internalAVLtree.bal(l$1, k, v, rr);
+    }
+  }
+
+  var data$1 = f(undefined);
+
+  if (data$1 !== undefined) {
+    return Belt_internalAVLtree.singleton(x, Caml_option.valFromOption(data$1));
+  } else {
+    return t;
+  }
+}
+
+function update(t, x, f) {
+  return updateU(t, x, Curry.__1(f));
+}
+
+function removeAux(n, x) {
+  var v = n.k;
+  var l = n.l;
+  var r = n.r;
+
+  if (x === v) {
+    if (l === undefined) {
+      return r;
+    }
+
+    if (r === undefined) {
+      return l;
+    }
+
+    var kr = {
+      contents: r.k
+    };
+    var vr = {
+      contents: r.v
+    };
+    var r$1 = Belt_internalAVLtree.removeMinAuxWithRef(r, kr, vr);
+    return Belt_internalAVLtree.bal(l, kr.contents, vr.contents, r$1);
+  }
+
+  if (x < v) {
+    if (l === undefined) {
+      return n;
+    }
+
+    var ll = removeAux(l, x);
+
+    if (ll === l) {
+      return n;
+    } else {
+      return Belt_internalAVLtree.bal(ll, v, n.v, r);
+    }
+  }
+
+  if (r === undefined) {
+    return n;
+  }
+
+  var rr = removeAux(r, x);
+  return Belt_internalAVLtree.bal(l, v, n.v, rr);
+}
+
+function remove(n, x) {
+  if (n !== undefined) {
+    return removeAux(n, x);
+  }
+}
+
+function removeMany(t, keys) {
+  var len = keys.length;
+
+  if (t !== undefined) {
+    var _t = t;
+    var _i = 0;
+
+    while (true) {
+      var i = _i;
+      var t$1 = _t;
+
+      if (i >= len) {
+        return t$1;
+      }
+
+      var ele = keys[i];
+      var u = removeAux(t$1, ele);
+
+      if (u === undefined) {
+        return u;
+      }
+
+      _i = i + 1 | 0;
+      _t = u;
+      continue;
+    }
+
+    ;
+  }
+}
+
+function mergeMany(h, arr) {
+  var len = arr.length;
+  var v = h;
+
+  for (var i = 0; i < len; ++i) {
+    var match = arr[i];
+    v = set(v, match[0], match[1]);
+  }
+
+  return v;
+}
+
+var empty;
+exports.empty = empty;
+var isEmpty = Belt_internalAVLtree.isEmpty;
+exports.isEmpty = isEmpty;
+var has = Belt_internalMapInt.has;
+exports.has = has;
+var cmpU = Belt_internalMapInt.cmpU;
+exports.cmpU = cmpU;
+var cmp = Belt_internalMapInt.cmp;
+exports.cmp = cmp;
+var eqU = Belt_internalMapInt.eqU;
+exports.eqU = eqU;
+var eq = Belt_internalMapInt.eq;
+exports.eq = eq;
+var findFirstByU = Belt_internalAVLtree.findFirstByU;
+exports.findFirstByU = findFirstByU;
+var findFirstBy = Belt_internalAVLtree.findFirstBy;
+exports.findFirstBy = findFirstBy;
+var forEachU = Belt_internalAVLtree.forEachU;
+exports.forEachU = forEachU;
+var forEach = Belt_internalAVLtree.forEach;
+exports.forEach = forEach;
+var reduceU = Belt_internalAVLtree.reduceU;
+exports.reduceU = reduceU;
+var reduce = Belt_internalAVLtree.reduce;
+exports.reduce = reduce;
+var everyU = Belt_internalAVLtree.everyU;
+exports.everyU = everyU;
+var every = Belt_internalAVLtree.every;
+exports.every = every;
+var someU = Belt_internalAVLtree.someU;
+exports.someU = someU;
+var some = Belt_internalAVLtree.some;
+exports.some = some;
+var size = Belt_internalAVLtree.size;
+exports.size = size;
+var toList = Belt_internalAVLtree.toList;
+exports.toList = toList;
+var toArray = Belt_internalAVLtree.toArray;
+exports.toArray = toArray;
+var fromArray = Belt_internalMapInt.fromArray;
+exports.fromArray = fromArray;
+var keysToArray = Belt_internalAVLtree.keysToArray;
+exports.keysToArray = keysToArray;
+var valuesToArray = Belt_internalAVLtree.valuesToArray;
+exports.valuesToArray = valuesToArray;
+var minKey = Belt_internalAVLtree.minKey;
+exports.minKey = minKey;
+var minKeyUndefined = Belt_internalAVLtree.minKeyUndefined;
+exports.minKeyUndefined = minKeyUndefined;
+var maxKey = Belt_internalAVLtree.maxKey;
+exports.maxKey = maxKey;
+var maxKeyUndefined = Belt_internalAVLtree.maxKeyUndefined;
+exports.maxKeyUndefined = maxKeyUndefined;
+var minimum = Belt_internalAVLtree.minimum;
+exports.minimum = minimum;
+var minUndefined = Belt_internalAVLtree.minUndefined;
+exports.minUndefined = minUndefined;
+var maximum = Belt_internalAVLtree.maximum;
+exports.maximum = maximum;
+var maxUndefined = Belt_internalAVLtree.maxUndefined;
+exports.maxUndefined = maxUndefined;
+var get = Belt_internalMapInt.get;
+exports.get = get;
+var getUndefined = Belt_internalMapInt.getUndefined;
+exports.getUndefined = getUndefined;
+var getWithDefault = Belt_internalMapInt.getWithDefault;
+exports.getWithDefault = getWithDefault;
+var getExn = Belt_internalMapInt.getExn;
+exports.getExn = getExn;
+var checkInvariantInternal = Belt_internalAVLtree.checkInvariantInternal;
+exports.checkInvariantInternal = checkInvariantInternal;
+var mergeU = Belt_internalMapInt.mergeU;
+exports.mergeU = mergeU;
+var merge = Belt_internalMapInt.merge;
+exports.merge = merge;
+var keepU = Belt_internalAVLtree.keepSharedU;
+exports.keepU = keepU;
+var keep = Belt_internalAVLtree.keepShared;
+exports.keep = keep;
+var partitionU = Belt_internalAVLtree.partitionSharedU;
+exports.partitionU = partitionU;
+var partition = Belt_internalAVLtree.partitionShared;
+exports.partition = partition;
+var split = Belt_internalMapInt.split;
+exports.split = split;
+var mapU = Belt_internalAVLtree.mapU;
+exports.mapU = mapU;
+var map = Belt_internalAVLtree.map;
+exports.map = map;
+var mapWithKeyU = Belt_internalAVLtree.mapWithKeyU;
+exports.mapWithKeyU = mapWithKeyU;
+var mapWithKey = Belt_internalAVLtree.mapWithKey;
+/* No side effect */
+
+exports.mapWithKey = mapWithKey;
+},{"./curry.js":"../node_modules/bs-platform/lib/es6/curry.js","./caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js","./belt_internalMapInt.js":"../node_modules/bs-platform/lib/es6/belt_internalMapInt.js","./belt_internalAVLtree.js":"../node_modules/bs-platform/lib/es6/belt_internalAVLtree.js"}],"../node_modules/bs-platform/lib/es6/belt_internalMapString.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.add = add;
+exports.get = get;
+exports.getUndefined = getUndefined;
+exports.getExn = getExn;
+exports.getWithDefault = getWithDefault;
+exports.has = has;
+exports.remove = remove;
+exports.splitAux = splitAux;
+exports.split = split;
+exports.mergeU = mergeU;
+exports.merge = merge;
+exports.compareAux = compareAux;
+exports.cmpU = cmpU;
+exports.cmp = cmp;
+exports.eqAux = eqAux;
+exports.eqU = eqU;
+exports.eq = eq;
+exports.addMutate = addMutate;
+exports.fromArray = fromArray;
+exports.S = exports.A = exports.N = void 0;
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+var Belt_SortArray = _interopRequireWildcard(require("./belt_SortArray.js"));
+
+var Caml_primitive = _interopRequireWildcard(require("./caml_primitive.js"));
+
+var Belt_internalAVLtree = _interopRequireWildcard(require("./belt_internalAVLtree.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function add(t, x, data) {
+  if (t === undefined) {
+    return Belt_internalAVLtree.singleton(x, data);
+  }
+
+  var k = t.k;
+
+  if (x === k) {
+    return Belt_internalAVLtree.updateValue(t, data);
+  }
+
+  var v = t.v;
+
+  if (x < k) {
+    return Belt_internalAVLtree.bal(add(t.l, x, data), k, v, t.r);
+  } else {
+    return Belt_internalAVLtree.bal(t.l, k, v, add(t.r, x, data));
+  }
+}
+
+function get(_n, x) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return;
+    }
+
+    var v = n.k;
+
+    if (x === v) {
+      return Caml_option.some(n.v);
+    }
+
+    _n = x < v ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function getUndefined(_n, x) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return;
+    }
+
+    var v = n.k;
+
+    if (x === v) {
+      return n.v;
+    }
+
+    _n = x < v ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function getExn(_n, x) {
+  while (true) {
+    var n = _n;
+
+    if (n !== undefined) {
+      var v = n.k;
+
+      if (x === v) {
+        return n.v;
+      }
+
+      _n = x < v ? n.l : n.r;
+      continue;
+    }
+
+    throw {
+      RE_EXN_ID: "Not_found",
+      Error: new Error()
+    };
+  }
+
+  ;
+}
+
+function getWithDefault(_n, x, def) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return def;
+    }
+
+    var v = n.k;
+
+    if (x === v) {
+      return n.v;
+    }
+
+    _n = x < v ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function has(_n, x) {
+  while (true) {
+    var n = _n;
+
+    if (n === undefined) {
+      return false;
+    }
+
+    var v = n.k;
+
+    if (x === v) {
+      return true;
+    }
+
+    _n = x < v ? n.l : n.r;
+    continue;
+  }
+
+  ;
+}
+
+function remove(n, x) {
+  if (n === undefined) {
+    return n;
+  }
+
+  var v = n.k;
+  var l = n.l;
+  var r = n.r;
+
+  if (x !== v) {
+    if (x < v) {
+      return Belt_internalAVLtree.bal(remove(l, x), v, n.v, r);
+    } else {
+      return Belt_internalAVLtree.bal(l, v, n.v, remove(r, x));
+    }
+  }
+
+  if (l === undefined) {
+    return r;
+  }
+
+  if (r === undefined) {
+    return l;
+  }
+
+  var kr = {
+    contents: r.k
+  };
+  var vr = {
+    contents: r.v
+  };
+  var r$1 = Belt_internalAVLtree.removeMinAuxWithRef(r, kr, vr);
+  return Belt_internalAVLtree.bal(l, kr.contents, vr.contents, r$1);
+}
+
+function splitAux(x, n) {
+  var v = n.k;
+  var d = n.v;
+  var l = n.l;
+  var r = n.r;
+
+  if (x === v) {
+    return [l, Caml_option.some(d), r];
+  }
+
+  if (x < v) {
+    if (l === undefined) {
+      return [undefined, undefined, n];
+    }
+
+    var match = splitAux(x, l);
+    return [match[0], match[1], Belt_internalAVLtree.join(match[2], v, d, r)];
+  }
+
+  if (r === undefined) {
+    return [n, undefined, undefined];
+  }
+
+  var match$1 = splitAux(x, r);
+  return [Belt_internalAVLtree.join(l, v, d, match$1[0]), match$1[1], match$1[2]];
+}
+
+function split(x, n) {
+  if (n !== undefined) {
+    return splitAux(x, n);
+  } else {
+    return [undefined, undefined, undefined];
+  }
+}
+
+function mergeU(s1, s2, f) {
+  if (s1 !== undefined) {
+    if (s1.h >= (s2 !== undefined ? s2.h : 0)) {
+      var v1 = s1.k;
+      var d1 = s1.v;
+      var l1 = s1.l;
+      var r1 = s1.r;
+      var match = split(v1, s2);
+      return Belt_internalAVLtree.concatOrJoin(mergeU(l1, match[0], f), v1, f(v1, Caml_option.some(d1), match[1]), mergeU(r1, match[2], f));
+    }
+  } else if (s2 === undefined) {
+    return;
+  }
+
+  var v2 = s2.k;
+  var d2 = s2.v;
+  var l2 = s2.l;
+  var r2 = s2.r;
+  var match$1 = split(v2, s1);
+  return Belt_internalAVLtree.concatOrJoin(mergeU(match$1[0], l2, f), v2, f(v2, match$1[1], Caml_option.some(d2)), mergeU(match$1[2], r2, f));
+}
+
+function merge(s1, s2, f) {
+  return mergeU(s1, s2, Curry.__3(f));
+}
+
+function compareAux(_e1, _e2, vcmp) {
+  while (true) {
+    var e2 = _e2;
+    var e1 = _e1;
+
+    if (!e1) {
+      return 0;
+    }
+
+    if (!e2) {
+      return 0;
+    }
+
+    var h2 = e2.hd;
+    var h1 = e1.hd;
+    var c = Caml_primitive.caml_string_compare(h1.k, h2.k);
+
+    if (c !== 0) {
+      return c;
+    }
+
+    var cx = vcmp(h1.v, h2.v);
+
+    if (cx !== 0) {
+      return cx;
+    }
+
+    _e2 = Belt_internalAVLtree.stackAllLeft(h2.r, e2.tl);
+    _e1 = Belt_internalAVLtree.stackAllLeft(h1.r, e1.tl);
+    continue;
+  }
+
+  ;
+}
+
+function cmpU(s1, s2, cmp) {
+  var len1 = Belt_internalAVLtree.size(s1);
+  var len2 = Belt_internalAVLtree.size(s2);
+
+  if (len1 === len2) {
+    return compareAux(Belt_internalAVLtree.stackAllLeft(s1,
+    /* [] */
+    0), Belt_internalAVLtree.stackAllLeft(s2,
+    /* [] */
+    0), cmp);
+  } else if (len1 < len2) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function cmp(s1, s2, f) {
+  return cmpU(s1, s2, Curry.__2(f));
+}
+
+function eqAux(_e1, _e2, eq) {
+  while (true) {
+    var e2 = _e2;
+    var e1 = _e1;
+
+    if (!e1) {
+      return true;
+    }
+
+    if (!e2) {
+      return true;
+    }
+
+    var h2 = e2.hd;
+    var h1 = e1.hd;
+
+    if (!(h1.k === h2.k && eq(h1.v, h2.v))) {
+      return false;
+    }
+
+    _e2 = Belt_internalAVLtree.stackAllLeft(h2.r, e2.tl);
+    _e1 = Belt_internalAVLtree.stackAllLeft(h1.r, e1.tl);
+    continue;
+  }
+
+  ;
+}
+
+function eqU(s1, s2, eq) {
+  var len1 = Belt_internalAVLtree.size(s1);
+  var len2 = Belt_internalAVLtree.size(s2);
+
+  if (len1 === len2) {
+    return eqAux(Belt_internalAVLtree.stackAllLeft(s1,
+    /* [] */
+    0), Belt_internalAVLtree.stackAllLeft(s2,
+    /* [] */
+    0), eq);
+  } else {
+    return false;
+  }
+}
+
+function eq(s1, s2, f) {
+  return eqU(s1, s2, Curry.__2(f));
+}
+
+function addMutate(t, x, data) {
+  if (t === undefined) {
+    return Belt_internalAVLtree.singleton(x, data);
+  }
+
+  var k = t.k;
+
+  if (x === k) {
+    t.k = x;
+    t.v = data;
+    return t;
+  }
+
+  var l = t.l;
+  var r = t.r;
+
+  if (x < k) {
+    var ll = addMutate(l, x, data);
+    t.l = ll;
+  } else {
+    t.r = addMutate(r, x, data);
+  }
+
+  return Belt_internalAVLtree.balMutate(t);
+}
+
+function fromArray(xs) {
+  var len = xs.length;
+
+  if (len === 0) {
+    return;
+  }
+
+  var next = Belt_SortArray.strictlySortedLengthU(xs, function (param, param$1) {
+    return param[0] < param$1[0];
+  });
+  var result;
+
+  if (next >= 0) {
+    result = Belt_internalAVLtree.fromSortedArrayAux(xs, 0, next);
+  } else {
+    next = -next | 0;
+    result = Belt_internalAVLtree.fromSortedArrayRevAux(xs, next - 1 | 0, next);
+  }
+
+  for (var i = next; i < len; ++i) {
+    var match = xs[i];
+    result = addMutate(result, match[0], match[1]);
+  }
+
+  return result;
+}
+
+var N;
+exports.N = N;
+var A;
+exports.A = A;
+var S;
+/* No side effect */
+
+exports.S = S;
+},{"./curry.js":"../node_modules/bs-platform/lib/es6/curry.js","./caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js","./belt_SortArray.js":"../node_modules/bs-platform/lib/es6/belt_SortArray.js","./caml_primitive.js":"../node_modules/bs-platform/lib/es6/caml_primitive.js","./belt_internalAVLtree.js":"../node_modules/bs-platform/lib/es6/belt_internalAVLtree.js"}],"../node_modules/bs-platform/lib/es6/belt_MapString.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.remove = remove;
+exports.removeMany = removeMany;
+exports.set = set;
+exports.updateU = updateU;
+exports.update = update;
+exports.mergeMany = mergeMany;
+exports.mapWithKey = exports.mapWithKeyU = exports.map = exports.mapU = exports.split = exports.partition = exports.partitionU = exports.keep = exports.keepU = exports.merge = exports.mergeU = exports.checkInvariantInternal = exports.getExn = exports.getWithDefault = exports.getUndefined = exports.get = exports.maxUndefined = exports.maximum = exports.minUndefined = exports.minimum = exports.maxKeyUndefined = exports.maxKey = exports.minKeyUndefined = exports.minKey = exports.valuesToArray = exports.keysToArray = exports.fromArray = exports.toArray = exports.toList = exports.size = exports.some = exports.someU = exports.every = exports.everyU = exports.reduce = exports.reduceU = exports.forEach = exports.forEachU = exports.findFirstBy = exports.findFirstByU = exports.eq = exports.eqU = exports.cmp = exports.cmpU = exports.has = exports.isEmpty = exports.empty = void 0;
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+var Belt_internalAVLtree = _interopRequireWildcard(require("./belt_internalAVLtree.js"));
+
+var Belt_internalMapString = _interopRequireWildcard(require("./belt_internalMapString.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function set(t, newK, newD) {
+  if (t === undefined) {
+    return Belt_internalAVLtree.singleton(newK, newD);
+  }
+
+  var k = t.k;
+
+  if (newK === k) {
+    return Belt_internalAVLtree.updateValue(t, newD);
+  }
+
+  var v = t.v;
+
+  if (newK < k) {
+    return Belt_internalAVLtree.bal(set(t.l, newK, newD), k, v, t.r);
+  } else {
+    return Belt_internalAVLtree.bal(t.l, k, v, set(t.r, newK, newD));
+  }
+}
+
+function updateU(t, x, f) {
+  if (t !== undefined) {
+    var k = t.k;
+
+    if (x === k) {
+      var data = f(Caml_option.some(t.v));
+
+      if (data !== undefined) {
+        return Belt_internalAVLtree.updateValue(t, Caml_option.valFromOption(data));
+      }
+
+      var l = t.l;
+      var r = t.r;
+
+      if (l === undefined) {
+        return r;
+      }
+
+      if (r === undefined) {
+        return l;
+      }
+
+      var kr = {
+        contents: r.k
+      };
+      var vr = {
+        contents: r.v
+      };
+      var r$1 = Belt_internalAVLtree.removeMinAuxWithRef(r, kr, vr);
+      return Belt_internalAVLtree.bal(l, kr.contents, vr.contents, r$1);
+    }
+
+    var v = t.v;
+    var l$1 = t.l;
+    var r$2 = t.r;
+
+    if (x < k) {
+      var ll = updateU(l$1, x, f);
+
+      if (l$1 === ll) {
+        return t;
+      } else {
+        return Belt_internalAVLtree.bal(ll, k, v, r$2);
+      }
+    }
+
+    var rr = updateU(r$2, x, f);
+
+    if (r$2 === rr) {
+      return t;
+    } else {
+      return Belt_internalAVLtree.bal(l$1, k, v, rr);
+    }
+  }
+
+  var data$1 = f(undefined);
+
+  if (data$1 !== undefined) {
+    return Belt_internalAVLtree.singleton(x, Caml_option.valFromOption(data$1));
+  } else {
+    return t;
+  }
+}
+
+function update(t, x, f) {
+  return updateU(t, x, Curry.__1(f));
+}
+
+function removeAux(n, x) {
+  var v = n.k;
+  var l = n.l;
+  var r = n.r;
+
+  if (x === v) {
+    if (l === undefined) {
+      return r;
+    }
+
+    if (r === undefined) {
+      return l;
+    }
+
+    var kr = {
+      contents: r.k
+    };
+    var vr = {
+      contents: r.v
+    };
+    var r$1 = Belt_internalAVLtree.removeMinAuxWithRef(r, kr, vr);
+    return Belt_internalAVLtree.bal(l, kr.contents, vr.contents, r$1);
+  }
+
+  if (x < v) {
+    if (l === undefined) {
+      return n;
+    }
+
+    var ll = removeAux(l, x);
+
+    if (ll === l) {
+      return n;
+    } else {
+      return Belt_internalAVLtree.bal(ll, v, n.v, r);
+    }
+  }
+
+  if (r === undefined) {
+    return n;
+  }
+
+  var rr = removeAux(r, x);
+  return Belt_internalAVLtree.bal(l, v, n.v, rr);
+}
+
+function remove(n, x) {
+  if (n !== undefined) {
+    return removeAux(n, x);
+  }
+}
+
+function removeMany(t, keys) {
+  var len = keys.length;
+
+  if (t !== undefined) {
+    var _t = t;
+    var _i = 0;
+
+    while (true) {
+      var i = _i;
+      var t$1 = _t;
+
+      if (i >= len) {
+        return t$1;
+      }
+
+      var ele = keys[i];
+      var u = removeAux(t$1, ele);
+
+      if (u === undefined) {
+        return u;
+      }
+
+      _i = i + 1 | 0;
+      _t = u;
+      continue;
+    }
+
+    ;
+  }
+}
+
+function mergeMany(h, arr) {
+  var len = arr.length;
+  var v = h;
+
+  for (var i = 0; i < len; ++i) {
+    var match = arr[i];
+    v = set(v, match[0], match[1]);
+  }
+
+  return v;
+}
+
+var empty;
+exports.empty = empty;
+var isEmpty = Belt_internalAVLtree.isEmpty;
+exports.isEmpty = isEmpty;
+var has = Belt_internalMapString.has;
+exports.has = has;
+var cmpU = Belt_internalMapString.cmpU;
+exports.cmpU = cmpU;
+var cmp = Belt_internalMapString.cmp;
+exports.cmp = cmp;
+var eqU = Belt_internalMapString.eqU;
+exports.eqU = eqU;
+var eq = Belt_internalMapString.eq;
+exports.eq = eq;
+var findFirstByU = Belt_internalAVLtree.findFirstByU;
+exports.findFirstByU = findFirstByU;
+var findFirstBy = Belt_internalAVLtree.findFirstBy;
+exports.findFirstBy = findFirstBy;
+var forEachU = Belt_internalAVLtree.forEachU;
+exports.forEachU = forEachU;
+var forEach = Belt_internalAVLtree.forEach;
+exports.forEach = forEach;
+var reduceU = Belt_internalAVLtree.reduceU;
+exports.reduceU = reduceU;
+var reduce = Belt_internalAVLtree.reduce;
+exports.reduce = reduce;
+var everyU = Belt_internalAVLtree.everyU;
+exports.everyU = everyU;
+var every = Belt_internalAVLtree.every;
+exports.every = every;
+var someU = Belt_internalAVLtree.someU;
+exports.someU = someU;
+var some = Belt_internalAVLtree.some;
+exports.some = some;
+var size = Belt_internalAVLtree.size;
+exports.size = size;
+var toList = Belt_internalAVLtree.toList;
+exports.toList = toList;
+var toArray = Belt_internalAVLtree.toArray;
+exports.toArray = toArray;
+var fromArray = Belt_internalMapString.fromArray;
+exports.fromArray = fromArray;
+var keysToArray = Belt_internalAVLtree.keysToArray;
+exports.keysToArray = keysToArray;
+var valuesToArray = Belt_internalAVLtree.valuesToArray;
+exports.valuesToArray = valuesToArray;
+var minKey = Belt_internalAVLtree.minKey;
+exports.minKey = minKey;
+var minKeyUndefined = Belt_internalAVLtree.minKeyUndefined;
+exports.minKeyUndefined = minKeyUndefined;
+var maxKey = Belt_internalAVLtree.maxKey;
+exports.maxKey = maxKey;
+var maxKeyUndefined = Belt_internalAVLtree.maxKeyUndefined;
+exports.maxKeyUndefined = maxKeyUndefined;
+var minimum = Belt_internalAVLtree.minimum;
+exports.minimum = minimum;
+var minUndefined = Belt_internalAVLtree.minUndefined;
+exports.minUndefined = minUndefined;
+var maximum = Belt_internalAVLtree.maximum;
+exports.maximum = maximum;
+var maxUndefined = Belt_internalAVLtree.maxUndefined;
+exports.maxUndefined = maxUndefined;
+var get = Belt_internalMapString.get;
+exports.get = get;
+var getUndefined = Belt_internalMapString.getUndefined;
+exports.getUndefined = getUndefined;
+var getWithDefault = Belt_internalMapString.getWithDefault;
+exports.getWithDefault = getWithDefault;
+var getExn = Belt_internalMapString.getExn;
+exports.getExn = getExn;
+var checkInvariantInternal = Belt_internalAVLtree.checkInvariantInternal;
+exports.checkInvariantInternal = checkInvariantInternal;
+var mergeU = Belt_internalMapString.mergeU;
+exports.mergeU = mergeU;
+var merge = Belt_internalMapString.merge;
+exports.merge = merge;
+var keepU = Belt_internalAVLtree.keepSharedU;
+exports.keepU = keepU;
+var keep = Belt_internalAVLtree.keepShared;
+exports.keep = keep;
+var partitionU = Belt_internalAVLtree.partitionSharedU;
+exports.partitionU = partitionU;
+var partition = Belt_internalAVLtree.partitionShared;
+exports.partition = partition;
+var split = Belt_internalMapString.split;
+exports.split = split;
+var mapU = Belt_internalAVLtree.mapU;
+exports.mapU = mapU;
+var map = Belt_internalAVLtree.map;
+exports.map = map;
+var mapWithKeyU = Belt_internalAVLtree.mapWithKeyU;
+exports.mapWithKeyU = mapWithKeyU;
+var mapWithKey = Belt_internalAVLtree.mapWithKey;
+/* No side effect */
+
+exports.mapWithKey = mapWithKey;
+},{"./curry.js":"../node_modules/bs-platform/lib/es6/curry.js","./caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js","./belt_internalAVLtree.js":"../node_modules/bs-platform/lib/es6/belt_internalAVLtree.js","./belt_internalMapString.js":"../node_modules/bs-platform/lib/es6/belt_internalMapString.js"}],"../node_modules/bs-platform/lib/es6/camlinternalOO.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.public_method_label = public_method_label;
+exports.new_method = new_method;
+exports.new_variable = new_variable;
+exports.new_methods_variables = new_methods_variables;
+exports.get_variable = get_variable;
+exports.get_variables = get_variables;
+exports.get_method_label = get_method_label;
+exports.get_method_labels = get_method_labels;
+exports.get_method = get_method;
+exports.set_method = set_method;
+exports.set_methods = set_methods;
+exports.narrow = narrow;
+exports.widen = widen;
+exports.add_initializer = add_initializer;
+exports.create_table = create_table;
+exports.init_class = init_class;
+exports.inherits = inherits;
+exports.make_class = make_class;
+exports.make_class_store = make_class_store;
+exports.copy = copy;
+exports.create_object = create_object;
+exports.create_object_opt = create_object_opt;
+exports.run_initializers = run_initializers;
+exports.run_initializers_opt = run_initializers_opt;
+exports.create_object_and_run_initializers = create_object_and_run_initializers;
+exports.lookup_tables = lookup_tables;
+exports.stats = stats;
+exports.params = exports.dummy_table = void 0;
+
+var List = _interopRequireWildcard(require("./list.js"));
+
+var $$Array = _interopRequireWildcard(require("./array.js"));
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Caml_oo = _interopRequireWildcard(require("./caml_oo.js"));
+
+var Caml_obj = _interopRequireWildcard(require("./caml_obj.js"));
+
+var Caml_array = _interopRequireWildcard(require("./caml_array.js"));
+
+var Belt_MapInt = _interopRequireWildcard(require("./belt_MapInt.js"));
+
+var Caml_string = _interopRequireWildcard(require("./caml_string.js"));
+
+var Belt_MapString = _interopRequireWildcard(require("./belt_MapString.js"));
+
+var Caml_js_exceptions = _interopRequireWildcard(require("./caml_js_exceptions.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var new_object_tag_block = function (size) {
+  var v = new Array(size);
+  v.TAG = 248; // tag
+
+  return v;
+};
+
+function copy(o) {
+  return Caml_oo.caml_set_oo_id(Caml_obj.caml_obj_dup(o));
+}
+
+var params = {
+  compact_table: true,
+  copy_parent: true,
+  clean_when_copying: true,
+  retry_count: 3,
+  bucket_small_size: 16
+};
+exports.params = params;
+
+function public_method_label(s) {
+  var accu = 0;
+
+  for (var i = 0, i_finish = s.length; i < i_finish; ++i) {
+    accu = Math.imul(223, accu) + Caml_string.get(s, i) | 0;
+  }
+
+  accu = accu & 2147483647;
+
+  if (accu > 1073741823) {
+    return accu - -2147483648 | 0;
+  } else {
+    return accu;
+  }
+}
+
+var dummy_table = {
+  size: 0,
+  methods: [undefined],
+  methods_by_name: undefined,
+  methods_by_label: undefined,
+  previous_states:
+  /* [] */
+  0,
+  hidden_meths:
+  /* [] */
+  0,
+  vars: undefined,
+  initializers:
+  /* [] */
+  0
+};
+exports.dummy_table = dummy_table;
+var table_count = {
+  contents: 0
+};
+
+function fit_size(n) {
+  if (n <= 2) {
+    return n;
+  } else {
+    return fit_size((n + 1 | 0) / 2 | 0) << 1;
+  }
+}
+
+function new_table(pub_labels) {
+  table_count.contents = table_count.contents + 1 | 0;
+  var len = pub_labels.length;
+  var methods = Caml_array.caml_make_vect((len << 1) + 2 | 0,
+  /* DummyA */
+  0);
+  Caml_array.set(methods, 0, len);
+  Caml_array.set(methods, 1, ((fit_size(len) << 5) / 8 | 0) - 1 | 0);
+
+  for (var i = 0; i < len; ++i) {
+    Caml_array.set(methods, (i << 1) + 3 | 0, Caml_array.get(pub_labels, i));
+  }
+
+  return {
+    size: 2,
+    methods: methods,
+    methods_by_name: undefined,
+    methods_by_label: undefined,
+    previous_states:
+    /* [] */
+    0,
+    hidden_meths:
+    /* [] */
+    0,
+    vars: undefined,
+    initializers:
+    /* [] */
+    0
+  };
+}
+
+function resize(array, new_size) {
+  var old_size = array.methods.length;
+
+  if (new_size <= old_size) {
+    return;
+  }
+
+  var new_buck = Caml_array.caml_make_vect(new_size,
+  /* DummyA */
+  0);
+  $$Array.blit(array.methods, 0, new_buck, 0, old_size);
+  array.methods = new_buck;
+}
+
+var method_count = {
+  contents: 0
+};
+var inst_var_count = {
+  contents: 0
+};
+
+function new_method(table) {
+  var index = table.methods.length;
+  resize(table, index + 1 | 0);
+  return index;
+}
+
+function get_method_label(table, name) {
+  var x = Belt_MapString.getUndefined(table.methods_by_name, name);
+
+  if (x !== undefined) {
+    return x;
+  }
+
+  var label = new_method(table);
+  table.methods_by_name = Belt_MapString.set(table.methods_by_name, name, label);
+  table.methods_by_label = Belt_MapInt.set(table.methods_by_label, label, true);
+  return label;
+}
+
+function get_method_labels(table, names) {
+  return $$Array.map(function (param) {
+    return get_method_label(table, param);
+  }, names);
+}
+
+function set_method(table, label, element) {
+  method_count.contents = method_count.contents + 1 | 0;
+
+  if (Belt_MapInt.getExn(table.methods_by_label, label)) {
+    resize(table, label + 1 | 0);
+    return Caml_array.set(table.methods, label, element);
+  } else {
+    table.hidden_meths = {
+      hd: [label, element],
+      tl: table.hidden_meths
+    };
+    return;
+  }
+}
+
+function get_method(table, label) {
+  try {
+    return List.assoc(label, table.hidden_meths);
+  } catch (raw_exn) {
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+
+    if (exn.RE_EXN_ID === "Not_found") {
+      return Caml_array.get(table.methods, label);
+    }
+
+    throw exn;
+  }
+}
+
+function to_list(arr) {
+  if (arr === 0) {
+    return (
+      /* [] */
+      0
+    );
+  } else {
+    return $$Array.to_list(arr);
+  }
+}
+
+function narrow(table, vars, virt_meths, concr_meths) {
+  var vars$1 = to_list(vars);
+  var virt_meths$1 = to_list(virt_meths);
+  var concr_meths$1 = to_list(concr_meths);
+  var virt_meth_labs = List.map(function (param) {
+    return get_method_label(table, param);
+  }, virt_meths$1);
+  var concr_meth_labs = List.map(function (param) {
+    return get_method_label(table, param);
+  }, concr_meths$1);
+  table.previous_states = {
+    hd: [table.methods_by_name, table.methods_by_label, table.hidden_meths, table.vars, virt_meth_labs, vars$1],
+    tl: table.previous_states
+  };
+  table.vars = Belt_MapString.reduceU(table.vars, undefined, function (tvars, lab, info) {
+    if (List.mem(lab, vars$1)) {
+      return Belt_MapString.set(tvars, lab, info);
+    } else {
+      return tvars;
+    }
+  });
+  var by_name = {
+    contents: undefined
+  };
+  var by_label = {
+    contents: undefined
+  };
+  List.iter2(function (met, label) {
+    by_name.contents = Belt_MapString.set(by_name.contents, met, label);
+    by_label.contents = Belt_MapInt.set(by_label.contents, label, Belt_MapInt.getWithDefault(table.methods_by_label, label, true));
+  }, concr_meths$1, concr_meth_labs);
+  List.iter2(function (met, label) {
+    by_name.contents = Belt_MapString.set(by_name.contents, met, label);
+    by_label.contents = Belt_MapInt.set(by_label.contents, label, false);
+  }, virt_meths$1, virt_meth_labs);
+  table.methods_by_name = by_name.contents;
+  table.methods_by_label = by_label.contents;
+  table.hidden_meths = List.fold_right(function (met, hm) {
+    if (List.mem(met[0], virt_meth_labs)) {
+      return hm;
+    } else {
+      return {
+        hd: met,
+        tl: hm
+      };
+    }
+  }, table.hidden_meths,
+  /* [] */
+  0);
+}
+
+function widen(table) {
+  var match = List.hd(table.previous_states);
+  var virt_meths = match[4];
+  table.previous_states = List.tl(table.previous_states);
+  table.vars = List.fold_left(function (s, v) {
+    return Belt_MapString.set(s, v, Belt_MapString.getExn(table.vars, v));
+  }, match[3], match[5]);
+  table.methods_by_name = match[0];
+  table.methods_by_label = match[1];
+  table.hidden_meths = List.fold_right(function (met, hm) {
+    if (List.mem(met[0], virt_meths)) {
+      return hm;
+    } else {
+      return {
+        hd: met,
+        tl: hm
+      };
+    }
+  }, table.hidden_meths, match[2]);
+}
+
+function new_slot(table) {
+  var index = table.size;
+  table.size = index + 1 | 0;
+  return index;
+}
+
+function new_variable(table, name) {
+  var x = Belt_MapString.getUndefined(table.vars, name);
+
+  if (x !== undefined) {
+    return x;
+  }
+
+  var index = new_slot(table);
+
+  if (name !== "") {
+    table.vars = Belt_MapString.set(table.vars, name, index);
+  }
+
+  return index;
+}
+
+function to_array(arr) {
+  if (Caml_obj.caml_equal(arr, 0)) {
+    return [];
+  } else {
+    return arr;
+  }
+}
+
+function new_methods_variables(table, meths, vals) {
+  var meths$1 = to_array(meths);
+  var nmeths = meths$1.length;
+  var nvals = vals.length;
+  var res = Caml_array.caml_make_vect(nmeths + nvals | 0, 0);
+
+  for (var i = 0; i < nmeths; ++i) {
+    Caml_array.set(res, i, get_method_label(table, Caml_array.get(meths$1, i)));
+  }
+
+  for (var i$1 = 0; i$1 < nvals; ++i$1) {
+    Caml_array.set(res, i$1 + nmeths | 0, new_variable(table, Caml_array.get(vals, i$1)));
+  }
+
+  return res;
+}
+
+function get_variable(table, name) {
+  return Belt_MapString.getExn(table.vars, name);
+}
+
+function get_variables(table, names) {
+  return $$Array.map(function (param) {
+    return Belt_MapString.getExn(table.vars, param);
+  }, names);
+}
+
+function add_initializer(table, f) {
+  table.initializers = {
+    hd: f,
+    tl: table.initializers
+  };
+}
+
+function create_table(public_methods) {
+  if (public_methods === 0) {
+    return new_table([]);
+  }
+
+  var tags = $$Array.map(public_method_label, public_methods);
+  var table = new_table(tags);
+  $$Array.iteri(function (i, met) {
+    var lab = (i << 1) + 2 | 0;
+    table.methods_by_name = Belt_MapString.set(table.methods_by_name, met, lab);
+    table.methods_by_label = Belt_MapInt.set(table.methods_by_label, lab, true);
+  }, public_methods);
+  return table;
+}
+
+function init_class(table) {
+  inst_var_count.contents = (inst_var_count.contents + table.size | 0) - 1 | 0;
+  table.initializers = List.rev(table.initializers);
+  return resize(table, 3 + ((Caml_array.get(table.methods, 1) << 4) / 32 | 0) | 0);
+}
+
+function inherits(cla, vals, virt_meths, concr_meths, param, top) {
+  var $$super = param[1];
+  narrow(cla, vals, virt_meths, concr_meths);
+  var init = top ? Curry._2($$super, cla, param[3]) : Curry._1($$super, cla);
+  widen(cla);
+  return Caml_array.caml_array_concat({
+    hd: [init],
+    tl: {
+      hd: $$Array.map(function (param) {
+        return Belt_MapString.getExn(cla.vars, param);
+      }, to_array(vals)),
+      tl: {
+        hd: $$Array.map(function (nm) {
+          return get_method(cla, get_method_label(cla, nm));
+        }, to_array(concr_meths)),
+        tl:
+        /* [] */
+        0
+      }
+    }
+  });
+}
+
+function make_class(pub_meths, class_init) {
+  var table = create_table(pub_meths);
+
+  var env_init = Curry._1(class_init, table);
+
+  init_class(table);
+  return [Curry._1(env_init, 0), class_init, env_init, 0];
+}
+
+function make_class_store(pub_meths, class_init, init_table) {
+  var table = create_table(pub_meths);
+
+  var env_init = Curry._1(class_init, table);
+
+  init_class(table);
+  init_table.class_init = class_init;
+  init_table.env_init = env_init;
+}
+
+function create_object(table) {
+  var obj = new_object_tag_block(table.size);
+  obj[0] = table.methods;
+  return Caml_oo.caml_set_oo_id(obj);
+}
+
+function create_object_opt(obj_0, table) {
+  if (obj_0) {
+    return obj_0;
+  }
+
+  var obj = new_object_tag_block(table.size);
+  obj[0] = table.methods;
+  return Caml_oo.caml_set_oo_id(obj);
+}
+
+function iter_f(obj, _param) {
+  while (true) {
+    var param = _param;
+
+    if (!param) {
+      return;
+    }
+
+    Curry._1(param.hd, obj);
+
+    _param = param.tl;
+    continue;
+  }
+
+  ;
+}
+
+function run_initializers(obj, table) {
+  var inits = table.initializers;
+
+  if (inits !==
+  /* [] */
+  0) {
+    return iter_f(obj, inits);
+  }
+}
+
+function run_initializers_opt(obj_0, obj, table) {
+  if (obj_0) {
+    return obj;
+  }
+
+  var inits = table.initializers;
+
+  if (inits !==
+  /* [] */
+  0) {
+    iter_f(obj, inits);
+  }
+
+  return obj;
+}
+
+function create_object_and_run_initializers(obj_0, table) {
+  if (obj_0) {
+    return obj_0;
+  }
+
+  var obj = create_object(table);
+  run_initializers(obj, table);
+  return obj;
+}
+
+function set_data(tables, v) {
+  if (tables) {
+    tables.data = v;
+    return;
+  }
+
+  throw {
+    RE_EXN_ID: "Assert_failure",
+    _1: ["camlinternalOO.ml", 492, 13],
+    Error: new Error()
+  };
+}
+
+function set_next(tables, v) {
+  if (tables) {
+    tables.next = v;
+    return;
+  }
+
+  throw {
+    RE_EXN_ID: "Assert_failure",
+    _1: ["camlinternalOO.ml", 495, 13],
+    Error: new Error()
+  };
+}
+
+function get_key(tables) {
+  if (tables) {
+    return tables.key;
+  }
+
+  throw {
+    RE_EXN_ID: "Assert_failure",
+    _1: ["camlinternalOO.ml", 498, 13],
+    Error: new Error()
+  };
+}
+
+function get_data(tables) {
+  if (tables) {
+    return tables.data;
+  }
+
+  throw {
+    RE_EXN_ID: "Assert_failure",
+    _1: ["camlinternalOO.ml", 501, 13],
+    Error: new Error()
+  };
+}
+
+function get_next(tables) {
+  if (tables) {
+    return tables.next;
+  }
+
+  throw {
+    RE_EXN_ID: "Assert_failure",
+    _1: ["camlinternalOO.ml", 504, 13],
+    Error: new Error()
+  };
+}
+
+function build_path(n, keys, tables) {
+  var res =
+  /* Cons */
+  {
+    key: 0,
+    data:
+    /* Empty */
+    0,
+    next:
+    /* Empty */
+    0
+  };
+  var r = res;
+
+  for (var i = 0; i <= n; ++i) {
+    r =
+    /* Cons */
+    {
+      key: Caml_array.get(keys, i),
+      data: r,
+      next:
+      /* Empty */
+      0
+    };
+  }
+
+  set_data(tables, r);
+  return res;
+}
+
+function lookup_keys(i, keys, tables) {
+  if (i < 0) {
+    return tables;
+  }
+
+  var key = Caml_array.get(keys, i);
+  var _tables = tables;
+
+  while (true) {
+    var tables$1 = _tables;
+
+    if (get_key(tables$1) === key) {
+      var tables_data = get_data(tables$1);
+
+      if (tables_data) {
+        return lookup_keys(i - 1 | 0, keys, tables_data);
+      }
+
+      throw {
+        RE_EXN_ID: "Assert_failure",
+        _1: ["camlinternalOO.ml", 522, 17],
+        Error: new Error()
+      };
+    }
+
+    var next = get_next(tables$1);
+
+    if (next) {
+      _tables = next;
+      continue;
+    }
+
+    var next$1 =
+    /* Cons */
+    {
+      key: key,
+      data:
+      /* Empty */
+      0,
+      next:
+      /* Empty */
+      0
+    };
+    set_next(tables$1, next$1);
+    return build_path(i - 1 | 0, keys, next$1);
+  }
+
+  ;
+}
+
+function lookup_tables(root, keys) {
+  var root_data = get_data(root);
+
+  if (root_data) {
+    return lookup_keys(keys.length - 1 | 0, keys, root_data);
+  } else {
+    return build_path(keys.length - 1 | 0, keys, root);
+  }
+}
+
+function new_cache(table) {
+  var n = new_method(table);
+  var n$1 = n % 2 === 0 || n > (2 + ((Caml_array.get(table.methods, 1) << 4) / 32 | 0) | 0) ? n : new_method(table);
+  Caml_array.set(table.methods, n$1, 0);
+  return n$1;
+}
+
+function method_impl(table, i, arr) {
+  var next = function (param) {
+    i.contents = i.contents + 1 | 0;
+    return Caml_array.get(arr, i.contents);
+  };
+
+  var clo = next(undefined);
+
+  if (typeof clo !== "number") {
+    return clo;
+  }
+
+  switch (clo) {
+    case
+    /* GetConst */
+    0:
+      var x = next(undefined);
+      return function (_obj) {
+        return x;
+      };
+
+    case
+    /* GetVar */
+    1:
+      var n = next(undefined);
+      return function (obj) {
+        return obj[n];
+      };
+
+    case
+    /* GetEnv */
+    2:
+      var e = next(undefined);
+      var n$1 = next(undefined);
+      return function (obj) {
+        return obj[e][n$1];
+      };
+
+    case
+    /* GetMeth */
+    3:
+      var n$2 = next(undefined);
+      return function (obj) {
+        return Curry._1(obj[0][n$2], obj);
+      };
+
+    case
+    /* SetVar */
+    4:
+      var n$3 = next(undefined);
+      return function (obj, x) {
+        obj[n$3] = x;
+      };
+
+    case
+    /* AppConst */
+    5:
+      var f = next(undefined);
+      var x$1 = next(undefined);
+      return function (_obj) {
+        return Curry._1(f, x$1);
+      };
+
+    case
+    /* AppVar */
+    6:
+      var f$1 = next(undefined);
+      var n$4 = next(undefined);
+      return function (obj) {
+        return Curry._1(f$1, obj[n$4]);
+      };
+
+    case
+    /* AppEnv */
+    7:
+      var f$2 = next(undefined);
+      var e$1 = next(undefined);
+      var n$5 = next(undefined);
+      return function (obj) {
+        return Curry._1(f$2, obj[e$1][n$5]);
+      };
+
+    case
+    /* AppMeth */
+    8:
+      var f$3 = next(undefined);
+      var n$6 = next(undefined);
+      return function (obj) {
+        return Curry._1(f$3, Curry._1(obj[0][n$6], obj));
+      };
+
+    case
+    /* AppConstConst */
+    9:
+      var f$4 = next(undefined);
+      var x$2 = next(undefined);
+      var y = next(undefined);
+      return function (_obj) {
+        return Curry._2(f$4, x$2, y);
+      };
+
+    case
+    /* AppConstVar */
+    10:
+      var f$5 = next(undefined);
+      var x$3 = next(undefined);
+      var n$7 = next(undefined);
+      return function (obj) {
+        return Curry._2(f$5, x$3, obj[n$7]);
+      };
+
+    case
+    /* AppConstEnv */
+    11:
+      var f$6 = next(undefined);
+      var x$4 = next(undefined);
+      var e$2 = next(undefined);
+      var n$8 = next(undefined);
+      return function (obj) {
+        return Curry._2(f$6, x$4, obj[e$2][n$8]);
+      };
+
+    case
+    /* AppConstMeth */
+    12:
+      var f$7 = next(undefined);
+      var x$5 = next(undefined);
+      var n$9 = next(undefined);
+      return function (obj) {
+        return Curry._2(f$7, x$5, Curry._1(obj[0][n$9], obj));
+      };
+
+    case
+    /* AppVarConst */
+    13:
+      var f$8 = next(undefined);
+      var n$10 = next(undefined);
+      var x$6 = next(undefined);
+      return function (obj) {
+        return Curry._2(f$8, obj[n$10], x$6);
+      };
+
+    case
+    /* AppEnvConst */
+    14:
+      var f$9 = next(undefined);
+      var e$3 = next(undefined);
+      var n$11 = next(undefined);
+      var x$7 = next(undefined);
+      return function (obj) {
+        return Curry._2(f$9, obj[e$3][n$11], x$7);
+      };
+
+    case
+    /* AppMethConst */
+    15:
+      var f$10 = next(undefined);
+      var n$12 = next(undefined);
+      var x$8 = next(undefined);
+      return function (obj) {
+        return Curry._2(f$10, Curry._1(obj[0][n$12], obj), x$8);
+      };
+
+    case
+    /* MethAppConst */
+    16:
+      var n$13 = next(undefined);
+      var x$9 = next(undefined);
+      return function (obj) {
+        return Curry._2(obj[0][n$13], obj, x$9);
+      };
+
+    case
+    /* MethAppVar */
+    17:
+      var n$14 = next(undefined);
+      var m = next(undefined);
+      return function (obj) {
+        return Curry._2(obj[0][n$14], obj, obj[m]);
+      };
+
+    case
+    /* MethAppEnv */
+    18:
+      var n$15 = next(undefined);
+      var e$4 = next(undefined);
+      var m$1 = next(undefined);
+      return function (obj) {
+        return Curry._2(obj[0][n$15], obj, obj[e$4][m$1]);
+      };
+
+    case
+    /* MethAppMeth */
+    19:
+      var n$16 = next(undefined);
+      var m$2 = next(undefined);
+      return function (obj) {
+        return Curry._2(obj[0][n$16], obj, Curry._1(obj[0][m$2], obj));
+      };
+
+    case
+    /* SendConst */
+    20:
+      var m$3 = next(undefined);
+      var x$10 = next(undefined);
+      new_cache(table);
+      return function (obj) {
+        return Curry._1(Curry._3(Caml_oo.caml_get_public_method, x$10, m$3, 1), x$10);
+      };
+
+    case
+    /* SendVar */
+    21:
+      var m$4 = next(undefined);
+      var n$17 = next(undefined);
+      new_cache(table);
+      return function (obj) {
+        var tmp = obj[n$17];
+        return Curry._1(Curry._3(Caml_oo.caml_get_public_method, tmp, m$4, 2), tmp);
+      };
+
+    case
+    /* SendEnv */
+    22:
+      var m$5 = next(undefined);
+      var e$5 = next(undefined);
+      var n$18 = next(undefined);
+      new_cache(table);
+      return function (obj) {
+        var tmp = obj[e$5][n$18];
+        return Curry._1(Curry._3(Caml_oo.caml_get_public_method, tmp, m$5, 3), tmp);
+      };
+
+    case
+    /* SendMeth */
+    23:
+      var m$6 = next(undefined);
+      var n$19 = next(undefined);
+      new_cache(table);
+      return function (obj) {
+        var tmp = Curry._1(obj[0][n$19], obj);
+
+        return Curry._1(Curry._3(Caml_oo.caml_get_public_method, tmp, m$6, 4), tmp);
+      };
+  }
+}
+
+function set_methods(table, methods) {
+  var len = methods.length;
+  var i = {
+    contents: 0
+  };
+
+  while (i.contents < len) {
+    var label = Caml_array.get(methods, i.contents);
+    var clo = method_impl(table, i, methods);
+    set_method(table, label, clo);
+    i.contents = i.contents + 1 | 0;
+  }
+
+  ;
+}
+
+function stats(param) {
+  return {
+    classes: table_count.contents,
+    methods: method_count.contents,
+    inst_vars: inst_var_count.contents
+  };
+}
+/* No side effect */
+},{"./list.js":"../node_modules/bs-platform/lib/es6/list.js","./array.js":"../node_modules/bs-platform/lib/es6/array.js","./curry.js":"../node_modules/bs-platform/lib/es6/curry.js","./caml_oo.js":"../node_modules/bs-platform/lib/es6/caml_oo.js","./caml_obj.js":"../node_modules/bs-platform/lib/es6/caml_obj.js","./caml_array.js":"../node_modules/bs-platform/lib/es6/caml_array.js","./belt_MapInt.js":"../node_modules/bs-platform/lib/es6/belt_MapInt.js","./caml_string.js":"../node_modules/bs-platform/lib/es6/caml_string.js","./belt_MapString.js":"../node_modules/bs-platform/lib/es6/belt_MapString.js","./caml_js_exceptions.js":"../node_modules/bs-platform/lib/es6/caml_js_exceptions.js"}],"../node_modules/bs-axios/src/axios.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41631,9 +46828,13 @@ function postRequest(url, body, accessToken, onSuccess, onFail) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Playlist = exports.Search = exports.Authorization = exports.base = void 0;
+exports.Playlist = exports.Profile = exports.Search = exports.Authorization = exports.base = void 0;
 
 var Uuid = _interopRequireWildcard(require("uuid"));
+
+var Curry = _interopRequireWildcard(require("bs-platform/lib/es6/curry.js"));
+
+var CamlinternalOO = _interopRequireWildcard(require("bs-platform/lib/es6/camlinternalOO.js"));
 
 var Ajax$Turntableam = _interopRequireWildcard(require("./Ajax.bs.js"));
 
@@ -41679,13 +46880,54 @@ var Search = {
   searchTrack: searchTrack
 };
 exports.Search = Search;
-var Playlist = {};
+
+function getCurrentUsersProfile(accessToken) {
+  return Ajax$Turntableam.getRequest("https://api.spotify.com/v1/me", accessToken, function (data) {
+    return Promise.resolve((console.log(data), undefined));
+  }, function (error) {
+    return Promise.resolve((console.log(error), undefined));
+  });
+}
+
+var Profile = {
+  getCurrentUsersProfile: getCurrentUsersProfile
+};
+exports.Profile = Profile;
+var class_tables =
+/* Cons */
+{
+  key: undefined,
+  data: undefined,
+  next: undefined
+};
+
+function create(param) {
+  if (!class_tables.key) {
+    var $$class = CamlinternalOO.create_table(0);
+    var env = CamlinternalOO.new_variable($$class, "");
+
+    var env_init = function env_init(env$1) {
+      var self = CamlinternalOO.create_object_opt(undefined, $$class);
+      self[env] = env$1;
+      return self;
+    };
+
+    CamlinternalOO.init_class($$class);
+    class_tables.key = env_init;
+  }
+
+  return Curry._1(class_tables.key, undefined);
+}
+
+var Playlist = {
+  create: create
+};
 exports.Playlist = Playlist;
 var base = "https://api.spotify.com";
 /* state Not a pure module */
 
 exports.base = base;
-},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js","./Ajax.bs.js":"services/Ajax.bs.js"}],"../node_modules/bs-platform/lib/es6/js_dict.js":[function(require,module,exports) {
+},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js","bs-platform/lib/es6/curry.js":"../node_modules/bs-platform/lib/es6/curry.js","bs-platform/lib/es6/camlinternalOO.js":"../node_modules/bs-platform/lib/es6/camlinternalOO.js","./Ajax.bs.js":"services/Ajax.bs.js"}],"../node_modules/bs-platform/lib/es6/js_dict.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -59327,6 +64569,7 @@ function App(Props) {
   var setPage = match.setPage;
   var match$1 = React.useState(function () {});
   var setAccessToken = match$1[1];
+  var MissingAccessToken = Caml_exceptions.create("MissingAccessToken");
   React.useEffect(function () {
     var accessToken = ParseUrl$Turntableam.getAccessToken(document.location.href);
 
@@ -59353,7 +64596,14 @@ function App(Props) {
         return Promise.resolve(undefined);
       });
     } else {
-      var MissingAccessToken = Caml_exceptions.create("MissingAccessToken");
+      Promise.reject({
+        RE_EXN_ID: MissingAccessToken
+      });
+    }
+
+    if (accessToken !== undefined) {
+      SpotifyAPI$Turntableam.Profile.getCurrentUsersProfile(accessToken);
+    } else {
       Promise.reject({
         RE_EXN_ID: MissingAccessToken
       });

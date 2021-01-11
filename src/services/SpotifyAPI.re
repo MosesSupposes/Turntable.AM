@@ -65,4 +65,17 @@ module Search = {
   };
 };
 
-module Playlist = {};
+module Profile = {
+  let getCurrentUsersProfile = (accessToken: string) => {
+    Ajax.getRequest(
+      ~url="https://api.spotify.com/v1/me",
+      ~accessToken,
+      ~onSuccess=data => Js.Promise.resolve(Js.log(data)),
+      ~onFail=error => Js.Promise.resolve(Js.log(error)),
+    );
+  };
+};
+
+module Playlist = {
+  let create = () => {};
+};
