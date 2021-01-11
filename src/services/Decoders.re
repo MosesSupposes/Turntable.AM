@@ -110,3 +110,36 @@ module MusicPlayer = {
     };
   };
 };
+
+module Profile = {
+  type followers = {
+    href: option(string),
+    total: int,
+  };
+  type user = {
+    country: string,
+    display_name: string,
+    email: string,
+    followers,
+    href: string, // A link to the user's Spotify profile
+    id: string,
+    images: array(option(string)),
+  };
+
+  let decodeFollowers = json =>
+    Json.Decode.{
+      href: json |> field("href", optional(string)),
+      total: json |> field("total", int),
+    };
+
+  let decodeUser = json =>
+    Json.Decode.{
+      country: json |> field("country", string),
+      display_name: json |> field("display_name", string),
+      email: json |> field("email", string),
+      followers: json |> field("followers", decodeFollowers),
+      href: json |> field("href", string),
+      id: json |> field("id", string),
+      images: json |> field("images", array(optional(string))),
+    };
+};

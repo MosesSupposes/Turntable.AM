@@ -90,8 +90,39 @@ var MusicPlayer = {
   decodeTrackInfo: decodeTrackInfo
 };
 
+function decodeFollowers(json) {
+  return {
+          href: Json_decode.field("href", (function (param) {
+                  return Json_decode.optional(Json_decode.string, param);
+                }), json),
+          total: Json_decode.field("total", Json_decode.$$int, json)
+        };
+}
+
+function decodeUser(json) {
+  return {
+          country: Json_decode.field("country", Json_decode.string, json),
+          display_name: Json_decode.field("display_name", Json_decode.string, json),
+          email: Json_decode.field("email", Json_decode.string, json),
+          followers: Json_decode.field("followers", decodeFollowers, json),
+          href: Json_decode.field("href", Json_decode.string, json),
+          id: Json_decode.field("id", Json_decode.string, json),
+          images: Json_decode.field("images", (function (param) {
+                  return Json_decode.array((function (param) {
+                                return Json_decode.optional(Json_decode.string, param);
+                              }), param);
+                }), json)
+        };
+}
+
+var Profile = {
+  decodeFollowers: decodeFollowers,
+  decodeUser: decodeUser
+};
+
 export {
   MusicPlayer ,
+  Profile ,
   
 }
 /* No side effect */

@@ -47533,7 +47533,7 @@ exports.tuple2 = tuple2;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MusicPlayer = void 0;
+exports.Profile = exports.MusicPlayer = void 0;
 
 var Json_decode = _interopRequireWildcard(require("@glennsl/bs-json/src/Json_decode.bs.js"));
 
@@ -47629,9 +47629,40 @@ var MusicPlayer = {
   decodeTrackWindow: decodeTrackWindow,
   decodeTrackInfo: decodeTrackInfo
 };
+exports.MusicPlayer = MusicPlayer;
+
+function decodeFollowers(json) {
+  return {
+    href: Json_decode.field("href", function (param) {
+      return Json_decode.optional(Json_decode.string, param);
+    }, json),
+    total: Json_decode.field("total", Json_decode.$$int, json)
+  };
+}
+
+function decodeUser(json) {
+  return {
+    country: Json_decode.field("country", Json_decode.string, json),
+    display_name: Json_decode.field("display_name", Json_decode.string, json),
+    email: Json_decode.field("email", Json_decode.string, json),
+    followers: Json_decode.field("followers", decodeFollowers, json),
+    href: Json_decode.field("href", Json_decode.string, json),
+    id: Json_decode.field("id", Json_decode.string, json),
+    images: Json_decode.field("images", function (param) {
+      return Json_decode.array(function (param) {
+        return Json_decode.optional(Json_decode.string, param);
+      }, param);
+    }, json)
+  };
+}
+
+var Profile = {
+  decodeFollowers: decodeFollowers,
+  decodeUser: decodeUser
+};
 /* No side effect */
 
-exports.MusicPlayer = MusicPlayer;
+exports.Profile = Profile;
 },{"@glennsl/bs-json/src/Json_decode.bs.js":"../node_modules/@glennsl/bs-json/src/Json_decode.bs.js"}],"../node_modules/@material-ui/utils/esm/chainPropTypes.js":[function(require,module,exports) {
 "use strict";
 
@@ -64677,7 +64708,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62341" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50675" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
