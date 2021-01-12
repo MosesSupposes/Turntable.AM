@@ -3,8 +3,9 @@ let getRequest =
       ~url: string,
       ~accessToken: string,
       ~onSuccess: Js.Promise.t('a) => Js.Promise.t('b),
-      ~onFail: Js.Promise.error => Js.Promise.t('a),
+      ~onFail,
     )
+    /*~onFail: Js.Promise.error => Js.Promise.t('a),*/
     : Js.Promise.t('a) => {
   let headers =
     Axios.Headers.fromObj({"Authorization": {j|Bearer $accessToken|j}});
@@ -12,8 +13,8 @@ let getRequest =
     Axios.getc(url, Axios.makeConfig(~headers, ()))
     |> then_(response => resolve(response##data))
     |> then_(onSuccess)
-    |> catch(onFail)
   );
+  /*|> catch(onFail)*/
 };
 
 let postRequest =

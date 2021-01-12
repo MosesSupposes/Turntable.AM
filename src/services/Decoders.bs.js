@@ -108,14 +108,31 @@ function decodeUser(json) {
           href: Json_decode.field("href", Json_decode.string, json),
           id: Json_decode.field("id", Json_decode.string, json),
           images: Json_decode.field("images", (function (param) {
-                  return Json_decode.array((function (param) {
+                  return Json_decode.list((function (param) {
                                 return Json_decode.optional(Json_decode.string, param);
                               }), param);
                 }), json)
         };
 }
 
+var Profile_empty = {
+  country: "",
+  display_name: "",
+  email: "",
+  followers: {
+    href: undefined,
+    total: 0
+  },
+  href: "",
+  id: "",
+  images: {
+    hd: undefined,
+    tl: /* [] */0
+  }
+};
+
 var Profile = {
+  empty: Profile_empty,
   decodeFollowers: decodeFollowers,
   decodeUser: decodeUser
 };

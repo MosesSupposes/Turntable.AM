@@ -123,7 +123,20 @@ module Profile = {
     followers,
     href: string, // A link to the user's Spotify profile
     id: string,
-    images: array(option(string)),
+    images: list(option(string)),
+  };
+
+  let empty = {
+    country: "",
+    display_name: "",
+    email: "",
+    followers: {
+      href: None,
+      total: 0,
+    },
+    href: "",
+    id: "",
+    images: [None],
   };
 
   let decodeFollowers = json =>
@@ -140,6 +153,6 @@ module Profile = {
       followers: json |> field("followers", decodeFollowers),
       href: json |> field("href", string),
       id: json |> field("id", string),
-      images: json |> field("images", array(optional(string))),
+      images: json |> field("images", list(optional(string))),
     };
 };

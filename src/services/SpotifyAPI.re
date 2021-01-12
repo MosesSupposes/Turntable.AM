@@ -70,8 +70,12 @@ module Profile = {
     Ajax.getRequest(
       ~url="https://api.spotify.com/v1/me",
       ~accessToken,
-      ~onSuccess=data => Js.Promise.resolve(Js.log(data)),
-      ~onFail=error => Js.Promise.resolve(Js.log(error)),
+      ~onSuccess=p => p,
+      ~onFail=
+        err => {
+          Js.log(err);
+          Js.Promise.resolve(err);
+        },
     );
   };
 };

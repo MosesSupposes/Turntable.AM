@@ -4,6 +4,7 @@
 let make = () => {
   let {page, setPage}: UsePage.export = UsePage.make();
   let (accessToken, setAccessToken) = React.useState(() => None);
+  let (profile, setProfile) = React.useState(() => Decoders.Profile.empty);
 
   exception MissingAccessToken;
 
@@ -21,7 +22,7 @@ let make = () => {
             ~onSuccess=future => Js.Promise.resolve(Js.log(future)),
             ~onFail=error => Js.Promise.resolve(Js.log(error)),
           )
-        | None => Js.Promise.resolve()
+        | None => Js.Promise.reject(MissingAccessToken)
         };
 
       let moneyLonger =
@@ -43,9 +44,18 @@ let make = () => {
           )
         | None => Js.Promise.reject(MissingAccessToken)
         };
+
       let currentUser =
         switch (accessToken) {
-        | Some(token) => SpotifyAPI.Profile.getCurrentUsersProfile(token)
+        | Some(token) =>
+          SpotifyAPI.Profile.getCurrentUsersProfile(token)
+          |> Js.Promise.(
+               then_(profile => {
+                 let decodedProfile = Decoders.Profile.decodeUser(profile);
+                 setProfile(_ => decodedProfile);
+                 resolve(decodedProfile);
+               })
+             )
         | None => Js.Promise.reject(MissingAccessToken)
         };
       None;

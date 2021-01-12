@@ -62,10 +62,11 @@ var Search = {
 };
 
 function getCurrentUsersProfile(accessToken) {
-  return Ajax$Turntableam.getRequest("https://api.spotify.com/v1/me", accessToken, (function (data) {
-                return Promise.resolve((console.log(data), undefined));
-              }), (function (error) {
-                return Promise.resolve((console.log(error), undefined));
+  return Ajax$Turntableam.getRequest("https://api.spotify.com/v1/me", accessToken, (function (p) {
+                return p;
+              }), (function (err) {
+                console.log(err);
+                return Promise.resolve(err);
               }));
 }
 

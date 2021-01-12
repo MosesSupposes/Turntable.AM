@@ -6,6 +6,7 @@ import * as Caml_exceptions from "bs-platform/lib/es6/caml_exceptions.js";
 import * as Footer$Turntableam from "./Footer.bs.js";
 import * as Header$Turntableam from "./Header.bs.js";
 import * as UsePage$Turntableam from "../hooks/UsePage.bs.js";
+import * as Decoders$Turntableam from "../services/Decoders.bs.js";
 import * as ParseUrl$Turntableam from "../services/ParseUrl.bs.js";
 import * as SpotifyAPI$Turntableam from "../services/SpotifyAPI.bs.js";
 import * as ApplicationContainer$Turntableam from "./ApplicationContainer.bs.js";
@@ -17,6 +18,10 @@ function App(Props) {
         
       });
   var setAccessToken = match$1[1];
+  var match$2 = React.useState(function () {
+        return Decoders$Turntableam.Profile.empty;
+      });
+  var setProfile = match$2[1];
   var MissingAccessToken = Caml_exceptions.create("MissingAccessToken");
   React.useEffect((function () {
           var accessToken = ParseUrl$Turntableam.getAccessToken(document.location.href);
@@ -30,7 +35,9 @@ function App(Props) {
                     return Promise.resolve((console.log(error), undefined));
                   }));
           } else {
-            Promise.resolve(undefined);
+            Promise.reject({
+                  RE_EXN_ID: MissingAccessToken
+                });
           }
           if (accessToken !== undefined) {
             SpotifyAPI$Turntableam.Search.searchTrack(accessToken, "money%20longer", (function (tracksPromise) {
@@ -46,7 +53,13 @@ function App(Props) {
                 });
           }
           if (accessToken !== undefined) {
-            SpotifyAPI$Turntableam.Profile.getCurrentUsersProfile(accessToken);
+            SpotifyAPI$Turntableam.Profile.getCurrentUsersProfile(accessToken).then(function (profile) {
+                  var decodedProfile = Decoders$Turntableam.Profile.decodeUser(profile);
+                  Curry._1(setProfile, (function (param) {
+                          return decodedProfile;
+                        }));
+                  return Promise.resolve(decodedProfile);
+                });
           } else {
             Promise.reject({
                   RE_EXN_ID: MissingAccessToken

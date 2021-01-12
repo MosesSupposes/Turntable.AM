@@ -9,10 +9,10 @@ function getRequest(url, accessToken, onSuccess, onFail) {
         Authorization: "Bearer " + accessToken
       });
   return Axios$1.get(url, {
-                    headers: headers
-                  }).then(function (response) {
-                  return Promise.resolve(response.data);
-                }).then(Curry.__1(onSuccess)).catch(Curry.__1(onFail));
+                  headers: headers
+                }).then(function (response) {
+                return Promise.resolve(response.data);
+              }).then(Curry.__1(onSuccess));
 }
 
 function postRequest(url, body, accessToken, onSuccess, onFail) {
