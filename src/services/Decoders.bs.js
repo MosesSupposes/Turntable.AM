@@ -115,24 +115,7 @@ function decodeUser(json) {
         };
 }
 
-var Profile_empty = {
-  country: "",
-  display_name: "",
-  email: "",
-  followers: {
-    href: undefined,
-    total: 0
-  },
-  href: "",
-  id: "",
-  images: {
-    hd: undefined,
-    tl: /* [] */0
-  }
-};
-
 var Profile = {
-  empty: Profile_empty,
   decodeFollowers: decodeFollowers,
   decodeUser: decodeUser
 };

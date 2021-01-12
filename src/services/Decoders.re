@@ -126,19 +126,6 @@ module Profile = {
     images: list(option(string)),
   };
 
-  let empty = {
-    country: "",
-    display_name: "",
-    email: "",
-    followers: {
-      href: None,
-      total: 0,
-    },
-    href: "",
-    id: "",
-    images: [None],
-  };
-
   let decodeFollowers = json =>
     Json.Decode.{
       href: json |> field("href", optional(string)),

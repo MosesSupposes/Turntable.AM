@@ -4,7 +4,7 @@
 let make = () => {
   let {page, setPage}: UsePage.export = UsePage.make();
   let (accessToken, setAccessToken) = React.useState(() => None);
-  let (profile, setProfile) = React.useState(() => Decoders.Profile.empty);
+  let (profile, setProfile) = React.useState(() => None);
 
   exception MissingAccessToken;
 
@@ -52,7 +52,7 @@ let make = () => {
           |> Js.Promise.(
                then_(profile => {
                  let decodedProfile = Decoders.Profile.decodeUser(profile);
-                 setProfile(_ => decodedProfile);
+                 setProfile(_ => Some(decodedProfile));
                  resolve(decodedProfile);
                })
              )

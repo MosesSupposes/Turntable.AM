@@ -19,7 +19,7 @@ function App(Props) {
       });
   var setAccessToken = match$1[1];
   var match$2 = React.useState(function () {
-        return Decoders$Turntableam.Profile.empty;
+        
       });
   var setProfile = match$2[1];
   var MissingAccessToken = Caml_exceptions.create("MissingAccessToken");

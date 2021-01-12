@@ -81,5 +81,10 @@ module Profile = {
 };
 
 module Playlist = {
-  let create = () => {};
+  let create = (profile: Decoders.Profile.user, accessToken: string) => {
+    let {id} = profile;
+    Ajax.postRequest(
+      ~url={j||https://api.spotify.com/v1/users/$id/playlists|j},
+    );
+  };
 };
