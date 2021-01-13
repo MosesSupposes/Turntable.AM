@@ -5,8 +5,7 @@ let getRequest =
       ~onSuccess: Js.Promise.t('a) => Js.Promise.t('b),
       ~onFail,
     )
-    /*~onFail: Js.Promise.t(Js.Promise.error) => Js.Promise.t('a),*/
-    /*~onFail: Js.Promise.error => Js.Promise.t('a)*/
+    /*~onFail: Js.Promise.error => Js.Promise.t('a),*/
     : Js.Promise.t('a) => {
   let headers =
     Axios.Headers.fromObj({"Authorization": {j|Bearer $accessToken|j}});
@@ -24,7 +23,7 @@ let postRequest =
       ~body: Js.t({..}),
       ~accessToken: string,
       ~onSuccess: Js.Promise.t('a) => Js.Promise.t('b),
-      ~onFail: Js.Promise.error => Js.Promise.t('b),
+      ~onFail: Js.Promise.error => Js.Promise.t('a),
     )
     : Js.Promise.t('a) => {
   let headers =

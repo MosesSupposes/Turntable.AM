@@ -81,10 +81,34 @@ module Profile = {
 };
 
 module Playlist = {
-  let create = (profile: Decoders.Profile.user, accessToken: string) => {
+  type playlistConfig = {
+    name: string,
+    public: bool,
+    collaborative: bool,
+    description: option(string),
+  };
+  let create =
+      (
+        ~config: playlistConfig,
+        ~accessToken: string,
+        ~profile: Decoders.Profile.user,
+      ) => {
     let {id} = profile;
     Ajax.postRequest(
       ~url={j||https://api.spotify.com/v1/users/$id/playlists|j},
+      ~accessToken,
+      ~body={
+        "name": config.name,
+        "public": config.public,
+        "collaborative": config.collaborative,
+        "description": Belt.Option.getWithDefault(config.description, ""),
+      },
+      ~onSuccess=p => p,
+      ~onFail=
+        err => {
+          Js.log(err);
+          Js.Promise.resolve(err);
+        },
     );
   };
 };

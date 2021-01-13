@@ -30,9 +30,9 @@ function Home(Props) {
           }
           
         }), [accessToken]);
-  return React.createElement("div", undefined, shouldShowWelcomeMessageAndAppDescription(accessToken) ? React.createElement("div", undefined, renderWelcomeMessage(undefined), renderAppDescription(undefined)) : React.createElement(MusicPlayer$Turntableam.make, {
-                    setPage: setPage
-                  }));
+  return React.createElement("div", undefined, shouldShowWelcomeMessageAndAppDescription(accessToken) ? React.createElement("div", undefined, renderWelcomeMessage(undefined), renderAppDescription(undefined)) : React.createElement("div", undefined, React.createElement(MusicPlayer$Turntableam.make, {
+                        setPage: setPage
+                      })));
 }
 
 var make = Home;

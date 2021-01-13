@@ -40686,7 +40686,141 @@ var _stringify = _interopRequireDefault(require("./stringify.js"));
 var _parse = _interopRequireDefault(require("./parse.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./v1.js":"../node_modules/uuid/dist/esm-browser/v1.js","./v3.js":"../node_modules/uuid/dist/esm-browser/v3.js","./v4.js":"../node_modules/uuid/dist/esm-browser/v4.js","./v5.js":"../node_modules/uuid/dist/esm-browser/v5.js","./nil.js":"../node_modules/uuid/dist/esm-browser/nil.js","./version.js":"../node_modules/uuid/dist/esm-browser/version.js","./validate.js":"../node_modules/uuid/dist/esm-browser/validate.js","./stringify.js":"../node_modules/uuid/dist/esm-browser/stringify.js","./parse.js":"../node_modules/uuid/dist/esm-browser/parse.js"}],"../node_modules/bs-axios/src/axios.bs.js":[function(require,module,exports) {
+},{"./v1.js":"../node_modules/uuid/dist/esm-browser/v1.js","./v3.js":"../node_modules/uuid/dist/esm-browser/v3.js","./v4.js":"../node_modules/uuid/dist/esm-browser/v4.js","./v5.js":"../node_modules/uuid/dist/esm-browser/v5.js","./nil.js":"../node_modules/uuid/dist/esm-browser/nil.js","./version.js":"../node_modules/uuid/dist/esm-browser/version.js","./validate.js":"../node_modules/uuid/dist/esm-browser/validate.js","./stringify.js":"../node_modules/uuid/dist/esm-browser/stringify.js","./parse.js":"../node_modules/uuid/dist/esm-browser/parse.js"}],"../node_modules/bs-platform/lib/es6/belt_Option.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.forEachU = forEachU;
+exports.forEach = forEach;
+exports.getExn = getExn;
+exports.mapWithDefaultU = mapWithDefaultU;
+exports.mapWithDefault = mapWithDefault;
+exports.mapU = mapU;
+exports.map = map;
+exports.flatMapU = flatMapU;
+exports.flatMap = flatMap;
+exports.getWithDefault = getWithDefault;
+exports.isSome = isSome;
+exports.isNone = isNone;
+exports.eqU = eqU;
+exports.eq = eq;
+exports.cmpU = cmpU;
+exports.cmp = cmp;
+
+var Curry = _interopRequireWildcard(require("./curry.js"));
+
+var Caml_option = _interopRequireWildcard(require("./caml_option.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function forEachU(opt, f) {
+  if (opt !== undefined) {
+    return f(Caml_option.valFromOption(opt));
+  }
+}
+
+function forEach(opt, f) {
+  return forEachU(opt, Curry.__1(f));
+}
+
+function getExn(x) {
+  if (x !== undefined) {
+    return Caml_option.valFromOption(x);
+  }
+
+  throw {
+    RE_EXN_ID: "Not_found",
+    Error: new Error()
+  };
+}
+
+function mapWithDefaultU(opt, $$default, f) {
+  if (opt !== undefined) {
+    return f(Caml_option.valFromOption(opt));
+  } else {
+    return $$default;
+  }
+}
+
+function mapWithDefault(opt, $$default, f) {
+  return mapWithDefaultU(opt, $$default, Curry.__1(f));
+}
+
+function mapU(opt, f) {
+  if (opt !== undefined) {
+    return Caml_option.some(f(Caml_option.valFromOption(opt)));
+  }
+}
+
+function map(opt, f) {
+  return mapU(opt, Curry.__1(f));
+}
+
+function flatMapU(opt, f) {
+  if (opt !== undefined) {
+    return f(Caml_option.valFromOption(opt));
+  }
+}
+
+function flatMap(opt, f) {
+  return flatMapU(opt, Curry.__1(f));
+}
+
+function getWithDefault(opt, $$default) {
+  if (opt !== undefined) {
+    return Caml_option.valFromOption(opt);
+  } else {
+    return $$default;
+  }
+}
+
+function isSome(param) {
+  return param !== undefined;
+}
+
+function isNone(x) {
+  return x === undefined;
+}
+
+function eqU(a, b, f) {
+  if (a !== undefined) {
+    if (b !== undefined) {
+      return f(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
+    } else {
+      return false;
+    }
+  } else {
+    return b === undefined;
+  }
+}
+
+function eq(a, b, f) {
+  return eqU(a, b, Curry.__2(f));
+}
+
+function cmpU(a, b, f) {
+  if (a !== undefined) {
+    if (b !== undefined) {
+      return f(Caml_option.valFromOption(a), Caml_option.valFromOption(b));
+    } else {
+      return 1;
+    }
+  } else if (b !== undefined) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
+function cmp(a, b, f) {
+  return cmpU(a, b, Curry.__2(f));
+}
+/* No side effect */
+},{"./curry.js":"../node_modules/bs-platform/lib/es6/curry.js","./caml_option.js":"../node_modules/bs-platform/lib/es6/caml_option.js"}],"../node_modules/bs-axios/src/axios.bs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42371,6 +42505,8 @@ exports.Playlist = exports.Profile = exports.Search = exports.Authorization = ex
 
 var Uuid = _interopRequireWildcard(require("uuid"));
 
+var Belt_Option = _interopRequireWildcard(require("bs-platform/lib/es6/belt_Option.js"));
+
 var Ajax$Turntableam = _interopRequireWildcard(require("./Ajax.bs.js"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -42430,11 +42566,18 @@ var Profile = {
 };
 exports.Profile = Profile;
 
-function create(profile, accessToken) {
-  var partial_arg = "|https://api.spotify.com/v1/users/" + profile.id + "/playlists";
-  return function (param, param$1, param$2, param$3) {
-    return Ajax$Turntableam.postRequest(partial_arg, param, param$1, param$2, param$3);
-  };
+function create(config, accessToken, profile) {
+  return Ajax$Turntableam.postRequest("|https://api.spotify.com/v1/users/" + profile.id + "/playlists", {
+    name: config.name,
+    public: config.public,
+    collaborative: config.collaborative,
+    description: Belt_Option.getWithDefault(config.description, "")
+  }, accessToken, function (p) {
+    return p;
+  }, function (err) {
+    console.log(err);
+    return Promise.resolve(err);
+  });
 }
 
 var Playlist = {
@@ -42445,7 +42588,7 @@ var base = "https://api.spotify.com";
 /* state Not a pure module */
 
 exports.base = base;
-},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js","./Ajax.bs.js":"services/Ajax.bs.js"}],"../node_modules/@material-ui/utils/esm/chainPropTypes.js":[function(require,module,exports) {
+},{"uuid":"../node_modules/uuid/dist/esm-browser/index.js","bs-platform/lib/es6/belt_Option.js":"../node_modules/bs-platform/lib/es6/belt_Option.js","./Ajax.bs.js":"services/Ajax.bs.js"}],"../node_modules/@material-ui/utils/esm/chainPropTypes.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -59225,9 +59368,9 @@ function Home(Props) {
       (0, _SpotifyWebPlaybackSDK.default)(accessToken);
     }
   }, [accessToken]);
-  return React.createElement("div", undefined, shouldShowWelcomeMessageAndAppDescription(accessToken) ? React.createElement("div", undefined, renderWelcomeMessage(undefined), renderAppDescription(undefined)) : React.createElement(MusicPlayer$Turntableam.make, {
+  return React.createElement("div", undefined, shouldShowWelcomeMessageAndAppDescription(accessToken) ? React.createElement("div", undefined, renderWelcomeMessage(undefined), renderAppDescription(undefined)) : React.createElement("div", undefined, React.createElement(MusicPlayer$Turntableam.make, {
     setPage: setPage
-  }));
+  })));
 }
 
 var make = Home;
@@ -59504,7 +59647,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50675" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61919" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
