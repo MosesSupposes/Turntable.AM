@@ -5,7 +5,7 @@ import * as React from "react";
 ((require("../styles/footer.css")));
 
 function Footer(Props) {
-  return React.createElement("footer", undefined, React.createElement("p", undefined, "Copyright 2020 by Moses A. Samuel"));
+  return React.createElement("footer", undefined, React.createElement("p", undefined, "Copyright 2021 by Moses A. Samuel"));
 }
 
 var make = Footer;
