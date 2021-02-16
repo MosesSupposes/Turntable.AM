@@ -190,26 +190,23 @@ let make = (~setPage: (Page.t => Page.t) => unit) => {
     [|spotifyPlayer|],
   );
 
-  switch (spotifyPlayer) {
-  | Some(player) =>
-    switch (trackInfo) {
-    | Some(info) =>
-      <div className="music-player-container">
-        <h2 className="now-playing"> {React.string("Now Playing:")} </h2>
-        <div className="media-control-card-container">
-          <MediaControlCard
-            songTitle=currentTrack
-            artist=currentArtist
-            albumCoverUrl=currentAlbumCover
-            albumName=currentAlbum
-            player
-            isPaused=paused
-          />
-        </div>
-        <p> {React.string({j|Up Next: $nextSong by $nextArtist|j})} </p>
+  switch (spotifyPlayer, trackInfo) {
+  | (None, _) => Helpers.renderLoadingScreen()
+  | (Some(_), None) => Helpers.renderConnectionInstructions()
+  | (Some(player), Some(_)) =>
+    <div className="music-player-container">
+      <h2 className="now-playing"> {React.string("Now Playing:")} </h2>
+      <div className="media-control-card-container">
+        <MediaControlCard
+          songTitle=currentTrack
+          artist=currentArtist
+          albumCoverUrl=currentAlbumCover
+          albumName=currentAlbum
+          player
+          isPaused=paused
+        />
       </div>
-    | None => Helpers.renderConnectionInstructions()
-    }
-  | None => Helpers.renderLoadingScreen()
+      <p> {React.string({j|Up Next: $nextSong by $nextArtist|j})} </p>
+    </div>
   };
 };
