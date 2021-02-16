@@ -9,7 +9,7 @@ function handleSubmit($$event) {
   
 }
 
-function JoinRoom(Props) {
+function RoomFinder(Props) {
   var match = React.useState(function () {
         return "";
       });
@@ -27,7 +27,7 @@ function JoinRoom(Props) {
                 }, "Enter"));
 }
 
-var make = JoinRoom;
+var make = RoomFinder;
 
 export {
   handleSubmit ,
