@@ -3,6 +3,7 @@
 import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
 import RadioButtonsGroupJs from "./RadioButtonsGroup.js";
+import * as RoomFinder$Turntableam from "./RoomFinder.bs.js";
 
 var make = RadioButtonsGroupJs;
 
@@ -38,38 +39,47 @@ function renderPlaylistCreationForm(param) {
                 }, "Create"));
 }
 
-function renderPlaylistEditForm(param) {
-  return React.createElement("div", undefined);
+function renderRoomFinder(param) {
+  return React.createElement(RoomFinder$Turntableam.make, {});
 }
 
 var Helpers = {
   handleSubmit: handleSubmit,
   renderPlaylistCreationForm: renderPlaylistCreationForm,
-  renderPlaylistEditForm: renderPlaylistEditForm
+  renderRoomFinder: renderRoomFinder
 };
 
 function PlaylistCreator(Props) {
   var match = React.useState(function () {
-        return false;
+        return /* Create */0;
       });
-  var setShouldShowPlaylistCreationForm = match[1];
-  var match$1 = React.useState(function () {
-        return false;
-      });
-  var setShouldShowPlaylistEditForm = match$1[1];
+  var setJoinOrCreateRoom = match[1];
+  var tmp;
+  switch (match[0]) {
+    case /* Create */0 :
+        tmp = renderPlaylistCreationForm(undefined);
+        break;
+    case /* Join */1 :
+        tmp = renderRoomFinder(undefined);
+        break;
+    case /* HasntSpecified */2 :
+        tmp = React.createElement("div", undefined);
+        break;
+    
+  }
   return React.createElement("div", undefined, React.createElement("div", undefined, React.createElement("button", {
                       onClick: (function (param) {
-                          return Curry._1(setShouldShowPlaylistCreationForm, (function (prevState) {
-                                        return !prevState;
+                          return Curry._1(setJoinOrCreateRoom, (function (param) {
+                                        return /* Create */0;
                                       }));
                         })
                     }, "Create a Playlist")), React.createElement("div", undefined, React.createElement("p", undefined, "-- Or --")), React.createElement("div", undefined, React.createElement("button", {
                       onClick: (function (param) {
-                          return Curry._1(setShouldShowPlaylistEditForm, (function (prevState) {
-                                        return !prevState;
+                          return Curry._1(setJoinOrCreateRoom, (function (param) {
+                                        return /* Join */1;
                                       }));
                         })
-                    }, "Edit a friend's playlist")), match[0] ? renderPlaylistCreationForm(undefined) : React.createElement("div", undefined), match$1[0] ? renderPlaylistEditForm(undefined) : React.createElement("div", undefined));
+                    }, "Edit a friend's playlist")), tmp);
 }
 
 var make$1 = PlaylistCreator;
