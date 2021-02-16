@@ -30694,7 +30694,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 require("../styles/footer.css");
 
 function Footer(Props) {
-  return React.createElement("footer", undefined, React.createElement("p", undefined, "Copyright 2020 by Moses A. Samuel"));
+  return React.createElement("footer", undefined, React.createElement("p", undefined, "Copyright 2021 by Moses A. Samuel"));
 }
 
 var make = Footer;
@@ -59647,7 +59647,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61919" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52251" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
